@@ -22,6 +22,18 @@
         </tr>
         IsFirstScreen = false;
     }
+    if (dbData.Count() < 10)
+    {
+        <script>
+            $("#slide-in-share").css("overflow -y", "hidden");
+        </script>
+    }
+    else
+    {
+        <script>
+            $("#slide-in-share").css("overflow-y", "scroll");
+        </script>
+    }
 }
 
 <!--Because jquery syntax does not like razor tags, input will be used instead-->
@@ -133,4 +145,4 @@
         });
     });
 
-</script>
+            </script>

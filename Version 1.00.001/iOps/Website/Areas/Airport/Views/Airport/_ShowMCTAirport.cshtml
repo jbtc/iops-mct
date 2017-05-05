@@ -31,11 +31,39 @@
         };
 
         var tags = [];
+        var rawScreens = '@Html.Raw(Json.Encode(TempData["Screens"]))';
+        var screens = JSON.parse(rawScreens);
+
+        var airportAlarms = [];
+        var airportWarnings = [];
+        var airportMasterAlarms = [];
+        var columnDef = [
+                            { name: "AlarmID", text: "Alarm ID", type: "string", visible: false },
+                            { name: "AlarmDateTime", text: "Alarm Date/Time", type: "datetime", visible: true, sort: 'desc', width: '120px', searchable: false },
+                            { name: "Active", text: "Active", type: "boolean", visible: true, width: '40px', align: 'center' },
+                            { name: "AlarmValue", text: "Alarm Value", type: "string", visible: false, align: 'right' },
+                            { name: "Text", text: "Text", type: "string", visible: true },
+                            { name: "AlarmType", text: "Alarm Type", type: "string", visible: true, width: '40px'},
+                            { name: "Priority", text: "Priority", type: "string", visible: true, width: '40px', align: 'right' }
+                        ]
+
+        for (i = 0; i < screens.length; i++) {
+            var gateNumber = screens[i].Gate;
+            airportAlarms.push(gateNumber + "_PBB_ALARMS");
+            airportAlarms.push(gateNumber + "_PCA_ALARMS");
+            airportAlarms.push(gateNumber + "_GPU_ALARMS");
+            airportWarnings.push(gateNumber + "_PBB_WARNINGS");
+            airportWarnings.push(gateNumber + "_PCA_WARNINGS");
+            airportWarnings.push(gateNumber + "_GPU_WARNINGS");
+            airportMasterAlarms.push(gateNumber + "_PBB_ALARMS");
+            airportMasterAlarms.push(gateNumber + "_PCA_ALARMS");
+            airportMasterAlarms.push(gateNumber + "_GPU_ALARMS");
+        }
 
         // set up moitoring of AC and Gate tags, and firing callback on data refresh
         OPC.tags = [];
         OPC_config.watch_tags = [];
-        OPC_config.tag_prefix = "Airport." + "@TempData["ClientAbbr"]" + ".Term1.Zone1.";
+        OPC_config.tag_prefix = "Airport." + "@TempData["ClientAbbr"]" + ".Term1.";
         OPC_config.refresh_callback = opc_airport_callback;
         OPC_config.watch_tags = tags;
         OPC_config.alarm_bindings = [
@@ -46,136 +74,38 @@
                 showHistory: false,
                 showSearch: false,
                 height: 200,
-                filter: {
-                    alarmtypes: ["Digital"],
-                    alarmgroups: ["A2_PBB_ALARMS", "A3_PBB_ALARMS", "A4_PBB_ALARMS", "A6_PBB_ALARMS", "A7B_PBB_ALARMS", "A7F_PBB_ALARMS", "A8B_PBB_ALARMS", "A8F_PBB_ALARMS",
-                                    "A9B_PBB_ALARMS", "A9F_PBB_ALARMS", "A10B_PBB_ALARMS", "A10F_PBB_ALARMS",
-                                  "B1_PBB_ALARMS", "B2_PBB_ALARMS", "B3_PBB_ALARMS", "B4B_PBB_ALARMS", "B4F_PBB_ALARMS", "B5_PBB_ALARMS", "B7B_PBB_ALARMS", "B7F_PBB_ALARMS",
-                                    "B8B_PBB_ALARMS", "B8F_PBB_ALARMS", "B9_PBB_ALARMS", "B10_PBB_ALARMS", "B11_PBB_ALARMS",
-                                  "C1_PBB_ALARMS", "C2_PBB_ALARMS", "C3_PBB_ALARMS", "C4_PBB_ALARMS", "C6_PBB_ALARMS", "C9_PBB_ALARMS", "C10B_PBB_ALARMS", "C10F_PBB_ALARMS",
-                                    "C11B_PBB_ALARMS", "C11F_PBB_ALARMS", "C12B_PBB_ALARMS", "C12F_PBB_ALARMS", "C15_PBB_ALARMS", "C16B_PBB_ALARMS", "C16F_PBB_ALARMS",
-
-                                  "A2_GPU_ALARMS", "A3_GPU_ALARMS", "A4_GPU_ALARMS", "A6_GPU_ALARMS", "A7B_GPU_ALARMS", "A7F_GPU_ALARMS", "A8B_GPU_ALARMS", "A8F_GPU_ALARMS",
-                                    "A9B_GPU_ALARMS", "A9F_GPU_ALARMS", "A10B_GPU_ALARMS", "A10F_GPU_ALARMS",
-                                  "B1_GPU_ALARMS", "B2_GPU_ALARMS", "B3_GPU_ALARMS", "B4B_GPU_ALARMS", "B4F_GPU_ALARMS", "B5_GPU_ALARMS", "B7B_GPU_ALARMS", "B7F_GPU_ALARMS",
-                                    "B8B_GPU_ALARMS", "B8F_GPU_ALARMS","B9_GPU_ALARMS","B10_GPU_ALARMS","B11_GPU_ALARMS",
-                                  "C1_GPU_ALARMS", "C2_GPU_ALARMS", "C3_GPU_ALARMS", "C4_GPU_ALARMS", "C6_GPU_ALARMS", "C9_GPU_ALARMS", "C10B_GPU_ALARMS", "C10F_GPU_ALARMS",
-                                    "C11B_GPU_ALARMS", "C11F_GPU_ALARMS","C12B_GPU_ALARMS","C12F_GPU_ALARMS","C15_GPU_ALARMS","C16B_GPU_ALARMS","C16F_GPU_ALARMS",
-
-                                  "A2_PCA_ALARMS", "A3_PCA_ALARMS", "A4_PCA_ALARMS", "A6_PCA_ALARMS", "A7B_PCA_ALARMS", "A7F_PCA_ALARMS", "A8B_PCA_ALARMS", "A8F_PCA_ALARMS",
-                                    "A9B_PCA_ALARMS", "A9F_PCA_ALARMS","A10B_PCA_ALARMS","A10F_PCA_ALARMS",
-                                  "B1_PCA_ALARMS", "B2_PCA_ALARMS", "B3_PCA_ALARMS", "B4B_PCA_ALARMS", "B4F_PCA_ALARMS", "B5_PCA_ALARMS", "B7B_PCA_ALARMS", "B7F_PCA_ALARMS",
-                                    "B8B_PCA_ALARMS", "B8F_PCA_ALARMS","B9_PCA_ALARMS","B10_PCA_ALARMS","B11_PCA_ALARMS",
-                                  "C1_PCA_ALARMS", "C2_PCA_ALARMS", "C3_PCA_ALARMS", "C4_PCA_ALARMS", "C6_PCA_ALARMS", "C9_PCA_ALARMS", "C10B_PCA_ALARMS", "C10F_PCA_ALARMS",
-                                    "C11B_PCA_ALARMS", "C11F_PCA_ALARMS","C12B_PCA_ALARMS","C12F_PCA_ALARMS","C15_PCA_ALARMS","C16B_PCA_ALARMS","C16F_PCA_ALARMS"]
-                },
-                columns: [
-                    { name: "AlarmID", text: "Alarm ID", type: "string", visible: false },
-                    { name: "AlarmDateTime", text: "Alarm Date/Time", type: "datetime", visible: true, sort: 'desc', width: '120px', searchable: false },
-                    { name: "Active", text: "Active", type: "boolean", visible: true, width: '40px', align: 'center' },
-                    { name: "AlarmValue", text: "Alarm Value", type: "string", visible: false, align: 'right' },
-                    { name: "Text", text: "Text", type: "string", visible: true },
-                    { name: "AlarmType", text: "Alarm Type", type: "string", visible: true, width: '40px'},
-                    { name: "Priority", text: "Priority", type: "string", visible: true, width: '40px', align: 'right' }
-                ]
-            },
-            {
+                filter: { alarmtypes: ["Digital"], alarmgroups: airportAlarms},
+                columns: columnDef
+            },{
                 alarmid: "AirportWarnings",
                 callback: updateAirportWarnings,
                 showInfo: false,
                 showHistory: false,
                 showSearch: false,
                 height: 200,
-                filter: {
-                    alarmtypes: ["Digital"],
-                    alarmgroups: ["A2_PBB_WARNINGS", "A3_PBB_WARNINGS", "A4_PBB_WARNINGS", "A6_PBB_WARNINGS", "A7B_PBB_WARNINGS", "A7F_PBB_WARNINGS", "A8B_PBB_WARNINGS", "A8F_PBB_WARNINGS",
-                                    "A9B_PBB_WARNINGS", "A9F_PBB_WARNINGS", "A10B_PBB_WARNINGS", "A10F_PBB_WARNINGS",
-                                  "B1_PBB_WARNINGS", "B2_PBB_WARNINGS", "B3_PBB_WARNINGS", "B4B_PBB_WARNINGS", "B4F_PBB_WARNINGS", "B5_PBB_WARNINGS", "B7B_PBB_WARNINGS", "B7F_PBB_WARNINGS",
-                                    "B8B_PBB_WARNINGS", "B8F_PBB_WARNINGS", "B9_PBB_WARNINGS", "B10_PBB_WARNINGS", "B11_PBB_WARNINGS",
-                                  "C1_PBB_WARNINGS", "C2_PBB_WARNINGS", "C3_PBB_WARNINGS", "C4_PBB_WARNINGS", "C6_PBB_WARNINGS", "C9_PBB_WARNINGS", "C10B_PBB_WARNINGS", "C10F_PBB_WARNINGS",
-                                    "C11B_PBB_WARNINGS","C11F_PBB_WARNINGS", "C12B_PBB_WARNINGS", "C12F_PBB_WARNINGS", "C15_PBB_WARNINGS", "C16B_PBB_WARNINGS", "C16F_PBB_WARNINGS",
-
-                                  "A2_GPU_WARNINGS", "A3_GPU_WARNINGS", "A4_GPU_WARNINGS", "A6_GPU_WARNINGS", "A7B_GPU_WARNINGS", "A7F_GPU_WARNINGS", "A8B_GPU_WARNINGS", "A8F_GPU_WARNINGS",
-                                    "A9B_GPU_WARNINGS", "A9F_GPU_WARNINGS", "A10B_GPU_WARNINGS", "A10F_GPU_WARNINGS",
-                                  "B1_GPU_WARNINGS", "B2_GPU_WARNINGS", "B3_GPU_WARNINGS", "B4B_GPU_WARNINGS", "B4F_GPU_WARNINGS", "B5_GPU_WARNINGS", "B7B_GPU_WARNINGS", "B7F_GPU_WARNINGS",
-                                    "B8B_GPU_WARNINGS", "B8F_GPU_WARNINGS", "B9_GPU_WARNINGS", "B10_GPU_WARNINGS", "B11_GPU_WARNINGS",
-                                  "C1_GPU_WARNINGS", "C2_GPU_WARNINGS", "C3_GPU_WARNINGS", "C4_GPU_WARNINGS", "C6_GPU_WARNINGS", "C9_GPU_WARNINGS", "C10B_GPU_WARNINGS", "C10F_GPU_WARNINGS",
-                                    "C11B_GPU_WARNINGS", "C11F_GPU_WARNINGS", "C12B_GPU_WARNINGS", "C12F_GPU_WARNINGS", "C15_GPU_WARNINGS", "C16B_GPU_WARNINGS", "C16F_GPU_WARNINGS",
-
-                                  "A2_PCA_WARNINGS", "A3_PCA_WARNINGS", "A4_PCA_WARNINGS", "A6_PCA_WARNINGS", "A7B_PCA_WARNINGS", "A7F_PCA_WARNINGS", "A8B_PCA_WARNINGS", "A8F_PCA_WARNINGS",
-                                    "A9B_PCA_WARNINGS","A9F_PCA_WARNINGS","A10B_PCA_WARNINGS","A10F_PCA_WARNINGS",
-                                  "B1_PCA_WARNINGS", "B2_PCA_WARNINGS", "B3_PCA_WARNINGS", "B4B_PCA_WARNINGS", "B4F_PCA_WARNINGS", "B5_PCA_WARNINGS", "B7B_PCA_WARNINGS", "B7F_PCA_WARNINGS",
-                                    "B8B_PCA_WARNINGS","B8F_PCA_WARNINGS","B9_PCA_WARNINGS","B10_PCA_WARNINGS","B11_PCA_WARNINGS",
-                                  "C1_PCA_WARNINGS", "C2_PCA_WARNINGS", "C3_PCA_WARNINGS", "C4_PCA_WARNINGS", "C6_PCA_WARNINGS", "C9_PCA_WARNINGS", "C10B_PCA_WARNINGS", "C10F_PCA_WARNINGS",
-                                    "C11B_PCA_WARNINGS", "C11F_PCA_WARNINGS", "C12B_PCA_WARNINGS", "C12F_PCA_WARNINGS", "C15_PCA_WARNINGS", "C16B_PCA_WARNINGS", "C16F_PCA_WARNINGS"]
-    },
-                columns: [
-                    { name: "AlarmID", text: "Alarm ID", type: "string", visible: false },
-                    { name: "AlarmDateTime", text: "Alarm Date/Time", type: "datetime", visible: true, sort: 'desc', width: '120px', searchable: false },
-                    { name: "Active", text: "Active", type: "boolean", visible: true, width: '40px', align: 'center' },
-                    { name: "AlarmValue", text: "Alarm Value", type: "string", visible: false, align: 'right' },
-                    { name: "Text", text: "Text", type: "string", visible: true },
-                    { name: "AlarmType", text: "Alarm Type", type: "string", visible: true, width: '40px' },
-                    { name: "Priority", text: "Priority", type: "string", visible: true, width: '40px', align: 'right' }
-                ]
-            },
-            {
+                filter: {alarmtypes: ["Digital"], alarmgroups: airportWarnings},
+                columns: columnDef
+            },{
                 alarmid: "AirportMasterAlarms",
                 callback: updateMasterAirportAlarms,
                 showInfo: false,
                 showHistory: false,
                 showSearch: false,
                 height: 200,
-                filter: {
-                    alarmtypes: ["Digital"],
-                    alarmgroups: ["A2_PBB_ALARMS", "A3_PBB_ALARMS", "A4_PBB_ALARMS", "A6_PBB_ALARMS", "A7B_PBB_ALARMS", "A7F_PBB_ALARMS", "A8B_PBB_ALARMS", "A8F_PBB_ALARMS",
-                                    "A9B_PBB_ALARMS", "A9F_PBB_ALARMS", "A10B_PBB_ALARMS", "A10F_PBB_ALARMS",
-                                  "B1_PBB_ALARMS", "B2_PBB_ALARMS", "B3_PBB_ALARMS", "B4B_PBB_ALARMS", "B4F_PBB_ALARMS", "B5_PBB_ALARMS", "B7B_PBB_ALARMS", "B7F_PBB_ALARMS",
-                                    "B8B_PBB_ALARMS", "B8F_PBB_ALARMS", "B9_PBB_ALARMS", "B10_PBB_ALARMS", "B11_PBB_ALARMS",
-                                  "C1_PBB_ALARMS", "C2_PBB_ALARMS", "C3_PBB_ALARMS", "C4_PBB_ALARMS", "C6_PBB_ALARMS", "C9_PBB_ALARMS", "C10B_PBB_ALARMS", "C10F_PBB_ALARMS",
-                                    "C11B_PBB_ALARMS", "C11F_PBB_ALARMS", "C12B_PBB_ALARMS", "C12F_PBB_ALARMS", "C15_PBB_ALARMS", "C16B_PBB_ALARMS", "C16F_PBB_ALARMS",
-
-                                  "A2_GPU_ALARMS", "A3_GPU_ALARMS", "A4_GPU_ALARMS", "A6_GPU_ALARMS", "A7B_GPU_ALARMS", "A7F_GPU_ALARMS", "A8B_GPU_ALARMS", "A8F_GPU_ALARMS",
-                                    "A9B_GPU_ALARMS", "A9F_GPU_ALARMS", "A10B_GPU_ALARMS", "A10F_GPU_ALARMS",
-                                  "B1_GPU_ALARMS", "B2_GPU_ALARMS", "B3_GPU_ALARMS", "B4B_GPU_ALARMS", "B4F_GPU_ALARMS", "B5_GPU_ALARMS", "B7B_GPU_ALARMS", "B7F_GPU_ALARMS",
-                                    "B8B_GPU_ALARMS", "B8F_GPU_ALARMS","B9_GPU_ALARMS","B10_GPU_ALARMS","B11_GPU_ALARMS",
-                                  "C1_GPU_ALARMS", "C2_GPU_ALARMS", "C3_GPU_ALARMS", "C4_GPU_ALARMS", "C6_GPU_ALARMS", "C9_GPU_ALARMS", "C10B_GPU_ALARMS", "C10F_GPU_ALARMS",
-                                    "C11B_GPU_ALARMS", "C11F_GPU_ALARMS","C12B_GPU_ALARMS","C12F_GPU_ALARMS","C15_GPU_ALARMS","C16B_GPU_ALARMS","C16F_GPU_ALARMS",
-
-                                  "A2_PCA_ALARMS", "A3_PCA_ALARMS", "A4_PCA_ALARMS", "A6_PCA_ALARMS", "A7B_PCA_ALARMS", "A7F_PCA_ALARMS", "A8B_PCA_ALARMS", "A8F_PCA_ALARMS",
-                                    "A9B_PCA_ALARMS", "A9F_PCA_ALARMS","A10B_PCA_ALARMS","A10F_PCA_ALARMS",
-                                  "B1_PCA_ALARMS", "B2_PCA_ALARMS", "B3_PCA_ALARMS", "B4B_PCA_ALARMS", "B4F_PCA_ALARMS", "B5_PCA_ALARMS", "B7B_PCA_ALARMS", "B7F_PCA_ALARMS",
-                                    "B8B_PCA_ALARMS", "B8F_PCA_ALARMS","B9_PCA_ALARMS","B10_PCA_ALARMS","B11_PCA_ALARMS",
-                                  "C1_PCA_ALARMS", "C2_PCA_ALARMS", "C3_PCA_ALARMS", "C4_PCA_ALARMS", "C6_PCA_ALARMS", "C9_PCA_ALARMS", "C10B_PCA_ALARMS", "C10F_PCA_ALARMS",
-                                    "C11B_PCA_ALARMS", "C11F_PCA_ALARMS","C12B_PCA_ALARMS","C12F_PCA_ALARMS","C15_PCA_ALARMS","C16B_PCA_ALARMS","C16F_PCA_ALARMS"]
-    },
-                columns: [
-                    { name: "AlarmID", text: "Alarm ID", type: "string", visible: false },
-                    { name: "AlarmDateTime", text: "Alarm Date/Time", type: "datetime", visible: true, sort: 'desc', width: '120px', searchable: false },
-                    { name: "Active", text: "Active", type: "boolean", visible: true, width: '40px', align: 'center' },
-                    { name: "AlarmValue", text: "Alarm Value", type: "string", visible: false, align: 'right' },
-                    { name: "Text", text: "Text", type: "string", visible: true },
-                    { name: "AlarmType", text: "Alarm Type", type: "string", visible: true, width: '40px' },
-                    { name: "Priority", text: "Priority", type: "string", visible: true, width: '40px', align: 'right' }
-                ]
+                filter: {alarmtypes: ["Digital"], alarmgroups: airportMasterAlarms},
+                columns: columnDef
             }
         ];
 
-        for (var i = 1; i <= 8; i++) {
-            var gateNumber = Math.ceil(i / 2) + ((i % 2) == 1 ? "A" : "B");
-            var pre = "Gate" + gateNumber + ".";
+        tags.push("Airport.MCT.Term1.RTUAutoOnLeadTime.Value");
+        for (i = 0; i < screens.length; i++) {
+            var gateNumber = screens[i].Gate;
+            var zoneNumber = screens[i].Zone;
+            var pre = "Zone" + zoneNumber + ".Gate" + gateNumber + ".";
             tags.push(pre + "PBB.AIRCRAFTDOCKEDCALCULATION.Value");                  // aircraft is docked
             tags.push(pre + "PBB.LoggedOn.Value");                  // show green
             tags.push(pre + "PBB.AircraftSubType.Value")            // Show Jumbo Graphics
-            //tags.push(pre + "PBB.AUTOLEVELKEY.Value");                  // show green
-            //tags.push(pre + "PBB.OPERATEKEY.Value");                  // show green
-            //tags.push(pre + "PBB.PBB_IN_OPER_MODE.Value");                  // show green
-            //tags.push(pre + "PBB.Warning._HasWarnings.Value");            // show yellow
-            //tags.push(pre + "PBB.AUTOLEVELING.Value");                 // show orange
-            //tags.push(pre + "PBB.AUTOLEVELMODEFLAG.Value");                 // show orange
-            //tags.push(pre + "PBB.Alarm._HasAlarms.Value");                     // show red
-            tags.push("Airport.MCT.Term1.Zone1.RTUAutoOnLeadTime.Value");
-        };
+        }
 
         $(".gate_fire").hide();
         OPC.init(); //required for ajax calls in OPC
@@ -208,8 +138,8 @@
     //   Wide Gate will be shown ONLY if both L and R gate DoorPositions are set to "Wide"
     //   Aircraft will display only if AircraftSubType is set to Wide or Narrow for gate
     //   Wide aircraft will display ONLY if both gates are showing "Wide" for AircraftSubType
-    function check_gate_images(gate) {
-        var pre = OPC_config.tag_prefix + "Gate" + gate + ".PBB.";
+    function check_gate_images(zone, gate) {
+        var pre = OPC_config.tag_prefix + "Zone" + zone + ".Gate" + gate + ".PBB.";
         var airCraftType = get_value(pre + "AircraftSubType.Value");
         airCraftType = airCraftType == null ? "NARROW" : airCraftType;
         var show_wide = (airCraftType.toUpperCase().indexOf("WIDE") >= 0) ? true : false;
@@ -249,9 +179,14 @@
     }
 
     function opc_airport_callback(data) {
-        for (var i = 1; i <= 8; i++) {
-            var gateNumber = Math.ceil(i / 2) + ((i % 2) == 1 ? "A" : "B");
-            check_gate_images(gateNumber);
+        var rawScreens = '@Html.Raw(Json.Encode(TempData["Screens"]))';
+        var screens = JSON.parse(rawScreens);
+
+        for (i = 0; i < screens.length; i++)
+        {
+            var gateNumber = screens[i].Gate;
+            var zoneNumber = screens[i].Zone;
+            check_gate_images(zoneNumber, gateNumber);
         }
     }
 
@@ -263,10 +198,11 @@
 
     function GoZone(zoneNumber,icon) {
         $.ajax({
-            url: 'Zones/Zones/ShowMCTZone',
+            url: 'Zones/Zones/ShowZone',
             type: "GET",
             data: {
-                zoneNum: zoneNumber
+				clientName: "MCT",
+                zoneNum: zoneNumber,
             },
             contentType: 'text/html',
             success: function (data) {
@@ -277,7 +213,8 @@
         })
     }
 
-    function GoZoneGate(zoneNumber, gateNumber,icon) {
+    function GoZoneGate(zoneNumber, gateNumber, icon) {
+        debugger;
         $.ajax({
             url: 'Gate/Gate/ShowGates',
             type: "GET",
@@ -337,7 +274,7 @@
         }
     };
 
-    function updateAirportGateAlarms(gateNumber) {
+    function updateAirportGateAlarms(zoneNumber, gateNumber) {
         var PriorityCol = -1;
         var TextCol = -1;
         var airCraftType = null;
@@ -371,7 +308,7 @@
             $("#Gate_" + gateNumber + "_Status").removeClass(function (index, css) {
                 return (css.match(/\bg[0-9]\S+/g) || []).join(' ');
             });
-            airCraftType = get_value(OPC_config.tag_prefix + "Gate" + gateNumber + ".PBB.AircraftSubType.Value");
+            airCraftType = get_value(OPC_config.tag_prefix + "Zone" + zoneNumber + ".Gate" + gateNumber + ".PBB.AircraftSubType.Value");
             airCraftType = airCraftType == null ? "NARROW" : airCraftType;
             show_wide = (airCraftType.toUpperCase().indexOf("WIDE") >= 0) ? true : false;
             $("#Gate_" + gateNumber + "_Status").addClass("g" + gateNumber + "_r" + ((show_wide) ? "_wide" : ""));
@@ -402,9 +339,9 @@
                 }
             });
         }
-     };
+    };
 
-    function updateAirportGateWarnings(gateNumber) {
+    function updateAirportGateWarnings(zoneNumber, gateNumber) {
         var PriorityCol = -1;
         var TextCol = -1;
         var airCraftType = null;
@@ -438,7 +375,7 @@
             $("#Gate_" + gateNumber + "_Status").removeClass(function (index, css) {
                 return (css.match(/\bg[0-9]\S+/g) || []).join(' ');
             });
-            airCraftType = get_value(OPC_config.tag_prefix + "Gate" + gateNumber + ".PBB.AircraftSubType.Value");
+            airCraftType = get_value(OPC_config.tag_prefix + "Zone" + zoneNumber + ".Gate" + gateNumber + ".PBB.AircraftSubType.Value");
             airCraftType = airCraftType == null ? "NARROW" : airCraftType;
             show_wide = (airCraftType.toUpperCase().indexOf("WIDE") >= 0) ? true : false;
             $("#Gate_" + gateNumber + "_Status").addClass("img gate_status g" + gateNumber + "_y" + ((show_wide) ? "_wide" : ""));
@@ -447,27 +384,33 @@
 
 </script>
 
-
 <div id="AirportWindow" class="Window-Container Airport-Window">
     <div id="gates_container">
         <img id="building" class="img" />
         <img id="gates_nc" class="img" />
         
-        <!-- gate alarm color overlays  -->
-        @for (var a = 1; a <= 8; a++)
-        {
-            var gateNumber = Math.Ceiling(((decimal)a / 2)) + ((a % 2) == 1 ? "A" : "B");
-            <img id="Gate_@(gateNumber)_Plane" class="img gate_plane" />
-            <img id="Gate_@(gateNumber)_Status" class="img gate_status" />
+        @{
+            List<object> screens = (List<object>)TempData["Screens"];
+            foreach (object scr in screens)
+            {
+                var zoneNumber = scr.GetType().GetProperty("Zone").GetValue(scr, null).ToString();
+                var gateNumber = scr.GetType().GetProperty("Gate").GetValue(scr, null).ToString();
+                <img id="Gate_@(gateNumber)_Plane" class="img gate_plane" />
+                <img id="Gate_@(gateNumber)_Status" class="img gate_status" />
+            }
         }
 
         <!-- gate links  -->
         <div id="gateLinkid" >
-            @for (var a = 1; a <= 8; a++)
-            {
-                var gateNumber = Math.Ceiling(((decimal)a / 2)) + ((a % 2) == 1 ? "A" : "B");
-                var parkPosition = (Math.Ceiling(((decimal)a / 2)) + 10) + ((a % 2) == 1 ? "L" : "R");
-                <a id="gate@(gateNumber)" class="gate_link" onclick='GoZoneGate("1", @(gateNumber), @(a))'>Gate @(gateNumber) (@(parkPosition))</a>
+            @{
+                foreach (object scr in screens)
+                {
+                    var zoneNumber = scr.GetType().GetProperty("Zone").GetValue(scr, null).ToString();
+                    var gateNumber = scr.GetType().GetProperty("Gate").GetValue(scr, null).ToString();
+                    var displayName = scr.GetType().GetProperty("DisplayName").GetValue(scr, null).ToString();
+                    var displayOrder = scr.GetType().GetProperty("DisplayOrder").GetValue(scr, null).ToString();
+                    <a id="gate@(gateNumber)" class="gate_link" onclick="GoZoneGate('@(zoneNumber)', '@(gateNumber)', @(displayOrder))">Gate @(gateNumber) </a>
+                }
             }
         </div>        
     </div>
@@ -478,7 +421,6 @@
         <div id="AirportWarnings"></div>
     </div>
 </div>
-
 <div id="AirportMasterAlarmWindow" style="display: none">
     <div id="AirportMasterAlarms"></div>
 </div>

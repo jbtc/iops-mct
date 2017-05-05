@@ -1,19 +1,19 @@
 @import url('Gates.css');
 @import url('Airport.css');
-.Zones-Window {
+
+/*.Zones-Window {
     height: 860px;
-    /*background-image: url(Images/CID-WAC-at-gate.gif);*/
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center center;
     position: relative;
-}
+}*/
 
-.Zones-Window #zones_container {
+/*.Zones-Window #zones_container {
     width:100%;
     position:relative;
     box-sizing:border-box;
-}
+}*/
 
 /*changes background link for icons in Kendo Window*/
 #zoneWindowLink0 {
@@ -26,79 +26,593 @@
     background-image: url('Images/rightArrow.gif');
 }
 
-.Zones-Window #zones_container .img {
+/*.Zones-Window #zones_container .img {
     width:80%;
     position:absolute;
     top: 0px;
     left:0;
-}
-.Zones-Window #zones_container #ZoneA1 { 
-    content:url(Images/TermT4/ZoneA1/JFK_T4_ZA1_Rev-0003.png); 
-    width: 100%; 
-    height: 100%; 
-		opacity: 1; 
-		filter: alpha(opacity=100);    
-    position:relative !important;
-       /*float: left;
-    -ms-transform: rotate(15deg); /* IE 9 
-    -webkit-transform: rotate(15deg); /* chrome,opera,Safari 
-    transform: rotate(15deg);*/
-}
+}*/
 
-.Zones-Window #zones_container #ZoneB1 { 
-    content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_Rev-0003.png); 
+/*#Zone_A_Window #zones_container #building { 
+    content:url(Images/ZoneA/JFK_T4_ZB3_Rev-0003.png); 
     width: 100%; height: 100%; 
 		opacity: 1; 
 		filter: alpha(opacity=100);    
     position:relative !important;
 }
-
-.Zones-Window #zones_container #ZoneB2 { 
-    content:url(Images/TermT4/ZoneB2/JFK_T4_ZB2_Rev-0003.png); 
-    width: 100%; height: 100%; 
-		opacity: 1; 
-		filter: alpha(opacity=100);    
-    position:relative !important;
-}
-
-.Zones-Window #zones_container #ZoneB3 { 
+#Zone_B_Window #zones_container #building { 
     content:url(Images/TermT4/ZoneB3/JFK_T4_ZB3_Rev-0003.png); 
     width: 100%; height: 100%; 
 		opacity: 1; 
 		filter: alpha(opacity=100);    
     position:relative !important;
 }
+#Zone_C_Window #zones_container #building { 
+    content:url(Images/TermT4/ZoneB3/JFK_T4_ZB3_Rev-0003.png); 
+    width: 100%; height: 100%; 
+		opacity: 1; 
+		filter: alpha(opacity=100);    
+    position:relative !important;
+}*/
 
-/* JFK Planes */
+.Zones-Window {
+    height:100%; width:100%;
+    position: relative;
+    background-color:#ac9;
+}
 
-/* Zone A1 */
-.Zones-Window #zones_container #gA5_ac { content:url(Images/TermT4/ZoneA1/JFK_T4_ZA1_Plane_A5_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 200; }
-.Zones-Window #zones_container #gA5_nc { content:url(Images/TermT4/ZoneA1/JFK_T4_ZA1_PBB_A5-NC_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 190; }
-.Zones-Window #zones_container #gA5_idle { content:url(Images/TermT4/ZoneA1/JFK_T4_ZA1_PBB_A5_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
-.Zones-Window #zones_container #gA5_bq { content:url(Images/TermT4/ZoneA1/JFK_T4_ZA1_PBB_A5-Gray_Rev-0002.png); width: 100%; height: 100%; opacity: .7; filter: alpha(opacity=70); z-index: 195; }
-.Zones-Window #zones_container #gA5_g { content:url(Images/TermT4/ZoneA1/JFK_T4_ZA1_PBB_A5-Green_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
-.Zones-Window #zones_container #gA5_y { content:url(Images/TermT4/ZoneA1/JFK_T4_ZA1_PBB_A5-Yellow_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
-.Zones-Window #zones_container #gA5_o { content:url(Images/TermT4/ZoneA1/JFK_T4_ZA1_PBB_A5-Orange_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
-.Zones-Window #zones_container #gA5_r { content:url(Images/TermT4/ZoneA1/JFK_T4_ZA1_PBB_A5-Red_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
+.Zones-Window #zones_container {
+    width:100%;
+    position:relative;
+    box-sizing:border-box;
+}
 
-/* Zone B1 */
-.Zones-Window #zones_container #gB25L1_ac { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_Plane_B25L1_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 200; }
-.Zones-Window #zones_container #gB25L1_nc { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B25L1-NC_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 190; }
-.Zones-Window #zones_container #gB25L1_idle { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B25L1_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
-.Zones-Window #zones_container #gB25L1_bq { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B25L1-Gray_Rev-0002.png); width: 100%; height: 100%; opacity: .7; filter: alpha(opacity=70); z-index: 195; }
-.Zones-Window #zones_container #gB25L1_g { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B25L1-Green_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
-.Zones-Window #zones_container #gB25L1_y { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B25L1-Yellow_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
-.Zones-Window #zones_container #gB25L1_o { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B25L1-Orange_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
-.Zones-Window #zones_container #gB25L1_r { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B25L1-Red_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
+.Zones-Window #zones_container .img {
+    width:100%;
+    position:absolute;
+    top:0px;
+    left:0px;
+}
 
-.Zones-Window #zones_container #gB27_ac { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_Plane_B27_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 200; }
-.Zones-Window #zones_container #gB27_nc { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B27-NC_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 190; }
-.Zones-Window #zones_container #gB27_idle { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B27_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
-.Zones-Window #zones_container #gB27_bq { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B27-Gray_Rev-0002.png); width: 100%; height: 100%; opacity: .7; filter: alpha(opacity=70); z-index: 195; }
-.Zones-Window #zones_container #gB27_g { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B27-Green_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
-.Zones-Window #zones_container #gB27_y { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B27-Yellow_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
-.Zones-Window #zones_container #gB27_o { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B27-Orange_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
-.Zones-Window #zones_container #gB27_r { content:url(Images/TermT4/ZoneB1/JFK_T4_ZB1_PBB_B27-Red_Rev-0002.png); width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); z-index: 195; }
+.Zones-Window #zones_container .gate_status { width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); }
+.Zones-Window #zones_container .gate_plane { width: 100%; height: 100%; opacity: 1; filter: alpha(opacity=100); }
+
+
+#Zone_A_Window #zones_container #building { 
+    content:url(Images/ZoneA/mct-zone-a-Rev-1.001.png); 
+    width: 100%; height: 100%; 
+    /*position:relative !important;*/
+}
+
+#Zone_A_Window #zones_container #gates_nc { 
+    content:url(Images/ZoneA/mct-zone-a-nc-Rev-1.001.png); 
+    width: 100%; height: 100%; 
+    position:relative !important;
+}
+
+#Zone_B_Window #zones_container #building { 
+    content:url(Images/ZoneB/mct-zone-b-Rev-1.001.png); 
+    width: 100%; height: 100%; 
+    /*position:relative !important;*/
+}
+
+#Zone_B_Window #zones_container #gates_nc { 
+    content:url(Images/ZoneB/mct-zone-b-nc-Rev-1.001.png); 
+    width: 100%; height: 100%; 
+    position:relative !important;
+}
+
+#Zone_C_Window #zones_container #building { 
+    content:url(Images/ZoneC/mct-zone-c-Rev-1.001.png); 
+    width: 100%; height: 100%; 
+    /*position:relative !important;*/
+}
+
+#Zone_C_Window #zones_container #gates_nc { 
+    content:url(Images/ZoneC/mct-zone-c-nc-Rev-1.001.png); 
+    width: 100%; height: 100%; 
+    position:relative !important;
+}
+
+/* Narrow Plane Styles */
+.Zones-Window .gA2_ac   { content: ""; content: none; display: none; }
+.Zones-Window .gA2_idle { content:url(Images/ZoneA/gates/mct-gateA2-idle.png); }
+.Zones-Window .gA2_bq   { content:url(Images/ZoneA/gates/mct-gateA2-gray.png); opacity: .7; }
+.Zones-Window .gA2_g    { content:url(Images/ZoneA/gates/mct-gateA2-green.png); }
+.Zones-Window .gA2_y    { content:url(Images/ZoneA/gates/mct-gateA2-yellow.png); }
+.Zones-Window .gA2_o    { content:url(Images/ZoneA/gates/mct-gateA2-orange.png); }
+.Zones-Window .gA2_r    { content:url(Images/ZoneA/gates/mct-gateA2-red.png); }
+
+.Zones-Window .gA3_ac   { content: ""; content: none; display: none; }
+.Zones-Window .gA3_idle { content:url(Images/ZoneA/gates/mct-gateA3-idle.png); }
+.Zones-Window .gA3_bq   { content:url(Images/ZoneA/gates/mct-gateA3-gray.png); opacity: .7; }
+.Zones-Window .gA3_g    { content:url(Images/ZoneA/gates/mct-gateA3-green.png); }
+.Zones-Window .gA3_y    { content:url(Images/ZoneA/gates/mct-gateA3-yellow.png); }
+.Zones-Window .gA3_o    { content:url(Images/ZoneA/gates/mct-gateA3-orange.png); }
+.Zones-Window .gA3_r    { content:url(Images/ZoneA/gates/mct-gateA3-red.png); }
+
+.Zones-Window .gA4_ac   { content: ""; content: none; display: none; }
+.Zones-Window .gA4_idle { content:url(Images/ZoneA/gates/mct-gateA4-idle.png); }
+.Zones-Window .gA4_bq   { content:url(Images/ZoneA/gates/mct-gateA4-gray.png); opacity: .7; }
+.Zones-Window .gA4_g    { content:url(Images/ZoneA/gates/mct-gateA4-green.png); }
+.Zones-Window .gA4_y    { content:url(Images/ZoneA/gates/mct-gateA4-yellow.png); }
+.Zones-Window .gA4_o    { content:url(Images/ZoneA/gates/mct-gateA4-orange.png); }
+.Zones-Window .gA4_r    { content:url(Images/ZoneA/gates/mct-gateA4-red.png); }
+
+.Zones-Window .gA6_ac   { content: ""; content: none; display: none; }
+.Zones-Window .gA6_idle { content:url(Images/ZoneA/gates/mct-gateA6-idle.png); }
+.Zones-Window .gA6_bq   { content:url(Images/ZoneA/gates/mct-gateA6-gray.png); opacity: .7; }
+.Zones-Window .gA6_g    { content:url(Images/ZoneA/gates/mct-gateA6-green.png); }
+.Zones-Window .gA6_y    { content:url(Images/ZoneA/gates/mct-gateA6-yellow.png); }
+.Zones-Window .gA6_o    { content:url(Images/ZoneA/gates/mct-gateA6-orange.png); }
+.Zones-Window .gA6_r    { content:url(Images/ZoneA/gates/mct-gateA6-red.png); }
+
+.Zones-Window .gA7B_ac   { content: ""; content: none; display: none; }
+.Zones-Window .gA7B_idle { content:url(Images/ZoneA/gates/mct-gateA7B-idle.png); }
+.Zones-Window .gA7B_bq   { content:url(Images/ZoneA/gates/mct-gateA7B-gray.png); opacity: .7; }
+.Zones-Window .gA7B_g    { content:url(Images/ZoneA/gates/mct-gateA7B-green.png); }
+.Zones-Window .gA7B_y    { content:url(Images/ZoneA/gates/mct-gateA7B-yellow.png); }
+.Zones-Window .gA7B_o    { content:url(Images/ZoneA/gates/mct-gateA7B-orange.png); }
+.Zones-Window .gA7B_r    { content:url(Images/ZoneA/gates/mct-gateA7B-red.png); }
+
+.Zones-Window .gA7F_ac   { content: ""; content: none; display: none; }
+.Zones-Window .gA7F_idle { content:url(Images/ZoneA/gates/mct-gateA7F-idle.png); }
+.Zones-Window .gA7F_bq   { content:url(Images/ZoneA/gates/mct-gateA7F-gray.png); opacity: .7; }
+.Zones-Window .gA7F_g    { content:url(Images/ZoneA/gates/mct-gateA7F-green.png); }
+.Zones-Window .gA7F_y    { content:url(Images/ZoneA/gates/mct-gateA7F-yellow.png); }
+.Zones-Window .gA7F_o    { content:url(Images/ZoneA/gates/mct-gateA7F-orange.png); }
+.Zones-Window .gA7F_r    { content:url(Images/ZoneA/gates/mct-gateA7F-red.png); }
+
+.Zones-Window .gA8B_ac   { content: ""; content: none; display: none; }
+.Zones-Window .gA8B_idle { content:url(Images/ZoneA/gates/mct-gateA8B-idle.png); }
+.Zones-Window .gA8B_bq   { content:url(Images/ZoneA/gates/mct-gateA8B-gray.png); opacity: .7; }
+.Zones-Window .gA8B_g    { content:url(Images/ZoneA/gates/mct-gateA8B-green.png); }
+.Zones-Window .gA8B_y    { content:url(Images/ZoneA/gates/mct-gateA8B-yellow.png); }
+.Zones-Window .gA8B_o    { content:url(Images/ZoneA/gates/mct-gateA8B-orange.png); }
+.Zones-Window .gA8B_r    { content:url(Images/ZoneA/gates/mct-gateA8B-red.png); }
+
+.Zones-Window .gA8F_ac   { content: ""; content: none; display: none; }
+.Zones-Window .gA8F_idle { content:url(Images/ZoneA/gates/mct-gateA8F-idle.png); }
+.Zones-Window .gA8F_bq   { content:url(Images/ZoneA/gates/mct-gateA8F-gray.png); opacity: .7; }
+.Zones-Window .gA8F_g    { content:url(Images/ZoneA/gates/mct-gateA8F-green.png); }
+.Zones-Window .gA8F_y    { content:url(Images/ZoneA/gates/mct-gateA8F-yellow.png); }
+.Zones-Window .gA8F_o    { content:url(Images/ZoneA/gates/mct-gateA8F-orange.png); }
+.Zones-Window .gA8F_r    { content:url(Images/ZoneA/gates/mct-gateA8F-red.png); }
+
+.Zones-Window .gA9B_ac   { content: ""; content: none; display: none; }
+.Zones-Window .gA9B_idle { content:url(Images/ZoneA/gates/mct-gateA9B-idle.png); }
+.Zones-Window .gA9B_bq   { content:url(Images/ZoneA/gates/mct-gateA9B-gray.png); opacity: .7; }
+.Zones-Window .gA9B_g    { content:url(Images/ZoneA/gates/mct-gateA9B-green.png); }
+.Zones-Window .gA9B_y    { content:url(Images/ZoneA/gates/mct-gateA9B-yellow.png); }
+.Zones-Window .gA9B_o    { content:url(Images/ZoneA/gates/mct-gateA9B-orange.png); }
+.Zones-Window .gA9B_r    { content:url(Images/ZoneA/gates/mct-gateA9B-red.png); }
+
+.Zones-Window .gA9F_ac   { content: ""; content: none; display: none; }
+.Zones-Window .gA9F_idle { content:url(Images/ZoneA/gates/mct-gateA9F-idle.png); }
+.Zones-Window .gA9F_bq   { content:url(Images/ZoneA/gates/mct-gateA9F-gray.png); opacity: .7; }
+.Zones-Window .gA9F_g    { content:url(Images/ZoneA/gates/mct-gateA9F-green.png); }
+.Zones-Window .gA9F_y    { content:url(Images/ZoneA/gates/mct-gateA9F-yellow.png); }
+.Zones-Window .gA9F_o    { content:url(Images/ZoneA/gates/mct-gateA9F-orange.png); }
+.Zones-Window .gA9F_r    { content:url(Images/ZoneA/gates/mct-gateA9F-red.png); }
+
+.Zones-Window .gA10B_ac   { content: ""; content: none; display: none; }
+.Zones-Window .gA10B_idle { content:url(Images/ZoneA/gates/mct-gateA10B-idle.png); }
+.Zones-Window .gA10B_bq   { content:url(Images/ZoneA/gates/mct-gateA10B-gray.png); opacity: .7; }
+.Zones-Window .gA10B_g    { content:url(Images/ZoneA/gates/mct-gateA10B-green.png); }
+.Zones-Window .gA10B_y    { content:url(Images/ZoneA/gates/mct-gateA10B-yellow.png); }
+.Zones-Window .gA10B_o    { content:url(Images/ZoneA/gates/mct-gateA10B-orange.png); }
+.Zones-Window .gA10B_r    { content:url(Images/ZoneA/gates/mct-gateA10B-red.png); }
+
+.Zones-Window .gA10F_ac   { content: ""; content: none; display: none; }
+.Zones-Window .gA10F_idle { content:url(Images/ZoneA/gates/mct-gateA10F-idle.png); }
+.Zones-Window .gA10F_bq   { content:url(Images/ZoneA/gates/mct-gateA10F-gray.png); opacity: .7; }
+.Zones-Window .gA10F_g    { content:url(Images/ZoneA/gates/mct-gateA10F-green.png); }
+.Zones-Window .gA10F_y    { content:url(Images/ZoneA/gates/mct-gateA10F-yellow.png); }
+.Zones-Window .gA10F_o    { content:url(Images/ZoneA/gates/mct-gateA10F-orange.png); }
+.Zones-Window .gA10F_r    { content:url(Images/ZoneA/gates/mct-gateA10F-red.png); }
+                                                                                                 
+.Zones-Window .gB1_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB1_idle { content:url(Images/ZoneB/gates/mct-gateB1-idle.png); }             
+.Zones-Window .gB1_bq   { content:url(Images/ZoneB/gates/mct-gateB1-gray.png); opacity: .7; }
+.Zones-Window .gB1_g    { content:url(Images/ZoneB/gates/mct-gateB1-green.png); }            
+.Zones-Window .gB1_y    { content:url(Images/ZoneB/gates/mct-gateB1-yellow.png); }           
+.Zones-Window .gB1_o    { content:url(Images/ZoneB/gates/mct-gateB1-orange.png); }           
+.Zones-Window .gB1_r    { content:url(Images/ZoneB/gates/mct-gateB1-red.png); }              
+                                                                                                 
+.Zones-Window .gB2_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB2_idle { content:url(Images/ZoneB/gates/mct-gateB2-idle.png); }             
+.Zones-Window .gB2_bq   { content:url(Images/ZoneB/gates/mct-gateB2-gray.png); opacity: .7; }
+.Zones-Window .gB2_g    { content:url(Images/ZoneB/gates/mct-gateB2-green.png); }            
+.Zones-Window .gB2_y    { content:url(Images/ZoneB/gates/mct-gateB2-yellow.png); }           
+.Zones-Window .gB2_o    { content:url(Images/ZoneB/gates/mct-gateB2-orange.png); }           
+.Zones-Window .gB2_r    { content:url(Images/ZoneB/gates/mct-gateB2-red.png); }              
+                                                                                                 
+.Zones-Window .gB3_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB3_idle { content:url(Images/ZoneB/gates/mct-gateB3-idle.png); }             
+.Zones-Window .gB3_bq   { content:url(Images/ZoneB/gates/mct-gateB3-gray.png); opacity: .7; }
+.Zones-Window .gB3_g    { content:url(Images/ZoneB/gates/mct-gateB3-green.png); }            
+.Zones-Window .gB3_y    { content:url(Images/ZoneB/gates/mct-gateB3-yellow.png); }           
+.Zones-Window .gB3_o    { content:url(Images/ZoneB/gates/mct-gateB3-orange.png); }           
+.Zones-Window .gB3_r    { content:url(Images/ZoneB/gates/mct-gateB3-red.png); }
+                                                                                                               
+.Zones-Window .gB4B_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB4B_idle { content:url(Images/ZoneB/gates/mct-gateB4B-idle.png); }             
+.Zones-Window .gB4B_bq   { content:url(Images/ZoneB/gates/mct-gateB4B-gray.png); opacity: .7; }
+.Zones-Window .gB4B_g    { content:url(Images/ZoneB/gates/mct-gateB4B-green.png); }            
+.Zones-Window .gB4B_y    { content:url(Images/ZoneB/gates/mct-gateB4B-yellow.png); }           
+.Zones-Window .gB4B_o    { content:url(Images/ZoneB/gates/mct-gateB4B-orange.png); }           
+.Zones-Window .gB4B_r    { content:url(Images/ZoneB/gates/mct-gateB4B-red.png); }
+                                                                                                               
+.Zones-Window .gB4F_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB4F_idle { content:url(Images/ZoneB/gates/mct-gateB4F-idle.png); }             
+.Zones-Window .gB4F_bq   { content:url(Images/ZoneB/gates/mct-gateB4F-gray.png); opacity: .7; }
+.Zones-Window .gB4F_g    { content:url(Images/ZoneB/gates/mct-gateB4F-green.png); }            
+.Zones-Window .gB4F_y    { content:url(Images/ZoneB/gates/mct-gateB4F-yellow.png); }           
+.Zones-Window .gB4F_o    { content:url(Images/ZoneB/gates/mct-gateB4F-orange.png); }           
+.Zones-Window .gB4F_r    { content:url(Images/ZoneB/gates/mct-gateB4F-red.png); }
+                                                                                                               
+.Zones-Window .gB5_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB5_idle { content:url(Images/ZoneB/gates/mct-gateB5-idle.png); }             
+.Zones-Window .gB5_bq   { content:url(Images/ZoneB/gates/mct-gateB5-gray.png); opacity: .7; }
+.Zones-Window .gB5_g    { content:url(Images/ZoneB/gates/mct-gateB5-green.png); }            
+.Zones-Window .gB5_y    { content:url(Images/ZoneB/gates/mct-gateB5-yellow.png); }           
+.Zones-Window .gB5_o    { content:url(Images/ZoneB/gates/mct-gateB5-orange.png); }           
+.Zones-Window .gB5_r    { content:url(Images/ZoneB/gates/mct-gateB5-red.png); }
+                                                                                                               
+.Zones-Window .gB7B_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB7B_idle { content:url(Images/ZoneB/gates/mct-gateB7B-idle.png); }             
+.Zones-Window .gB7B_bq   { content:url(Images/ZoneB/gates/mct-gateB7B-gray.png); opacity: .7; }
+.Zones-Window .gB7B_g    { content:url(Images/ZoneB/gates/mct-gateB7B-green.png); }            
+.Zones-Window .gB7B_y    { content:url(Images/ZoneB/gates/mct-gateB7B-yellow.png); }           
+.Zones-Window .gB7B_o    { content:url(Images/ZoneB/gates/mct-gateB7B-orange.png); }           
+.Zones-Window .gB7B_r    { content:url(Images/ZoneB/gates/mct-gateB7B-red.png); }
+                                                                                                               
+.Zones-Window .gB7F_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB7F_idle { content:url(Images/ZoneB/gates/mct-gateB7F-idle.png); }             
+.Zones-Window .gB7F_bq   { content:url(Images/ZoneB/gates/mct-gateB7F-gray.png); opacity: .7; }
+.Zones-Window .gB7F_g    { content:url(Images/ZoneB/gates/mct-gateB7F-green.png); }            
+.Zones-Window .gB7F_y    { content:url(Images/ZoneB/gates/mct-gateB7F-yellow.png); }           
+.Zones-Window .gB7F_o    { content:url(Images/ZoneB/gates/mct-gateB7F-orange.png); }           
+.Zones-Window .gB7F_r    { content:url(Images/ZoneB/gates/mct-gateB7F-red.png); }
+                                                                                                               
+.Zones-Window .gB8B_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB8B_idle { content:url(Images/ZoneB/gates/mct-gateB8B-idle.png); }             
+.Zones-Window .gB8B_bq   { content:url(Images/ZoneB/gates/mct-gateB8B-gray.png); opacity: .7; }
+.Zones-Window .gB8B_g    { content:url(Images/ZoneB/gates/mct-gateB8B-green.png); }            
+.Zones-Window .gB8B_y    { content:url(Images/ZoneB/gates/mct-gateB8B-yellow.png); }           
+.Zones-Window .gB8B_o    { content:url(Images/ZoneB/gates/mct-gateB8B-orange.png); }           
+.Zones-Window .gB8B_r    { content:url(Images/ZoneB/gates/mct-gateB8B-red.png); }
+                                                                                                               
+.Zones-Window .gB8F_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB8F_idle { content:url(Images/ZoneB/gates/mct-gateB8F-idle.png); }             
+.Zones-Window .gB8F_bq   { content:url(Images/ZoneB/gates/mct-gateB8F-gray.png); opacity: .7; }
+.Zones-Window .gB8F_g    { content:url(Images/ZoneB/gates/mct-gateB8F-green.png); }            
+.Zones-Window .gB8F_y    { content:url(Images/ZoneB/gates/mct-gateB8F-yellow.png); }           
+.Zones-Window .gB8F_o    { content:url(Images/ZoneB/gates/mct-gateB8F-orange.png); }           
+.Zones-Window .gB8F_r    { content:url(Images/ZoneB/gates/mct-gateB8F-red.png); }
+                                                                                                               
+.Zones-Window .gB9_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB9_idle { content:url(Images/ZoneB/gates/mct-gateB9-idle.png); }             
+.Zones-Window .gB9_bq   { content:url(Images/ZoneB/gates/mct-gateB9-gray.png); opacity: .7; }
+.Zones-Window .gB9_g    { content:url(Images/ZoneB/gates/mct-gateB9-green.png); }            
+.Zones-Window .gB9_y    { content:url(Images/ZoneB/gates/mct-gateB9-yellow.png); }           
+.Zones-Window .gB9_o    { content:url(Images/ZoneB/gates/mct-gateB9-orange.png); }           
+.Zones-Window .gB9_r    { content:url(Images/ZoneB/gates/mct-gateB9-red.png); }
+                                                                                                               
+.Zones-Window .gB10_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB10_idle { content:url(Images/ZoneB/gates/mct-gateB10-idle.png); }             
+.Zones-Window .gB10_bq   { content:url(Images/ZoneB/gates/mct-gateB10-gray.png); opacity: .7; }
+.Zones-Window .gB10_g    { content:url(Images/ZoneB/gates/mct-gateB10-green.png); }            
+.Zones-Window .gB10_y    { content:url(Images/ZoneB/gates/mct-gateB10-yellow.png); }           
+.Zones-Window .gB10_o    { content:url(Images/ZoneB/gates/mct-gateB10-orange.png); }           
+.Zones-Window .gB10_r    { content:url(Images/ZoneB/gates/mct-gateB10-red.png); }
+
+.Zones-Window .gB11_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB11_idle { content:url(Images/ZoneB/gates/mct-gateB11-idle.png); }             
+.Zones-Window .gB11_bq   { content:url(Images/ZoneB/gates/mct-gateB11-gray.png); opacity: .7; }
+.Zones-Window .gB11_g    { content:url(Images/ZoneB/gates/mct-gateB11-green.png); }            
+.Zones-Window .gB11_y    { content:url(Images/ZoneB/gates/mct-gateB11-yellow.png); }           
+.Zones-Window .gB11_o    { content:url(Images/ZoneB/gates/mct-gateB11-orange.png); }           
+.Zones-Window .gB11_r    { content:url(Images/ZoneB/gates/mct-gateB11-red.png); }
+
+.Zones-Window .gC1_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC1_idle { content:url(Images/ZoneC/gates/mct-gateC1-idle.png); }             
+.Zones-Window .gC1_bq   { content:url(Images/ZoneC/gates/mct-gateC1-gray.png); opacity: .7; }
+.Zones-Window .gC1_g    { content:url(Images/ZoneC/gates/mct-gateC1-green.png); }            
+.Zones-Window .gC1_y    { content:url(Images/ZoneC/gates/mct-gateC1-yellow.png); }           
+.Zones-Window .gC1_o    { content:url(Images/ZoneC/gates/mct-gateC1-orange.png); }           
+.Zones-Window .gC1_r    { content:url(Images/ZoneC/gates/mct-gateC1-red.png); }
+
+.Zones-Window .gC2_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC2_idle { content:url(Images/ZoneC/gates/mct-gateC2-idle.png); }             
+.Zones-Window .gC2_bq   { content:url(Images/ZoneC/gates/mct-gateC2-gray.png); opacity: .7; }
+.Zones-Window .gC2_g    { content:url(Images/ZoneC/gates/mct-gateC2-green.png); }            
+.Zones-Window .gC2_y    { content:url(Images/ZoneC/gates/mct-gateC2-yellow.png); }           
+.Zones-Window .gC2_o    { content:url(Images/ZoneC/gates/mct-gateC2-orange.png); }           
+.Zones-Window .gC2_r    { content:url(Images/ZoneC/gates/mct-gateC2-red.png); }
+
+.Zones-Window .gC3_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC3_idle { content:url(Images/ZoneC/gates/mct-gateC3-idle.png); }             
+.Zones-Window .gC3_bq   { content:url(Images/ZoneC/gates/mct-gateC3-gray.png); opacity: .7; }
+.Zones-Window .gC3_g    { content:url(Images/ZoneC/gates/mct-gateC3-green.png); }            
+.Zones-Window .gC3_y    { content:url(Images/ZoneC/gates/mct-gateC3-yellow.png); }           
+.Zones-Window .gC3_o    { content:url(Images/ZoneC/gates/mct-gateC3-orange.png); }           
+.Zones-Window .gC3_r    { content:url(Images/ZoneC/gates/mct-gateC3-red.png); }
+
+.Zones-Window .gC4_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC4_idle { content:url(Images/ZoneC/gates/mct-gateC4-idle.png); }             
+.Zones-Window .gC4_bq   { content:url(Images/ZoneC/gates/mct-gateC4-gray.png); opacity: .7; }
+.Zones-Window .gC4_g    { content:url(Images/ZoneC/gates/mct-gateC4-green.png); }            
+.Zones-Window .gC4_y    { content:url(Images/ZoneC/gates/mct-gateC4-yellow.png); }           
+.Zones-Window .gC4_o    { content:url(Images/ZoneC/gates/mct-gateC4-orange.png); }           
+.Zones-Window .gC4_r    { content:url(Images/ZoneC/gates/mct-gateC4-red.png); }
+
+.Zones-Window .gC6_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC6_idle { content:url(Images/ZoneC/gates/mct-gateC6-idle.png); }             
+.Zones-Window .gC6_bq   { content:url(Images/ZoneC/gates/mct-gateC6-gray.png); opacity: .7; }
+.Zones-Window .gC6_g    { content:url(Images/ZoneC/gates/mct-gateC6-green.png); }            
+.Zones-Window .gC6_y    { content:url(Images/ZoneC/gates/mct-gateC6-yellow.png); }           
+.Zones-Window .gC6_o    { content:url(Images/ZoneC/gates/mct-gateC6-orange.png); }           
+.Zones-Window .gC6_r    { content:url(Images/ZoneC/gates/mct-gateC6-red.png); }
+
+.Zones-Window .gC9_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC9_idle { content:url(Images/ZoneC/gates/mct-gateC9-idle.png); }             
+.Zones-Window .gC9_bq   { content:url(Images/ZoneC/gates/mct-gateC9-gray.png); opacity: .7; }
+.Zones-Window .gC9_g    { content:url(Images/ZoneC/gates/mct-gateC9-green.png); }            
+.Zones-Window .gC9_y    { content:url(Images/ZoneC/gates/mct-gateC9-yellow.png); }           
+.Zones-Window .gC9_o    { content:url(Images/ZoneC/gates/mct-gateC9-orange.png); }           
+.Zones-Window .gC9_r    { content:url(Images/ZoneC/gates/mct-gateC9-red.png); }
+
+.Zones-Window .gC10B_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC10B_idle { content:url(Images/ZoneC/gates/mct-gateC10B-idle.png); }             
+.Zones-Window .gC10B_bq   { content:url(Images/ZoneC/gates/mct-gateC10B-gray.png); opacity: .7; }
+.Zones-Window .gC10B_g    { content:url(Images/ZoneC/gates/mct-gateC10B-green.png); }            
+.Zones-Window .gC10B_y    { content:url(Images/ZoneC/gates/mct-gateC10B-yellow.png); }           
+.Zones-Window .gC10B_o    { content:url(Images/ZoneC/gates/mct-gateC10B-orange.png); }           
+.Zones-Window .gC10B_r    { content:url(Images/ZoneC/gates/mct-gateC10B-red.png); }
+
+.Zones-Window .gC10F_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC10F_idle { content:url(Images/ZoneC/gates/mct-gateC10F-idle.png); }             
+.Zones-Window .gC10F_bq   { content:url(Images/ZoneC/gates/mct-gateC10F-gray.png); opacity: .7; }
+.Zones-Window .gC10F_g    { content:url(Images/ZoneC/gates/mct-gateC10F-green.png); }            
+.Zones-Window .gC10F_y    { content:url(Images/ZoneC/gates/mct-gateC10F-yellow.png); }           
+.Zones-Window .gC10F_o    { content:url(Images/ZoneC/gates/mct-gateC10F-orange.png); }           
+.Zones-Window .gC10F_r    { content:url(Images/ZoneC/gates/mct-gateC10F-red.png); }
+
+.Zones-Window .gC11B_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC11B_idle { content:url(Images/ZoneC/gates/mct-gateC11B-idle.png); }             
+.Zones-Window .gC11B_bq   { content:url(Images/ZoneC/gates/mct-gateC11B-gray.png); opacity: .7; }
+.Zones-Window .gC11B_g    { content:url(Images/ZoneC/gates/mct-gateC11B-green.png); }            
+.Zones-Window .gC11B_y    { content:url(Images/ZoneC/gates/mct-gateC11B-yellow.png); }           
+.Zones-Window .gC11B_o    { content:url(Images/ZoneC/gates/mct-gateC11B-orange.png); }           
+.Zones-Window .gC11B_r    { content:url(Images/ZoneC/gates/mct-gateC11B-red.png); }
+
+.Zones-Window .gC11F_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC11F_idle { content:url(Images/ZoneC/gates/mct-gateC11F-idle.png); }             
+.Zones-Window .gC11F_bq   { content:url(Images/ZoneC/gates/mct-gateC11F-gray.png); opacity: .7; }
+.Zones-Window .gC11F_g    { content:url(Images/ZoneC/gates/mct-gateC11F-green.png); }            
+.Zones-Window .gC11F_y    { content:url(Images/ZoneC/gates/mct-gateC11F-yellow.png); }           
+.Zones-Window .gC11F_o    { content:url(Images/ZoneC/gates/mct-gateC11F-orange.png); }           
+.Zones-Window .gC11F_r    { content:url(Images/ZoneC/gates/mct-gateC11F-red.png); }
+
+.Zones-Window .gC12B_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC12B_idle { content:url(Images/ZoneC/gates/mct-gateC12B-idle.png); }             
+.Zones-Window .gC12B_bq   { content:url(Images/ZoneC/gates/mct-gateC12B-gray.png); opacity: .7; }
+.Zones-Window .gC12B_g    { content:url(Images/ZoneC/gates/mct-gateC12B-green.png); }            
+.Zones-Window .gC12B_y    { content:url(Images/ZoneC/gates/mct-gateC12B-yellow.png); }           
+.Zones-Window .gC12B_o    { content:url(Images/ZoneC/gates/mct-gateC12B-orange.png); }           
+.Zones-Window .gC12B_r    { content:url(Images/ZoneC/gates/mct-gateC12B-red.png); }
+
+.Zones-Window .gC12F_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC12F_idle { content:url(Images/ZoneC/gates/mct-gateC12F-idle.png); }             
+.Zones-Window .gC12F_bq   { content:url(Images/ZoneC/gates/mct-gateC12F-gray.png); opacity: .7; }
+.Zones-Window .gC12F_g    { content:url(Images/ZoneC/gates/mct-gateC12F-green.png); }            
+.Zones-Window .gC12F_y    { content:url(Images/ZoneC/gates/mct-gateC12F-yellow.png); }           
+.Zones-Window .gC12F_o    { content:url(Images/ZoneC/gates/mct-gateC12F-orange.png); }           
+.Zones-Window .gC12F_r    { content:url(Images/ZoneC/gates/mct-gateC12F-red.png); }
+
+.Zones-Window .gC15_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC15_idle { content:url(Images/ZoneC/gates/mct-gateC15-idle.png); }             
+.Zones-Window .gC15_bq   { content:url(Images/ZoneC/gates/mct-gateC15-gray.png); opacity: .7; }
+.Zones-Window .gC15_g    { content:url(Images/ZoneC/gates/mct-gateC15-green.png); }            
+.Zones-Window .gC15_y    { content:url(Images/ZoneC/gates/mct-gateC15-yellow.png); }           
+.Zones-Window .gC15_o    { content:url(Images/ZoneC/gates/mct-gateC15-orange.png); }           
+.Zones-Window .gC15_r    { content:url(Images/ZoneC/gates/mct-gateC15-red.png); }
+
+.Zones-Window .gC16B_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC16B_idle { content:url(Images/ZoneC/gates/mct-gateC16B-idle.png); }             
+.Zones-Window .gC16B_bq   { content:url(Images/ZoneC/gates/mct-gateC16B-gray.png); opacity: .7; }
+.Zones-Window .gC16B_g    { content:url(Images/ZoneC/gates/mct-gateC16B-green.png); }            
+.Zones-Window .gC16B_y    { content:url(Images/ZoneC/gates/mct-gateC16B-yellow.png); }           
+.Zones-Window .gC16B_o    { content:url(Images/ZoneC/gates/mct-gateC16B-orange.png); }           
+.Zones-Window .gC16B_r    { content:url(Images/ZoneC/gates/mct-gateC16B-red.png); }
+
+.Zones-Window .gC16F_ac   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC16F_idle { content:url(Images/ZoneC/gates/mct-gateC16F-idle.png); }             
+.Zones-Window .gC16F_bq   { content:url(Images/ZoneC/gates/mct-gateC16F-gray.png); opacity: .7; }
+.Zones-Window .gC16F_g    { content:url(Images/ZoneC/gates/mct-gateC16F-green.png); }            
+.Zones-Window .gC16F_y    { content:url(Images/ZoneC/gates/mct-gateC16F-yellow.png); }           
+.Zones-Window .gC16F_o    { content:url(Images/ZoneC/gates/mct-gateC16F-orange.png); }           
+.Zones-Window .gC16F_r    { content:url(Images/ZoneC/gates/mct-gateC16F-red.png); }
+
+
+/* Wide Plane Styles */
+.Zones-Window .gA7B_ac_wide   { content: ""; content: none; display: none; }
+.Zones-Window .gA7B_idle_wide { content:url(Images/ZoneC/gates/mct-gateA7B-wide-idle.png); }
+.Zones-Window .gA7B_bq_wide   { content:url(Images/ZoneC/gates/mct-gateA7B-wide-gray.png); opacity: .7; }
+.Zones-Window .gA7B_g_wide    { content:url(Images/ZoneC/gates/mct-gateA7B-wide-green.png); }
+.Zones-Window .gA7B_y_wide    { content:url(Images/ZoneC/gates/mct-gateA7B-wide-yellow.png); }
+.Zones-Window .gA7B_o_wide    { content:url(Images/ZoneC/gates/mct-gateA7B-wide-orange.png); }
+.Zones-Window .gA7B_r_wide    { content:url(Images/ZoneC/gates/mct-gateA7B-wide-red.png); }
+
+.Zones-Window .gA7F_ac_wide   { content: ""; content: none; display: none; }
+.Zones-Window .gA7F_idle_wide { content:url(Images/ZoneC/gates/mct-gateA7F-wide-idle.png); }
+.Zones-Window .gA7F_bq_wide   { content:url(Images/ZoneC/gates/mct-gateA7F-wide-gray.png); opacity: .7; }
+.Zones-Window .gA7F_g_wide    { content:url(Images/ZoneC/gates/mct-gateA7F-wide-green.png); }
+.Zones-Window .gA7F_y_wide    { content:url(Images/ZoneC/gates/mct-gateA7F-wide-yellow.png); }
+.Zones-Window .gA7F_o_wide    { content:url(Images/ZoneC/gates/mct-gateA7F-wide-orange.png); }
+.Zones-Window .gA7F_r_wide    { content:url(Images/ZoneC/gates/mct-gateA7F-wide-red.png); }
+
+.Zones-Window .gA8B_ac_wide   { content: ""; content: none; display: none; }
+.Zones-Window .gA8B_idle_wide { content:url(Images/ZoneC/gates/mct-gateA8B-wide-idle.png); }
+.Zones-Window .gA8B_bq_wide   { content:url(Images/ZoneC/gates/mct-gateA8B-wide-gray.png); opacity: .7; }
+.Zones-Window .gA8B_g_wide    { content:url(Images/ZoneC/gates/mct-gateA8B-wide-green.png); }
+.Zones-Window .gA8B_y_wide    { content:url(Images/ZoneC/gates/mct-gateA8B-wide-yellow.png); }
+.Zones-Window .gA8B_o_wide    { content:url(Images/ZoneC/gates/mct-gateA8B-wide-orange.png); }
+.Zones-Window .gA8B_r_wide    { content:url(Images/ZoneC/gates/mct-gateA8B-wide-red.png); }
+
+.Zones-Window .gA8F_ac_wide   { content: ""; content: none; display: none; }
+.Zones-Window .gA8F_idle_wide { content:url(Images/ZoneC/gates/mct-gateA8F-wide-idle.png); }
+.Zones-Window .gA8F_bq_wide   { content:url(Images/ZoneC/gates/mct-gateA8F-wide-gray.png); opacity: .7; }
+.Zones-Window .gA8F_g_wide    { content:url(Images/ZoneC/gates/mct-gateA8F-wide-green.png); }
+.Zones-Window .gA8F_y_wide    { content:url(Images/ZoneC/gates/mct-gateA8F-wide-yellow.png); }
+.Zones-Window .gA8F_o_wide    { content:url(Images/ZoneC/gates/mct-gateA8F-wide-orange.png); }
+.Zones-Window .gA8F_r_wide    { content:url(Images/ZoneC/gates/mct-gateA8F-wide-red.png); }
+
+.Zones-Window .gA9B_ac_wide   { content: ""; content: none; display: none; }
+.Zones-Window .gA9B_idle_wide { content:url(Images/ZoneC/gates/mct-gateA9B-wide-idle.png); }
+.Zones-Window .gA9B_bq_wide   { content:url(Images/ZoneC/gates/mct-gateA9B-wide-gray.png); opacity: .7; }
+.Zones-Window .gA9B_g_wide    { content:url(Images/ZoneC/gates/mct-gateA9B-wide-green.png); }
+.Zones-Window .gA9B_y_wide    { content:url(Images/ZoneC/gates/mct-gateA9B-wide-yellow.png); }
+.Zones-Window .gA9B_o_wide    { content:url(Images/ZoneC/gates/mct-gateA9B-wide-orange.png); }
+.Zones-Window .gA9B_r_wide    { content:url(Images/ZoneC/gates/mct-gateA9B-wide-red.png); }
+
+.Zones-Window .gA9F_ac_wide   { content: ""; content: none; display: none; }
+.Zones-Window .gA9F_idle_wide { content:url(Images/ZoneC/gates/mct-gateA9F-wide-idle.png); }
+.Zones-Window .gA9F_bq_wide   { content:url(Images/ZoneC/gates/mct-gateA9F-wide-gray.png); opacity: .7; }
+.Zones-Window .gA9F_g_wide    { content:url(Images/ZoneC/gates/mct-gateA9F-wide-green.png); }
+.Zones-Window .gA9F_y_wide    { content:url(Images/ZoneC/gates/mct-gateA9F-wide-yellow.png); }
+.Zones-Window .gA9F_o_wide    { content:url(Images/ZoneC/gates/mct-gateA9F-wide-orange.png); }
+.Zones-Window .gA9F_r_wide    { content:url(Images/ZoneC/gates/mct-gateA9F-wide-red.png); }
+
+.Zones-Window .gA10B_ac_wide   { content: ""; content: none; display: none; }
+.Zones-Window .gA10B_idle_wide { content:url(Images/ZoneC/gates/mct-gateA10B-wide-idle.png); }
+.Zones-Window .gA10B_bq_wide   { content:url(Images/ZoneC/gates/mct-gateA10B-wide-gray.png); opacity: .7; }
+.Zones-Window .gA10B_g_wide    { content:url(Images/ZoneC/gates/mct-gateA10B-wide-green.png); }
+.Zones-Window .gA10B_y_wide    { content:url(Images/ZoneC/gates/mct-gateA10B-wide-yellow.png); }
+.Zones-Window .gA10B_o_wide    { content:url(Images/ZoneC/gates/mct-gateA10B-wide-orange.png); }
+.Zones-Window .gA10B_r_wide    { content:url(Images/ZoneC/gates/mct-gateA10B-wide-red.png); }
+
+.Zones-Window .gA10F_ac_wide   { content: ""; content: none; display: none; }
+.Zones-Window .gA10F_idle_wide { content:url(Images/ZoneC/gates/mct-gateA10F-wide-idle.png); }
+.Zones-Window .gA10F_bq_wide   { content:url(Images/ZoneC/gates/mct-gateA10F-wide-gray.png); opacity: .7; }
+.Zones-Window .gA10F_g_wide    { content:url(Images/ZoneC/gates/mct-gateA10F-wide-green.png); }
+.Zones-Window .gA10F_y_wide    { content:url(Images/ZoneC/gates/mct-gateA10F-wide-yellow.png); }
+.Zones-Window .gA10F_o_wide    { content:url(Images/ZoneC/gates/mct-gateA10F-wide-orange.png); }
+.Zones-Window .gA10F_r_wide    { content:url(Images/ZoneC/gates/mct-gateA10F-wide-red.png); }
+                                                                                                               
+.Zones-Window .gB4B_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB4B_idle_wide { content:url(Images/ZoneC/gates/mct-gateB4B-wide-idle.png); }             
+.Zones-Window .gB4B_bq_wide   { content:url(Images/ZoneC/gates/mct-gateB4B-wide-gray.png); opacity: .7; }
+.Zones-Window .gB4B_g_wide    { content:url(Images/ZoneC/gates/mct-gateB4B-wide-green.png); }            
+.Zones-Window .gB4B_y_wide    { content:url(Images/ZoneC/gates/mct-gateB4B-wide-yellow.png); }           
+.Zones-Window .gB4B_o_wide    { content:url(Images/ZoneC/gates/mct-gateB4B-wide-orange.png); }           
+.Zones-Window .gB4B_r_wide    { content:url(Images/ZoneC/gates/mct-gateB4B-wide-red.png); }
+                                                                                                               
+.Zones-Window .gB4F_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB4F_idle_wide { content:url(Images/ZoneC/gates/mct-gateB4F-wide-idle.png); }             
+.Zones-Window .gB4F_bq_wide   { content:url(Images/ZoneC/gates/mct-gateB4F-wide-gray.png); opacity: .7; }
+.Zones-Window .gB4F_g_wide    { content:url(Images/ZoneC/gates/mct-gateB4F-wide-green.png); }            
+.Zones-Window .gB4F_y_wide    { content:url(Images/ZoneC/gates/mct-gateB4F-wide-yellow.png); }           
+.Zones-Window .gB4F_o_wide    { content:url(Images/ZoneC/gates/mct-gateB4F-wide-orange.png); }           
+.Zones-Window .gB4F_r_wide    { content:url(Images/ZoneC/gates/mct-gateB4F-wide-red.png); }
+                                                                                                               
+.Zones-Window .gB7B_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB7B_idle_wide { content:url(Images/ZoneC/gates/mct-gateB7B-wide-idle.png); }             
+.Zones-Window .gB7B_bq_wide   { content:url(Images/ZoneC/gates/mct-gateB7B-wide-gray.png); opacity: .7; }
+.Zones-Window .gB7B_g_wide    { content:url(Images/ZoneC/gates/mct-gateB7B-wide-green.png); }            
+.Zones-Window .gB7B_y_wide    { content:url(Images/ZoneC/gates/mct-gateB7B-wide-yellow.png); }           
+.Zones-Window .gB7B_o_wide    { content:url(Images/ZoneC/gates/mct-gateB7B-wide-orange.png); }           
+.Zones-Window .gB7B_r_wide    { content:url(Images/ZoneC/gates/mct-gateB7B-wide-red.png); }
+                                                                                                               
+.Zones-Window .gB7F_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB7F_idle_wide { content:url(Images/ZoneC/gates/mct-gateB7F-wide-idle.png); }             
+.Zones-Window .gB7F_bq_wide   { content:url(Images/ZoneC/gates/mct-gateB7F-wide-gray.png); opacity: .7; }
+.Zones-Window .gB7F_g_wide    { content:url(Images/ZoneC/gates/mct-gateB7F-wide-green.png); }            
+.Zones-Window .gB7F_y_wide    { content:url(Images/ZoneC/gates/mct-gateB7F-wide-yellow.png); }           
+.Zones-Window .gB7F_o_wide    { content:url(Images/ZoneC/gates/mct-gateB7F-wide-orange.png); }           
+.Zones-Window .gB7F_r_wide    { content:url(Images/ZoneC/gates/mct-gateB7F-wide-red.png); }
+                                                                                                               
+.Zones-Window .gB8B_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB8B_idle_wide { content:url(Images/ZoneC/gates/mct-gateB8B-wide-idle.png); }             
+.Zones-Window .gB8B_bq_wide   { content:url(Images/ZoneC/gates/mct-gateB8B-wide-gray.png); opacity: .7; }
+.Zones-Window .gB8B_g_wide    { content:url(Images/ZoneC/gates/mct-gateB8B-wide-green.png); }            
+.Zones-Window .gB8B_y_wide    { content:url(Images/ZoneC/gates/mct-gateB8B-wide-yellow.png); }           
+.Zones-Window .gB8B_o_wide    { content:url(Images/ZoneC/gates/mct-gateB8B-wide-orange.png); }           
+.Zones-Window .gB8B_r_wide    { content:url(Images/ZoneC/gates/mct-gateB8B-wide-red.png); }
+                                                                                                               
+.Zones-Window .gB8F_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gB8F_idle_wide { content:url(Images/ZoneC/gates/mct-gateB8F-wide-idle.png); }             
+.Zones-Window .gB8F_bq_wide   { content:url(Images/ZoneC/gates/mct-gateB8F-wide-gray.png); opacity: .7; }
+.Zones-Window .gB8F_g_wide    { content:url(Images/ZoneC/gates/mct-gateB8F-wide-green.png); }            
+.Zones-Window .gB8F_y_wide    { content:url(Images/ZoneC/gates/mct-gateB8F-wide-yellow.png); }           
+.Zones-Window .gB8F_o_wide    { content:url(Images/ZoneC/gates/mct-gateB8F-wide-orange.png); }           
+.Zones-Window .gB8F_r_wide    { content:url(Images/ZoneC/gates/mct-gateB8F-wide-red.png); }
+
+.Zones-Window .gC10B_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC10B_idle_wide { content:url(Images/ZoneC/gates/mct-gateC10B-wide-idle.png); }             
+.Zones-Window .gC10B_bq_wide   { content:url(Images/ZoneC/gates/mct-gateC10B-wide-gray.png); opacity: .7; }
+.Zones-Window .gC10B_g_wide    { content:url(Images/ZoneC/gates/mct-gateC10B-wide-green.png); }            
+.Zones-Window .gC10B_y_wide    { content:url(Images/ZoneC/gates/mct-gateC10B-wide-yellow.png); }           
+.Zones-Window .gC10B_o_wide    { content:url(Images/ZoneC/gates/mct-gateC10B-wide-orange.png); }           
+.Zones-Window .gC10B_r_wide    { content:url(Images/ZoneC/gates/mct-gateC10B-wide-red.png); }
+
+.Zones-Window .gC10F_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC10F_idle_wide { content:url(Images/ZoneC/gates/mct-gateC10F-wide-idle.png); }             
+.Zones-Window .gC10F_bq_wide   { content:url(Images/ZoneC/gates/mct-gateC10F-wide-gray.png); opacity: .7; }
+.Zones-Window .gC10F_g_wide    { content:url(Images/ZoneC/gates/mct-gateC10F-wide-green.png); }            
+.Zones-Window .gC10F_y_wide    { content:url(Images/ZoneC/gates/mct-gateC10F-wide-yellow.png); }           
+.Zones-Window .gC10F_o_wide    { content:url(Images/ZoneC/gates/mct-gateC10F-wide-orange.png); }           
+.Zones-Window .gC10F_r_wide    { content:url(Images/ZoneC/gates/mct-gateC10F-wide-red.png); }
+
+.Zones-Window .gC11B_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC11B_idle_wide { content:url(Images/ZoneC/gates/mct-gateC11B-wide-idle.png); }             
+.Zones-Window .gC11B_bq_wide   { content:url(Images/ZoneC/gates/mct-gateC11B-wide-gray.png); opacity: .7; }
+.Zones-Window .gC11B_g_wide    { content:url(Images/ZoneC/gates/mct-gateC11B-wide-green.png); }            
+.Zones-Window .gC11B_y_wide    { content:url(Images/ZoneC/gates/mct-gateC11B-wide-yellow.png); }           
+.Zones-Window .gC11B_o_wide    { content:url(Images/ZoneC/gates/mct-gateC11B-wide-orange.png); }           
+.Zones-Window .gC11B_r_wide    { content:url(Images/ZoneC/gates/mct-gateC11B-wide-red.png); }
+
+.Zones-Window .gC11F_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC11F_idle_wide { content:url(Images/ZoneC/gates/mct-gateC11F-wide-idle.png); }             
+.Zones-Window .gC11F_bq_wide   { content:url(Images/ZoneC/gates/mct-gateC11F-wide-gray.png); opacity: .7; }
+.Zones-Window .gC11F_g_wide    { content:url(Images/ZoneC/gates/mct-gateC11F-wide-green.png); }            
+.Zones-Window .gC11F_y_wide    { content:url(Images/ZoneC/gates/mct-gateC11F-wide-yellow.png); }           
+.Zones-Window .gC11F_o_wide    { content:url(Images/ZoneC/gates/mct-gateC11F-wide-orange.png); }           
+.Zones-Window .gC11F_r_wide    { content:url(Images/ZoneC/gates/mct-gateC11F-wide-red.png); }
+
+.Zones-Window .gC12B_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC12B_idle_wide { content:url(Images/ZoneC/gates/mct-gateC12B-wide-idle.png); }             
+.Zones-Window .gC12B_bq_wide   { content:url(Images/ZoneC/gates/mct-gateC12B-wide-gray.png); opacity: .7; }
+.Zones-Window .gC12B_g_wide    { content:url(Images/ZoneC/gates/mct-gateC12B-wide-green.png); }            
+.Zones-Window .gC12B_y_wide    { content:url(Images/ZoneC/gates/mct-gateC12B-wide-yellow.png); }           
+.Zones-Window .gC12B_o_wide    { content:url(Images/ZoneC/gates/mct-gateC12B-wide-orange.png); }           
+.Zones-Window .gC12B_r_wide    { content:url(Images/ZoneC/gates/mct-gateC12B-wide-red.png); }
+
+.Zones-Window .gC12F_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC12F_idle_wide { content:url(Images/ZoneC/gates/mct-gateC12F-wide-idle.png); }             
+.Zones-Window .gC12F_bq_wide   { content:url(Images/ZoneC/gates/mct-gateC12F-wide-gray.png); opacity: .7; }
+.Zones-Window .gC12F_g_wide    { content:url(Images/ZoneC/gates/mct-gateC12F-wide-green.png); }            
+.Zones-Window .gC12F_y_wide    { content:url(Images/ZoneC/gates/mct-gateC12F-wide-yellow.png); }           
+.Zones-Window .gC12F_o_wide    { content:url(Images/ZoneC/gates/mct-gateC12F-wide-orange.png); }           
+.Zones-Window .gC12F_r_wide    { content:url(Images/ZoneC/gates/mct-gateC12F-wide-red.png); }
+
+.Zones-Window .gC16B_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC16B_idle_wide { content:url(Images/ZoneC/gates/mct-gateC16B-wide-idle.png); }             
+.Zones-Window .gC16B_bq_wide   { content:url(Images/ZoneC/gates/mct-gateC16B-wide-gray.png); opacity: .7; }
+.Zones-Window .gC16B_g_wide    { content:url(Images/ZoneC/gates/mct-gateC16B-wide-green.png); }            
+.Zones-Window .gC16B_y_wide    { content:url(Images/ZoneC/gates/mct-gateC16B-wide-yellow.png); }           
+.Zones-Window .gC16B_o_wide    { content:url(Images/ZoneC/gates/mct-gateC16B-wide-orange.png); }           
+.Zones-Window .gC16B_r_wide    { content:url(Images/ZoneC/gates/mct-gateC16B-wide-red.png); }
+
+.Zones-Window .gC16F_ac_wide   { content: ""; content: none; display: none; }                     
+.Zones-Window .gC16F_idle_wide { content:url(Images/ZoneC/gates/mct-gateC16F-wide-idle.png); }             
+.Zones-Window .gC16F_bq_wide   { content:url(Images/ZoneC/gates/mct-gateC16F-wide-gray.png); opacity: .7; }
+.Zones-Window .gC16F_g_wide    { content:url(Images/ZoneC/gates/mct-gateC16F-wide-green.png); }            
+.Zones-Window .gC16F_y_wide    { content:url(Images/ZoneC/gates/mct-gateC16F-wide-yellow.png); }           
+.Zones-Window .gC16F_o_wide    { content:url(Images/ZoneC/gates/mct-gateC16F-wide-orange.png); }           
+.Zones-Window .gC16F_r_wide    { content:url(Images/ZoneC/gates/mct-gateC16F-wide-red.png); }
+
 
 .Zones-Window #zones_container .status { 
    /* IE 8 */
@@ -134,6 +648,46 @@
     content:"Fire Alarm";
 }
 
+.Zones-Window #zones_container #gateA2 { top:10%;left:28%; }
+.Zones-Window #zones_container #gateA3 { top:36%;left:21%; }
+.Zones-Window #zones_container #gateA4 { top:12%;left:24%; }
+.Zones-Window #zones_container #gateA6 { top:14%;left:21%; }
+.Zones-Window #zones_container #gateA7B { top:39%;left:13%; }
+.Zones-Window #zones_container #gateA7F { top:35%;left:15%; }
+.Zones-Window #zones_container #gateA8B { top:15%;left:16%; }
+.Zones-Window #zones_container #gateA8F { top:19%;left:13%; }
+.Zones-Window #zones_container #gateA9B { top:43%;left:6%; }
+.Zones-Window #zones_container #gateA9F { top:39%;left:9%; }
+.Zones-Window #zones_container #gateA10B { top:10%;left:9%; }
+.Zones-Window #zones_container #gateA10F { top:23%;left:7%; }
+.Zones-Window #zones_container #gateB1 { top:9%;left:57%; }
+.Zones-Window #zones_container #gateB2 { top:36%;left:56%; }
+.Zones-Window #zones_container #gateB3 { top:12%;left:61%; }
+.Zones-Window #zones_container #gateB4B { top:36%;left:62%; }
+.Zones-Window #zones_container #gateB4F { top:32%;left:66%; }
+.Zones-Window #zones_container #gateB5 { top:13%;left:65%; }
+.Zones-Window #zones_container #gateB7B { top:13%;left:72%; }
+.Zones-Window #zones_container #gateB7F { top:18%;left:69%; }
+.Zones-Window #zones_container #gateB8B { top:37%;left:69%; }
+.Zones-Window #zones_container #gateB8F { top:33%;left:72%; }
+.Zones-Window #zones_container #gateB9 { top:15%;left:76%; }
+.Zones-Window #zones_container #gateB10 { top:40%;left:77%; }
+.Zones-Window #zones_container #gateB11 { top:15%;left:80%; }
+.Zones-Window #zones_container #gateC1 { top:41%;left:50%; }
+.Zones-Window #zones_container #gateC2 { top:38%;left:28%; }
+.Zones-Window #zones_container #gateC3 { top:46%;left:48%; }
+.Zones-Window #zones_container #gateC4 { top:41%;left:31%; }
+.Zones-Window #zones_container #gateC6 { top:55%;left:33%; }
+.Zones-Window #zones_container #gateC9 { top:66%;left:48%; }
+.Zones-Window #zones_container #gateC10B { top:66%;left:34%; }
+.Zones-Window #zones_container #gateC10F { top:71%;left:36%; }
+.Zones-Window #zones_container #gateC11B { top:77%;left:48%; }
+.Zones-Window #zones_container #gateC11F { top:72%;left:46%; }
+.Zones-Window #zones_container #gateC12B { top:77%;left:34%; }
+.Zones-Window #zones_container #gateC12F { top:82%;left:36%; }
+.Zones-Window #zones_container #gateC15 { top:87%;left:49%; }
+.Zones-Window #zones_container #gateC16B { top:88%;left:35%; }
+.Zones-Window #zones_container #gateC16F { top:92%;left:38%; }
 
 .k-window {
     z-index: 100 !important;

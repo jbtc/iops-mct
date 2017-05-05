@@ -3,7 +3,7 @@
     $(document).ready(function () {
         OPC.tags = [];
         OPC_config.watch_tags = [];
-        OPC_config.tag_prefix = 'Airport.SLL.Term1.Zone1.GateC' + '@TempData["GateNumber"]' + '.PCA.';
+        OPC_config.tag_prefix = 'Airport.SLL.Term1.Zone' + '@TempData["ZoneNumber"]' + '.GateC' + '@TempData["GateNumber"]' + '.PCA.';
         OPC_config.refresh_callback = refresh_update;
         OPC_config.watch_tags = tags;
         OPC_config.alarm_bindings = [

@@ -1195,6 +1195,7 @@
     <Content Include="Content\Themes\MCT\Ver 1.0.0\.DS_Store" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\._.DS_Store" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\AwesomeMvc.css.old" />
+    <Content Include="Areas\Zones\Views\Zones\_ShowMCTZone.cshtml" />
     <None Include="Properties\PublishProfiles\iops-cid.pubxml" />
     <None Include="Properties\PublishProfiles\iops-dev.pubxml" />
     <None Include="Properties\PublishProfiles\iops-jfk-local.pubxml" />

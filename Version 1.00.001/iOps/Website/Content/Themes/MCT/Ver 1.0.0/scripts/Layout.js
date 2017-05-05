@@ -37,7 +37,6 @@
 
 $(document).ready(function () {
 
-
     //hide the link text for gate list and show the icons on startup on the slide-in-handle splitter column
     if ($('#slide-in-handle').is(':visible')) {
         $('[class^="screen-text"]').hide();
