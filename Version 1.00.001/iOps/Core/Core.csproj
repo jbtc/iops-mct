@@ -136,6 +136,282 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\IDel.cs" />
+    <Compile Include="Model\MCTReports.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MCTReports.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCTReports.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCTReports.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MCTReports.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_Network_Monitoring_Bool.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A10B_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A10B_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A10F_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A10F_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A2_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A2_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A3_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A3_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A4_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A4_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A6_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A6_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A7B_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A7B_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A7F_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A7F_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A8B_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A8B_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A8F_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A8F_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A9B_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A9B_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A9F_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_A9F_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_AlarmLogging.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B10_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B10_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B11_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B11_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B1_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B1_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B2_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B2_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B3_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B3_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B4B_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B4B_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B4F_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B4F_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B5_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B5_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B7B_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B7B_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B7F_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B7F_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B8B_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B8B_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B8F_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B8F_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B9_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_B9_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C10B_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C10B_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C10F_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C10F_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C11B_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C11B_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C11F_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C11F_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C12B_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C12B_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C12F_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C12F_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C15_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C15_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C16B_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C16B_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C16F_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C16F_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C1_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C1_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C2_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C2_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C3_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C3_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C4_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C4_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C6_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C6_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C9_DockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_C9_UnDockTime.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_DailyAircraftDocked.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_DataLogging.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_DockTime_DataLogging.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_UnDockTime_DataLogging.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MCT_PBB_WarningLogging.cs">
+      <DependentUpon>MCTReports.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -313,6 +589,13 @@
       <DependentUpon>FlightData.edmx</DependentUpon>
       <LastGenOutput>FlightData.cs</LastGenOutput>
     </None>
+    <EntityDeploy Include="Model\MCTReports.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MCTReports.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\MCTReports.edmx.diagram">
+      <DependentUpon>MCTReports.edmx</DependentUpon>
+    </None>
     <None Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -347,6 +630,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
+    <Content Include="Model\MCTReports.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MCTReports.edmx</DependentUpon>
+      <LastGenOutput>MCTReports.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\MCTReports.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MCTReports.edmx</DependentUpon>
+      <LastGenOutput>MCTReports.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

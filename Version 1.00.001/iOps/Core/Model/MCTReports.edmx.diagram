@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1c8207f9af5b4a57932a7f7e0499c0e9" Name="Diagram1">
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A10B_DockTime" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A10B_UnDockTime" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A10F_DockTime" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A10F_UnDockTime" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A2_DockTime" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A2_UnDockTime" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A3_DockTime" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A3_UnDockTime" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A4_DockTime" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A4_UnDockTime" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A6_DockTime" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A6_UnDockTime" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A7B_DockTime" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A7B_UnDockTime" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A7F_DockTime" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A7F_UnDockTime" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A8B_DockTime" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A8B_UnDockTime" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A8F_DockTime" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A8F_UnDockTime" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A9B_DockTime" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A9B_UnDockTime" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A9F_DockTime" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_A9F_UnDockTime" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B1_DockTime" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B1_UnDockTime" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B10_DockTime" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B10_UnDockTime" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B11_DockTime" Width="1.5" PointX="4.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B11_UnDockTime" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B2_DockTime" Width="1.5" PointX="6.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B2_UnDockTime" Width="1.5" PointX="8.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B3_DockTime" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B3_UnDockTime" Width="1.5" PointX="10.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B4B_DockTime" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B4B_UnDockTime" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B4F_DockTime" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B4F_UnDockTime" Width="1.5" PointX="14.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B5_DockTime" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B5_UnDockTime" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B7B_DockTime" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B7B_UnDockTime" Width="1.5" PointX="2.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B7F_DockTime" Width="1.5" PointX="4.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B7F_UnDockTime" Width="1.5" PointX="6.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B8B_DockTime" Width="1.5" PointX="8.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B8B_UnDockTime" Width="1.5" PointX="10.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B8F_DockTime" Width="1.5" PointX="12.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B8F_UnDockTime" Width="1.5" PointX="14.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B9_DockTime" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_B9_UnDockTime" Width="1.5" PointX="16.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C1_DockTime" Width="1.5" PointX="16.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C1_UnDockTime" Width="1.5" PointX="16.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C10B_DockTime" Width="1.5" PointX="16.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C10B_UnDockTime" Width="1.5" PointX="16.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C10F_DockTime" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C10F_UnDockTime" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C11B_DockTime" Width="1.5" PointX="2.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C11B_UnDockTime" Width="1.5" PointX="18.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C11F_DockTime" Width="1.5" PointX="4.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C11F_UnDockTime" Width="1.5" PointX="18.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C12B_DockTime" Width="1.5" PointX="6.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C12B_UnDockTime" Width="1.5" PointX="8.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C12F_DockTime" Width="1.5" PointX="18.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C12F_UnDockTime" Width="1.5" PointX="10.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C15_DockTime" Width="1.5" PointX="18.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C15_UnDockTime" Width="1.5" PointX="12.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C16B_DockTime" Width="1.5" PointX="14.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C16B_UnDockTime" Width="1.5" PointX="18.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C16F_DockTime" Width="1.5" PointX="16.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C16F_UnDockTime" Width="1.5" PointX="18.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C2_DockTime" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C2_UnDockTime" Width="1.5" PointX="20.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C3_DockTime" Width="1.5" PointX="20.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C3_UnDockTime" Width="1.5" PointX="20.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C4_DockTime" Width="1.5" PointX="20.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C4_UnDockTime" Width="1.5" PointX="20.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C6_DockTime" Width="1.5" PointX="20.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C6_UnDockTime" Width="1.5" PointX="0.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C9_DockTime" Width="1.5" PointX="2.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_C9_UnDockTime" Width="1.5" PointX="4.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_DailyAircraftDocked" Width="1.5" PointX="6.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_Network_Monitoring_Bool" Width="1.5" PointX="8.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_AlarmLogging" Width="1.5" PointX="10.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_DataLogging" Width="1.5" PointX="12.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_WarningLogging" Width="1.5" PointX="14.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_DockTime_DataLogging" Width="1.5" PointX="16.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MCT_Airport_SCADAModel.MCT_PBB_UnDockTime_DataLogging" Width="1.5" PointX="18.75" PointY="21.75" IsExpanded="true" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

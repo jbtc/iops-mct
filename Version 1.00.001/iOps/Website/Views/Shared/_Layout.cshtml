@@ -1,5 +1,4 @@
-﻿
-@using System.Threading
+﻿@using System.Threading
 @using System.Web.Mvc.Html;
 @using System.Web.Optimization;
 
@@ -41,8 +40,8 @@
         OPC_config = {
             token: '7e61b230-481d-4551-b24b-ba9046e3d8f2',
             serverURL: '@System.Web.Configuration.WebConfigurationManager.AppSettings["OPC_config_ServerURL"]',
-            max_tags_per_msg: 15,
-            max_callbacks: 200
+            max_tags_per_msg: 30,
+            max_callbacks: 250
         };
         OPC.init();
     </script>

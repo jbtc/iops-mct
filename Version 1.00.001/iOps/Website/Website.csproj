@@ -1213,7 +1213,27 @@
     <Content Include="Reports\SLLalarmreport.trdx" />
     <Content Include="Reports\SLLwarningreport.trdx" />
     <Content Include="Reports\SLLNetworkMonitoring.trdx" />
-    <Content Include="Reports\SLLAircraft Docked.trdx" />
+    <Content Include="Reports\SLLAircraft Docked.trdx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\MCTAircraft Docked.trdx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\MCTAircraftDockedTime.trdx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\MCTAircraftUnDockedTime.trdx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\MCTalarmreport.trdx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\MCTNetworkMonitoring.trdx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\MCTwarningreport.trdx">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
