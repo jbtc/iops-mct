@@ -17,7 +17,6 @@
 
 <script>
     $(document).ready(function () {
-//        debugger;
         var tags = [];
         OPC.tags = [];
         OPC_config.watch_tags = [];
@@ -111,7 +110,6 @@
         });
 
         $('#rtuspUpdate').click(function () {
-            debugger;
             var old_watch_tags = OPC_config.watch_tags;
             var old_tag_prefix = OPC_config.tag_prefix;
             var old_refresh_callback = OPC_config.refresh_callback;

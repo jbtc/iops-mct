@@ -126,7 +126,7 @@
             $(this).attr('id', 'gateWindowLink' + index);
         });
 
-        //up arrow (Zone screen)
+        //up arrow (Airport screen)
         $('#gateWindowLink0').click(function (e) {
             $.ajax({
                 url: '@Url.Action("ShowAirport", "Airport", new { area = "Airport" })',
@@ -142,7 +142,6 @@
                     CloseKendoGate();
                     $('#main-body').html(data);
                     ChangeIcons(1);
-
                 }
             });
         });
@@ -167,33 +166,15 @@
             });
         });
 
-        $('#gpuLinkButtonInGateScreen').click(function (e) {
+        //regular text link (to RTU)
+        $('#rtuLinkButtonInGateScreen').click(function (e) {
             $.ajax({
-                url: '@Url.Action("ShowGPU", "GPU", new { area = "GPU" })',
+                url: '@Url.Action("ShowRTU", "RTU", new { area = "RTU" })',
                 type: "GET",
                 data: {
-                    gateNum: "@TempData["GateNumber"]",
-                    zoneNum: "@TempData["ZoneNumber"]"
-                },
-                contentType: 'text/html',
-                success: function (data) {
-                    CloseGateAlarmWindow();
-                    CloseGateWarningWindow();
-                    CloseKendoGate();
-                    $('#main-body').html(data);
-                }
-            });
-        });
-
-        //regular text link (to PCA)
-        $('#pcaLinkButtonInGateScreen').click(function (e) {
-            $.ajax({
-                url: '@Url.Action("ShowPCA", "PCA", new { area= "PCA" })',
-                type: "GET",
-                data: {
-                    gateNum: "@TempData["GateNumber"]",
-                    zoneNum: "@TempData["ZoneNumber"]"
-                },
+                    zoneNum: "@TempData["ZoneNumber"]",
+                    gateNum: "@TempData["GateNumber"]"
+            },
                 contentType: 'text/html',
                 success: function (data) {
                     CloseGateAlarmWindow();
@@ -207,7 +188,6 @@
         CreateGateAlarmWindow();
 
         CreateGateWarningWindow();
-
 
         $('#btnRemoteBridgeControl').prop('disabled', (@TempData["AuthLevel"] > 3 ? false : true));
         $('#btnRemoteBridgeControl').click(function () {
@@ -803,6 +783,7 @@
     </div>
     <div class="gatesPageDividerRight">
         <button id="showServiceCounters">Service Counters</button>
+        <button id="rtuLinkButtonInGateScreen">Go To RTU</button>
     </div>
     <div id="GateAlarmWindow">
         <div id="GateAlarms"></div>

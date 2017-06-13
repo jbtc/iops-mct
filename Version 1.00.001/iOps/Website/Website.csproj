@@ -59,12 +59,12 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Castle.Windsor.Mvc">
       <HintPath>..\packages\Castle.Windsor.Mvc.1.3.0.0\lib\net45\Castle.Windsor.Mvc.dll</HintPath>
@@ -82,9 +82,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Kendo.Mvc, Version=2015.1.408.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -101,13 +101,13 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Omu.AwesomeMvc, Version=3.0.1.0, Culture=neutral, PublicKeyToken=9c6fbba722ea1caf, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -118,8 +118,8 @@
       <HintPath>..\libs\Omu.Encrypto.dll</HintPath>
     </Reference>
     <Reference Include="Omu.ValueInjecter, Version=2.3.3.0, Culture=neutral, PublicKeyToken=c7694541b0ac80e4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ValueInjecter.2.3.3\lib\net35\Omu.ValueInjecter.dll</HintPath>
+      <HintPath>..\packages\valueinjecter.2.3.3\lib\net35\Omu.ValueInjecter.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -131,8 +131,12 @@
       <HintPath>..\packages\Rabbit.Bootstrap.MVC.1.1.0.0\lib\net40\Rabbit.Bootstrap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Extensions">
@@ -201,8 +205,12 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebApiContrib.IoC.CastleWindsor">
       <HintPath>..\packages\WebApiContrib.IoC.CastleWindsor.0.10.0.0\lib\net40\WebApiContrib.IoC.CastleWindsor.dll</HintPath>
       <Private>True</Private>
@@ -252,6 +260,8 @@
     <Compile Include="Areas\GPU\GPUAreaRegistration.cs" />
     <Compile Include="Areas\NetworkMonitor\Controllers\NetworkMonitorController.cs" />
     <Compile Include="Areas\NetworkMonitor\NetworkMonitorAreaRegistration.cs" />
+    <Compile Include="Areas\RTU\Controllers\RTUController.cs" />
+    <Compile Include="Areas\RTU\RTUAreaRegistration.cs" />
     <Compile Include="Areas\PCA\Controllers\PCAController.cs" />
     <Compile Include="Areas\PCA\PCAAreaRegistration.cs" />
     <Compile Include="Areas\ServiceCounters\Controllers\ServiceCountersController.cs" />
@@ -667,6 +677,576 @@
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Gates.css" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\GPU.css" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Header.css" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA10F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA2-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA2-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA2-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA2-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA2-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA2-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA2-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA3-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA3-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA3-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA3-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA3-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA3-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA3-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA4-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA4-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA4-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA4-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA4-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA4-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA4-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA6-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA6-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA6-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA6-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA6-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA6-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA6-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA7F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA8F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateA9F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB1-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB1-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB1-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB1-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB1-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB1-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB1-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB10-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB10-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB10-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB10-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB10-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB10-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB10-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB11-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB11-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB11-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB11-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB11-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB11-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB11-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB2-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB2-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB2-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB2-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB2-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB2-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB2-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB3-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB3-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB3-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB3-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB3-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB3-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB3-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB4F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB5-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB5-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB5-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB5-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB5-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB5-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB5-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB7F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB8F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB9-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB9-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB9-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB9-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB9-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB9-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateB9-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC1-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC1-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC1-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC1-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC1-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC1-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC1-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC10F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC11F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC12F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC15-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC15-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC15-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC15-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC15-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC15-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC15-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC16F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC2-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC2-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC2-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC2-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC2-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC2-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC2-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC3-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC3-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC3-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC3-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC3-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC3-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC3-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC4-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC4-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC4-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC4-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC4-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC4-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC4-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC6-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC6-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC6-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC6-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC6-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC6-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC6-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC9-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC9-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC9-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC9-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC9-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC9-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\gates\mct-gateC9-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gate-nc-Rev-1.001.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-terminal-Rev-1.001..png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-terminal-Rev-1.001.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-terminal.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA10F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA2-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA2-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA2-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA2-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA2-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA2-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA2-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA3-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA3-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA3-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA3-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA3-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA3-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA3-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA4-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA4-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA4-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA4-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA4-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA4-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA4-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA6-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA6-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA6-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA6-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA6-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA6-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA6-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA7F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA8F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\gates\mct-gateA9F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\mct-zone-a-nc-Rev-1.001.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneA\mct-zone-a-Rev-1.001.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB1-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB1-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB1-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB1-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB1-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB1-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB1-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB10-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB10-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB10-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB10-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB10-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB10-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB10-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB11-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB11-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB11-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB11-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB11-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB11-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB11-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB2-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB2-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB2-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB2-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB2-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB2-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB2-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB3-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB3-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB3-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB3-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB3-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB3-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB3-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB4F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB5-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB5-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB5-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB5-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB5-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB5-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB5-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB7F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB8F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB9-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB9-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB9-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB9-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB9-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB9-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\gates\mct-gateB9-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\mct-zone-b-nc-Rev-1.001.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneB\mct-zone-b-Rev-1.001.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC1-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC1-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC1-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC1-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC1-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC1-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC1-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC10F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC11F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC12F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC15-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC15-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC15-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC15-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC15-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC15-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC15-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16B-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16B-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16B-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16B-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16B-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16B-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16B-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16F-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16F-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16F-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16F-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16F-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16F-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC16F-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC2-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC2-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC2-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC2-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC2-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC2-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC2-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC3-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC3-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC3-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC3-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC3-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC3-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC3-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC4-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC4-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC4-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC4-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC4-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC4-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC4-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC6-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC6-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC6-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC6-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC6-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC6-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC6-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC9-gray.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC9-green.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC9-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC9-orange.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC9-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC9-red.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\gates\mct-gateC9-yellow.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\mct-zone-c-nc-Rev-1.001.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\ZoneC\mct-zone-c-Rev-1.001.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\awe_gray.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\awe_icons.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ButtonHamburgerStyle.png" />
@@ -704,117 +1284,6 @@
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\editdel_black.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\eia-logo_mouseover.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\eia-logo_mouseup.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate-nc-Rev-1.001.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1-wide-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1A-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1A-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1A-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1A-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1A-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1A-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1A-wide-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1A-wide-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1A-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1A-wide-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1A-wide-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1A-wide-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1A-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1B-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1B-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1B-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1B-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1B-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1B-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1B-wide-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1B-wide-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1B-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1B-wide-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1B-wide-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1B-wide-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate1B-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2-wide-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2A-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2A-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2A-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2A-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2A-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2A-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2A-wide-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2A-wide-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2A-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2A-wide-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2A-wide-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2A-wide-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2A-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2B-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2B-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2B-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2B-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2B-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2B-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2B-wide-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2B-wide-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2B-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2B-wide-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2B-wide-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2B-wide-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate2B-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3-wide-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3A-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3A-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3A-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3A-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3A-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3A-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3A-wide-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3A-wide-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3A-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3A-wide-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3A-wide-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3A-wide-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3A-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3B-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3B-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3B-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3B-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3B-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3B-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3B-wide-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3B-wide-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3B-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3B-wide-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3B-wide-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3B-wide-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate3B-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4-wide-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4A-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4A-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4A-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4A-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4A-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4A-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4A-wide-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4A-wide-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4A-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4A-wide-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4A-wide-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4A-wide-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4A-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4B-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4B-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4B-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4B-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4B-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4B-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4B-wide-gray.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4B-wide-green.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4B-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4B-wide-orange.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4B-wide-red.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4B-wide-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-gate4B-yellow.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-terminal-Rev-1.001.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gates\mct-terminal.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gauge\gauge-container-partial.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gauge\gauge-container-partial001.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\gauge\gauge-container.png" />
@@ -1169,10 +1638,6 @@
     <Content Include="Areas\Zones\Views\Zones\_ShowJFKZoneB1.cshtml" />
     <Content Include="Areas\Zones\Views\Zones\_ShowJFKZoneB2.cshtml" />
     <Content Include="Areas\Zones\Views\Zones\_ShowJFKZoneB3.cshtml" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Areas\Airport\Views\Airport\_ShowCIDAirport.cshtml" />
@@ -1196,10 +1661,19 @@
     <Content Include="Content\Themes\MCT\Ver 1.0.0\._.DS_Store" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\AwesomeMvc.css.old" />
     <Content Include="Areas\Zones\Views\Zones\_ShowMCTZone.cshtml" />
+    <Content Include="Areas\RTU\Views\RTU\_ShowRTU.cshtml" />
+    <Content Include="Areas\RTU\Views\web.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
     <None Include="Properties\PublishProfiles\iops-cid.pubxml" />
     <None Include="Properties\PublishProfiles\iops-dev.pubxml" />
     <None Include="Properties\PublishProfiles\iops-jfk-local.pubxml" />
     <None Include="Properties\PublishProfiles\iops-jfk.pubxml" />
+    <None Include="Properties\PublishProfiles\iops-MCT.pubxml" />
     <None Include="Properties\PublishProfiles\iops-sll.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <Content Include="Reports\Report2.trdx">
@@ -1234,14 +1708,19 @@
     <Content Include="Reports\MCTwarningreport.trdx">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.4.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -1249,7 +1728,6 @@
     <Content Include="Scripts\Kendo\2015.1.408\angular.min.js" />
     <Content Include="Scripts\Kendo\2015.1.408\jquery.min.js" />
     <Content Include="Scripts\Kendo\2015.1.408\jszip.min.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\Kendo\2015.1.408\kendo.all-vsdoc.js" />
     <None Include="Scripts\Kendo\2015.1.408\kendo.all.min.intellisense.js" />
     <Content Include="Scripts\Kendo\2015.1.408\kendo.all.min.js" />
@@ -1631,6 +2109,8 @@
     <Folder Include="Areas\NetworkMonitor\Models\" />
     <Folder Include="Areas\PCA\Models\" />
     <Folder Include="Areas\PCA\Views\Shared\" />
+    <Folder Include="Areas\RTU\Models\" />
+    <Folder Include="Areas\RTU\Views\Shared\" />
     <Folder Include="Areas\ServiceCounters\Models\" />
     <Folder Include="Areas\Users\Models\" />
     <Folder Include="Areas\Users\Views\Shared\" />
@@ -1701,6 +2181,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\iOps_QA.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

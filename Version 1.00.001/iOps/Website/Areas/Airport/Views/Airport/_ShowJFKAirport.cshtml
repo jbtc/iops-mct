@@ -38,9 +38,10 @@
                 serverURL: 'http://10.28.100.3:58725',
                 tag_prefix: '\\\\10.28.100.3\\Airport.JFK.Term4.',
                 refresh_callback: opc_callback,
-                max_tags_per_msg: 30,
+                max_tags_per_msg: 25,
                 max_callbaks: 250,
-                watch_tags: tags
+                watch_tags: tags,
+                interval: 6000
             }
 
             tags.push("ZoneA1.GateA5.PBB.AUTOLEVELMODEFLAG.Value");                  // aircraft is docked

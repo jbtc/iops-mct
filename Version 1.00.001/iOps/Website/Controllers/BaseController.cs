@@ -21,8 +21,7 @@ namespace iOps.Website.Controllers
                 HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
                 if(authCookie == null)
                 {
-                    RedirectToAction("SignOff", "Account");
-                    return null;
+                    LogOff();
                 }
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
                 
@@ -35,6 +34,11 @@ namespace iOps.Website.Controllers
                 }
                 return null;
             }
+        }
+
+        private RedirectToRouteResult LogOff()
+        {
+            return RedirectToAction("SignOff", "Account");
         }
     }
 }

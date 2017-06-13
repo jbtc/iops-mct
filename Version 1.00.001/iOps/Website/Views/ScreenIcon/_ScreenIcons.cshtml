@@ -75,7 +75,7 @@
 
     function CloseKendoWindow() {
         var gateWindow = $('#GateWindow').data('kendoWindow');
-        var zoneWindow = $('#ZonesWindow').data('kendoWindow');
+        var zoneWindow = $('.Zones-Window').data('kendoWindow');
         var airportWindow = $('#AirportWindow').data('kendoWindow');
         var pcaWindow = $('#PCAWindow').data('kendoWindow');
         var gpuWindow = $('#GPUWindow').data('kendoWindow');
@@ -91,7 +91,7 @@
         var flightsWindow = $('#FlightsWindow').data('kendoWindow');
 
         if (zoneWindow)
-            $('#ZonesWindow').data('kendoWindow').destroy();
+            $('.Zones-Window').data('kendoWindow').destroy();
         if (gateWindow)
             $('#GateWindow').data('kendoWindow').destroy();
         if (airportWindow)
@@ -123,7 +123,6 @@
     }
 
     $('#tblScreenNav tr[class^="screen-ajax"]').click(function (e) {
-        debugger;
         var ajaxUrl = $(this).attr('ajax-url');
         var ajaxData = $(this).attr('ajax-data').replace(new RegExp(/[']/g),"\"");
         var parseData = $.parseJSON(ajaxData.replace(/'/g, '"'));
@@ -139,7 +138,6 @@
                 ChangeIcons(screenNumber);
             },
             error: function (a, b, c) {
-                debugger;
                 var text = 'Error: ';
             }
         });

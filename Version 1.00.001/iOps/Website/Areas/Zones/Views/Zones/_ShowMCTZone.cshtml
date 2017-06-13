@@ -128,8 +128,8 @@
         // set up moitoring of AC and Gate tags, and firing callback on data refresh
         OPC.tags = [];
         OPC_config.watch_tags = [];
-        OPC_config.tag_prefix = "Airport." + "@TempData["ClientAbbr"]" + ".Term1.Zone" + "@TempData["ZoneNumber"]" + ".";
-        OPC_config.refresh_callback = opc_Zone_callback;
+        OPC_config.tag_prefix = "Airport." + "@TempData["ClientAbbr"]" + ".Term1.";
+        OPC_config.refresh_callback = opc_zone_callback;
         OPC_config.watch_tags = tags;
         OPC_config.alarm_bindings = [
             {
@@ -241,7 +241,7 @@
     //   Wide Gate will be shown ONLY if both L and R gate DoorPositions are set to "Wide"
     //   Aircraft will display only if AircraftSubType is set to Wide or Narrow for gate
     //   Wide aircraft will display ONLY if both gates are showing "Wide" for AircraftSubType
-    function check_gate_images(zone, gate) {
+    function check_zone_images(zone, gate) {
         var pre = OPC_config.tag_prefix + "Zone" + zone + ".Gate" + gate + ".PBB.";
         var airCraftType = get_value(pre + "AircraftSubType.Value");
         airCraftType = airCraftType == null ? "NARROW" : airCraftType;
@@ -253,10 +253,10 @@
         $("#gates_nc").toggle(!show_wide);
 
         $("#Gate_" + gate + "_Plane").removeClass(function (index, css) {
-            return (css.match(/\bg[0-9]\S+/g) || []).join(' ');
+            return (css.match(/\bg[A-Z]\S+/g) || []).join(' ');
         });
         $("#Gate_" + gate + "_Status").removeClass(function (index, css) {
-            return (css.match(/\bg[0-9]\S+/g) || []).join(' ');
+            return (css.match(/\bg[A-Z]\S+/g) || []).join(' ');
         });
 
         if (show_ac != null && show_g != null && show_o != null) {   // removed csw20160211:  && show_r != null && show_y != null
@@ -281,7 +281,7 @@
         }
     }
 
-    function opc_Zone_callback(data) {
+    function opc_zone_callback(data) {
         //$('#gateLinkid').css('visibility', 'visible');
         var rawScreens = '@Html.Raw(Json.Encode(TempData["Screens"]))';
         var screens = JSON.parse(rawScreens);
@@ -290,7 +290,7 @@
         {
             var gateNumber = screens[i].Gate;
             var zoneNumber = screens[i].Zone;
-            check_gate_images(zoneNumber, gateNumber);
+            check_zone_images(zoneNumber, gateNumber);
         }
     }
 
@@ -318,7 +318,6 @@
     }
 
     function GoZoneGate(zoneNumber, gateNumber, icon) {
-        debugger;
         $.ajax({
             url: 'Gate/Gate/ShowGates',
             type: "GET",
