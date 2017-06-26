@@ -22,6 +22,7 @@ namespace iOps.Website.Controllers
                 if(authCookie == null)
                 {
                     LogOff();
+                    return null;
                 }
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
                 

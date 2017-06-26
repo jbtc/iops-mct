@@ -169,6 +169,7 @@
             var pre = "Zone" + zoneNumber + ".Gate" + gateNumber + ".";
             tags.push(pre + "PBB.AIRCRAFTDOCKEDCALCULATION.Value");                  // aircraft is docked
             tags.push(pre + "PBB.LoggedOn.Value");                  // show green
+            tags.push(pre + "PBB.Parked.Value");                  // show green
             tags.push(pre + "PBB.AircraftSubType.Value")            // Show Jumbo Graphics
         }
 
@@ -243,41 +244,45 @@
     //   Wide aircraft will display ONLY if both gates are showing "Wide" for AircraftSubType
     function check_zone_images(zone, gate) {
         var pre = OPC_config.tag_prefix + "Zone" + zone + ".Gate" + gate + ".PBB.";
+        var is_parked = get_bool(pre + "Parked.Value");             // check for parked and default plane type to NARROW
         var airCraftType = get_value(pre + "AircraftSubType.Value");
-        airCraftType = airCraftType == null ? "NARROW" : airCraftType;
+        if(airCraftType == null || is_parked == null || is_parked) {
+            airCraftType = "NARROW";
+        }
+        
         var show_wide = (airCraftType.toUpperCase().indexOf("WIDE") >= 0) ? true : false;
         var show_ac = get_bool(pre + "AIRCRAFTDOCKEDCALCULATION.Value");            // aircraft is docked
         var show_g = get_bool(pre + "LoggedOn.Value");              // show green
         var show_o = get_bool(pre + "AIRCRAFTDOCKEDCALCULATION.Value");             // show orange
 
-        $("#gates_nc").toggle(!show_wide);
-
         $("#Gate_" + gate + "_Plane").removeClass(function (index, css) {
-            return (css.match(/\bg[A-Z]\S+/g) || []).join(' ');
+            return (css.match(/\bnot_docked/g) || []).join(' ');
         });
         $("#Gate_" + gate + "_Status").removeClass(function (index, css) {
-            return (css.match(/\bg[A-Z]\S+/g) || []).join(' ');
+            return (css.match(/\bstat-[a-zA-Z]\S+/g) || []).join(' ');
         });
+        var imgPath = $('#building').css('content').match(/(.*url[(]*\")(.*)(\Images)/)[2];
+        $("#Gate_" + gate + "_Status").css({ 'content': 'url(' + imgPath + 'Images/Zone' + zone + '/mct-gate' + gate + (show_wide ? '-wide' : '') + '-idle.png)' , 'display' : 'inline' });
 
         if (show_ac != null && show_g != null && show_o != null) {   // removed csw20160211:  && show_r != null && show_y != null
-            $("#Gate_" + gate + "_Plane").addClass("img gate_plane g" + gate + (!show_ac ? "_no_ac" : "_ac" + (show_wide ? "_wide" : "")));
+            $("#Gate_" + gate + "_Plane").css( (show_ac ? { 'content' : 'url(' + imgPath + 'Images/Zone' + zone + '/mct-gate' + gate + (show_wide ? '-wide' : '') + '-plane.png)' , 'display' : 'inline' } : { 'content' : 'none' , 'display' : 'none' }));
+            //$("#Gate_" + gate + "_Plane").addClass("img gate_plane g" + gate + "_no_ac");
             switch (true) {
                 case show_o:
-                    $("#Gate_" + gate + "_Status").addClass("img gate_status g" + gate + "_o" + (show_wide ? "_wide" : ""));
+                    $("#Gate_" + gate + "_Status").addClass("stat-docked");
                     break;
                 case show_g:
-                    $("#Gate_" + gate + "_Status").addClass("img gate_status g" + gate + "_g" + (show_wide ? "_wide" : ""));
+                    $("#Gate_" + gate + "_Status").addClass("stat-logged");
                     break;
                 default:
-                    $("#Gate_" + gate + "_Status").addClass("img gate_status g" + gate + "_idle" + (show_wide ? "_wide" : ""));
                     break;
             }
             updateZoneGateWarnings(gate);
             updateZoneGateAlarms(gate);
         }
         else {
-            $("#Gate_" + gate + "_Plane").addClass("img gate_plane g" + gate + "_no_ac");
-            $("#Gate_" + gate + "_Status").addClass("img gate_status g" + gate + "_bq" + (show_wide ? "_wide" : ""));
+            $("#Gate_" + gate + "_Plane").css({ "content": 'none', 'display': 'none' } );
+            $("#Gate_" + gate + "_Status").addClass("stat-bq");
         }
     }
 
@@ -489,10 +494,30 @@
 </script>
 
 <div id="Zone_@(TempData["ZoneNumber"])_Window" class="Window-Container Zones-Window">
+    <svg class="defs-only" style="display:none;">
+        <filter id="svg-red" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="0 1 0 0.5 0   0 0 0 0 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
+        </filter>
+        <filter id="svg-yellow" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="0 0 0 1.1 0   0 0 0 1.1 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
+        </filter>
+        <filter id="svg-green" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="0 0 0 0 0   0 0 0 0.6 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
+        </filter>
+        <filter id="svg-orange" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="0 0 0 1.1 0   0 0 0 0.6 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
+        </filter>
+        <filter id="svg-ghost" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="1 0 0 0 0   0 1 0 0 0   0 0 1 0 0   -0.9 -1 -0.9 1.5 0"></feColorMatrix>
+        </filter>
+        <filter id="svg-gray" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="0 3 1 0 0   0 3 1 0 0   0 3 1 0 0   0 0 0 1 0"></feColorMatrix>
+        </filter>
+    </svg>
     <div id="zones_container">
         <img id="building" class="img" />
         <img id="gates_nc" class="img" />
-
+        
         @{
             List<object> screens = (List<object>)TempData["Screens"];
             foreach (object scr in screens)
