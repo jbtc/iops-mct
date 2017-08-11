@@ -201,7 +201,7 @@
         }
     }
 
-    function GoZone(zoneNumber,icon) {
+    function GoZone(zoneNumber, icon) {
         $.ajax({
             url: 'Zones/Zones/ShowZone',
             type: "GET",
@@ -433,9 +433,12 @@
                     var gateNumber = scr.GetType().GetProperty("Gate").GetValue(scr, null).ToString();
                     var displayName = scr.GetType().GetProperty("DisplayName").GetValue(scr, null).ToString();
                     var displayOrder = scr.GetType().GetProperty("DisplayOrder").GetValue(scr, null).ToString();
-                    <a id="gate@(gateNumber)" class="gate_link" onclick="GoZoneGate('@(zoneNumber)', '@(gateNumber)', @(displayOrder))">Gate @(gateNumber) </a>
+                    <a id="gate@(gateNumber)" class="gate_link" onclick="GoZoneGate('@(zoneNumber)', '@(gateNumber)', @(displayOrder))">@(gateNumber) </a>
                 }
             }
+            <a id="zoneA" class="zone_link" onclick='GoZone("A",-2)'>North Pier</a>
+            <a id="zoneB" class="zone_link" onclick='GoZone("B",3)'>South Pier</a>
+            <a id="zoneC" class="zone_link" onclick='GoZone("C",4)'>West Pier</a>
         </div>        
     </div>
     <div id="AirportAlarmWindow">

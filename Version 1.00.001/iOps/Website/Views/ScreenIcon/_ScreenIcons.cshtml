@@ -17,7 +17,12 @@
                                         "{{\"tag\":\"{0}Warning._HasWarnings.Value\",\"config\":{{\"cls\":\"IconWarning\"}}}}], \"ignore_prefix\":true}}", tagPrefix);
 
         <tr class="screen-ajax@(screen.DefaultDisplayOrder)" title="@(screen.DisplayName)" screen-number="@(screen.DefaultDisplayOrder)" ajax-url="@(ajaxUrl)" ajax-data="@(ajaxData)" tag-prefix="@(tagPrefix)">)
-            <td class='@(iconClass)' opc-tag-bkg='@(opcBkgAttrib)'></td>
+            <td class='@(iconClass)' opc-tag-bkg='@(opcBkgAttrib)'>
+                @if (screen.DisplayName.StartsWith("Gate"))
+                {
+                    @Html.Raw(string.Format("{0}", screen.DisplayName.Replace("Gate ", "").Trim()));
+                }
+            </td>
             <td class="screen-text@(screen.DefaultDisplayOrder)">@(screen.DisplayName)</td>
         </tr>
         IsFirstScreen = false;
@@ -31,7 +36,7 @@
     else
     {
         <script>
-            $("#slide-in-share").css("overflow-y", "scroll");
+            $("#slide-in-content").css("overflow-y", "scroll");
         </script>
     }
 }
@@ -42,20 +47,20 @@
     var slide = kendo.fx($("#slide-in-share")).slideIn("right"), visible = true;
 
     $("#slide-in-handle").click(function (e) {
-        toggleSlide(e);
-    });
+                        toggleSlide(e);
+                    });
 
     $('[class^="screen-icon"],[class^="screen-text"]').click(function (e) {
-        if (!visible) {
-            slide.duration(0).play();
+                        if (!visible) {
+                            slide.duration(0).play();
             //$('[class^="screen-icon"]').css('height', '25px');
             $('[class^="screen-text"]').hide();
             $("#slide-in-share").css("margin-left", "0px")
-            $("#slide-in-share").width("40px");
+                            $("#slide-in-share").width("40px");
             $("#slide-in-wrapper").width("40px");
-            visible = !visible;
-        }
-    })
+                            visible = !visible;
+                        }
+                    })
 
     $('[class^="screen-text"]').css('color', '#FFF');
     $('[class^="screen-text"]').css('text-decoration', 'underline');

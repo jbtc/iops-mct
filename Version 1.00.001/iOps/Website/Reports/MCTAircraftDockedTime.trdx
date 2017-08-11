@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report Width="6.70000012715658in" Name="cidtest" DocumentMapText="Aircraft Dock Time Report" xmlns="http://schemas.telerik.com/reporting/2012/3.8">
   <DataSources>
-    <SqlDataSource ConnectionString="MCT_IOPS_Reporting" SelectCommand="SELECT&#xD;&#xA;&#x9;DISTINCT GATE &#xD;&#xA;FROM [MCT_Airport_SCADA].[dbo].[MCT_PBB_DockTime_DataLogging] where convert(date,DateandTime) between convert(date,getdate()-31)and convert(date,getdate())&#xD;&#xA; " Name="gate-docked-MCTDataSource" QueryDesignerState="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;DM xmlns:z=&quot;http://schemas.microsoft.com/2003/10/Serialization/&quot; xmlns:i=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://schemas.datacontract.org/2004/07/Telerik.Reporting.Design.QueryDesigner&quot;&gt;&lt;Es&gt;&lt;E z:Id=&quot;i1&quot;&gt;&lt;MBN&gt;Term4_PBB_DockedTime&lt;/MBN&gt;&lt;MBP z:Id=&quot;i2&quot; i:type=&quot;Namespace&quot;&gt;&lt;MBN&gt;&lt;/MBN&gt;&lt;MOC&gt;&lt;MB z:Ref=&quot;i1&quot; /&gt;&lt;/MOC&gt;&lt;/MBP&gt;&lt;MOC&gt;&lt;MB z:Id=&quot;i3&quot; i:type=&quot;P&quot;&gt;&lt;MBN&gt;Gate&lt;/MBN&gt;&lt;MBP z:Ref=&quot;i1&quot; /&gt;&lt;PO&gt;true&lt;/PO&gt;&lt;/MB&gt;&lt;MB z:Id=&quot;i4&quot; i:type=&quot;P&quot;&gt;&lt;MBN&gt;DateAndTime&lt;/MBN&gt;&lt;MBP z:Ref=&quot;i1&quot; /&gt;&lt;PO&gt;true&lt;/PO&gt;&lt;/MB&gt;&lt;MB z:Id=&quot;i5&quot; i:type=&quot;P&quot;&gt;&lt;MBN&gt;Value&lt;/MBN&gt;&lt;MBP z:Ref=&quot;i1&quot; /&gt;&lt;PO&gt;true&lt;/PO&gt;&lt;/MB&gt;&lt;/MOC&gt;&lt;ER /&gt;&lt;/E&gt;&lt;/Es&gt;&lt;Fs /&gt;&lt;Ps&gt;&lt;P z:Ref=&quot;i3&quot; /&gt;&lt;P z:Ref=&quot;i4&quot; /&gt;&lt;P z:Ref=&quot;i5&quot; /&gt;&lt;/Ps&gt;&lt;Rs /&gt;&lt;/DM&gt;" />
     <SqlDataSource ConnectionString="MCT_IOPS_Reporting" SelectCommand="SELECT [Gate]&#xD;&#xA; ,CONVERT(varchar,dateandtime, 100)&#xD;&#xA; ,round(value, 2, 1)&#xD;&#xA;FROM [MCT_Airport_SCADA].[dbo].[MCT_PBB_DockTime_DataLogging]&#xD;&#xA;WHERE&#xD;&#xA; CONVERT(date,dateandtime) = CONVERT(date,getdate() - (&#xD;&#xA;  CASE WHEN @numDays is NULL &#xD;&#xA;   THEN 0 &#xD;&#xA;   ELSE @numDays &#xD;&#xA;  END))&#xD;&#xA; AND (@Gate is NULL &#xD;&#xA;  OR Gate=@Gate)&#xD;&#xA;ORDER BY dateandtime DESC&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" Name="MCTAircraftDockedTimeDataSource">
       <Parameters>
         <SqlDataSourceParameter DbType="String" Name="@numDays">
@@ -107,7 +106,7 @@
               </TableCell>
               <TableCell RowIndex="0" ColumnIndex="2" RowSpan="1" ColumnSpan="1">
                 <ReportItem>
-                  <TextBox Width="1.1020832943488in" Height="0.200000002980232in" Left="0in" Top="0in" Value="= Fields.[2]" Name="textBox6" StyleName="Corporate.TableBody" />
+                  <TextBox Width="1.10208323039522in" Height="0.200000002980232in" Left="1.70000012715658in" Top="0.199999809265137in" Value="= Fields.[2]" Name="textBox6" StyleName="Corporate.TableBody" />
                 </ReportItem>
               </TableCell>
             </Cells>
@@ -219,7 +218,7 @@
   </PageSettings>
   <ReportParameters>
     <ReportParameter Name="Gate" Text="Gate" Visible="True" AllowNull="True" AutoRefresh="True">
-      <AvailableValues DataSourceName="gate-docked-MCTDataSource" ValueMember="= Fields.Gate" />
+      <AvailableValues ValueMember="= Fields.Gate" />
     </ReportParameter>
     <ReportParameter Name="numDays" Text="*Number of Days" Visible="True" AllowNull="True" AutoRefresh="True" />
   </ReportParameters>

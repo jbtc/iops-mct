@@ -3,8 +3,24 @@
 <script>
     $(document).ready(function () {
         //$('#gateLinkid').css('visibility', 'hidden');
+        var titleText = ""
+        switch (true) {
+            case "@TempData["ZoneNumber"]" == "A":
+                titleText = "MCT Airport North Pier Overview";
+                break;
+            case "@TempData["ZoneNumber"]" == "B":
+                titleText = "MCT Airport South Pier Overview";
+                break;
+            case "@TempData["ZoneNumber"]" == "C":
+                titleText = "MCT Airport West Pier Overview";
+                break;
+            default:
+                titleText = "MCT Airport - ERR";
+                break;
+        }
+
         $("#Zone_@(TempData["ZoneNumber"])_Window").kendoWindow({
-            title: "MCT Terminal 1 Concourse " + "@TempData["ZoneNumber"]" + " Overview",
+            title: titleText,
             draggable: false,
             modal: false,
             width: $("#splitter").width() - 244,
@@ -249,7 +265,7 @@
         if(airCraftType == null || is_parked == null || is_parked) {
             airCraftType = "NARROW";
         }
-        
+
         var show_wide = (airCraftType.toUpperCase().indexOf("WIDE") >= 0) ? true : false;
         var show_ac = get_bool(pre + "AIRCRAFTDOCKEDCALCULATION.Value");            // aircraft is docked
         var show_g = get_bool(pre + "LoggedOn.Value");              // show green
@@ -272,7 +288,8 @@
                     $("#Gate_" + gate + "_Status").addClass("stat-docked");
                     break;
                 case show_g:
-                    $("#Gate_" + gate + "_Status").addClass("stat-logged");
+                    //$("#Gate_" + gate + "_Status").addClass("stat-logged");
+                    $("#Gate_" + gate + "_Status").addClass("img gate_status g" + gate + "_g" + (show_wide ? "_wide" : ""));
                     break;
                 default:
                     break;
@@ -538,7 +555,7 @@
                     var gateNumber = scr.GetType().GetProperty("Gate").GetValue(scr, null).ToString();
                     var displayName = scr.GetType().GetProperty("DisplayName").GetValue(scr, null).ToString();
                     var displayOrder = scr.GetType().GetProperty("DisplayOrder").GetValue(scr, null).ToString();
-                    <a id="gate@(gateNumber)" class="gate_link" onclick="GoZoneGate('@(zoneNumber)', '@(gateNumber)', @(displayOrder))">Gate @(gateNumber) </a>
+                    <a id="gate@(gateNumber)" class="gate_link" onclick="GoZoneGate('@(zoneNumber)', '@(gateNumber)', @(displayOrder))">@(gateNumber) </a>
                 }
             }
         </div>        

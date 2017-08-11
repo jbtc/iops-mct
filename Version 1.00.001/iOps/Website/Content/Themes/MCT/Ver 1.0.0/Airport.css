@@ -6,6 +6,7 @@
 
 .Airport-Window #gates_container {
     width:100%;
+    height: 100%;
     position:relative;
     box-sizing:border-box;
 }
@@ -64,67 +65,67 @@
     content:"Fire Alarm";
 }
 
-.Airport-Window #gates_container #gateA2 { top:10%;left:28%; }
-.Airport-Window #gates_container #gateA3 { top:36%;left:21%; }
-.Airport-Window #gates_container #gateA4 { top:12%;left:24%; }
-.Airport-Window #gates_container #gateA6 { top:14%;left:21%; }
-.Airport-Window #gates_container #gateA7B { top:39%;left:13%; }
-.Airport-Window #gates_container #gateA7F { top:35%;left:15%; }
-.Airport-Window #gates_container #gateA8B { top:15%;left:16%; }
-.Airport-Window #gates_container #gateA8F { top:19%;left:13%; }
-.Airport-Window #gates_container #gateA9B { top:43%;left:6%; }
-.Airport-Window #gates_container #gateA9F { top:39%;left:9%; }
-.Airport-Window #gates_container #gateA10B { top:10%;left:9%; }
-.Airport-Window #gates_container #gateA10F { top:23%;left:7%; }
-.Airport-Window #gates_container #gateB1 { top:9%;left:57%; }
-.Airport-Window #gates_container #gateB2 { top:36%;left:56%; }
-.Airport-Window #gates_container #gateB3 { top:12%;left:61%; }
-.Airport-Window #gates_container #gateB4B { top:36%;left:62%; }
-.Airport-Window #gates_container #gateB4F { top:32%;left:66%; }
-.Airport-Window #gates_container #gateB5 { top:13%;left:65%; }
-.Airport-Window #gates_container #gateB7B { top:13%;left:72%; }
-.Airport-Window #gates_container #gateB7F { top:18%;left:69%; }
-.Airport-Window #gates_container #gateB8B { top:37%;left:69%; }
-.Airport-Window #gates_container #gateB8F { top:33%;left:72%; }
-.Airport-Window #gates_container #gateB9 { top:15%;left:76%; }
-.Airport-Window #gates_container #gateB10 { top:40%;left:77%; }
-.Airport-Window #gates_container #gateB11 { top:15%;left:80%; }
-.Airport-Window #gates_container #gateC1 { top:41%;left:50%; }
-.Airport-Window #gates_container #gateC2 { top:38%;left:28%; }
-.Airport-Window #gates_container #gateC3 { top:46%;left:48%; }
-.Airport-Window #gates_container #gateC4 { top:41%;left:31%; }
-.Airport-Window #gates_container #gateC6 { top:55%;left:33%; }
-.Airport-Window #gates_container #gateC9 { top:66%;left:48%; }
-.Airport-Window #gates_container #gateC10B { top:66%;left:34%; }
-.Airport-Window #gates_container #gateC10F { top:71%;left:36%; }
-.Airport-Window #gates_container #gateC11B { top:77%;left:48%; }
-.Airport-Window #gates_container #gateC11F { top:72%;left:46%; }
-.Airport-Window #gates_container #gateC12B { top:77%;left:34%; }
-.Airport-Window #gates_container #gateC12F { top:82%;left:36%; }
-.Airport-Window #gates_container #gateC15 { top:87%;left:49%; }
-.Airport-Window #gates_container #gateC16B { top:88%;left:35%; }
-.Airport-Window #gates_container #gateC16F { top:92%;left:38%; }
+.Airport-Window #gates_container #gateA2 { top:12.75%;left:28.75%; }
+.Airport-Window #gates_container #gateA3 { top:36.5%;left:21.25%; }
+.Airport-Window #gates_container #gateA4 { top:14%;left:24.5%; }
+.Airport-Window #gates_container #gateA6 { top:15.5%;left:20.75%; }
+.Airport-Window #gates_container #gateA7B { top:39%;left:17%; }
+.Airport-Window #gates_container #gateA7F { top:34.5%;left:17%; }
+.Airport-Window #gates_container #gateA8B { top:16%;left:15.5%; }
+.Airport-Window #gates_container #gateA8F { top:19.5%;left:15.25%; }
+.Airport-Window #gates_container #gateA9B { top:42.25%;left:10.25%; }
+.Airport-Window #gates_container #gateA9F { top:38.5%;left:10.5%; }
+.Airport-Window #gates_container #gateA10B { top:19.25%;left:8.5%; }
+.Airport-Window #gates_container #gateA10F { top:23.25%;left:8.5%; }
+.Airport-Window #gates_container #gateB1 { top:11%;left:57.25%; }
+.Airport-Window #gates_container #gateB2 { top:35%;left:60.5%; }
+.Airport-Window #gates_container #gateB3 { top:13%;left:60.75%; }
+.Airport-Window #gates_container #gateB4B { top:36%;left:66.75%; }
+.Airport-Window #gates_container #gateB4F { top:31.25%;left:67%; }
+.Airport-Window #gates_container #gateB5 { top:13.75%;left:64.75%; }
+.Airport-Window #gates_container #gateB7B { top:13.75%;left:71.25%; }
+.Airport-Window #gates_container #gateB7F { top:18.5%;left:70.75%; }
+.Airport-Window #gates_container #gateB8B { top:37%;left:73.5%; }
+.Airport-Window #gates_container #gateB8F { top:33%;left:74%; }
+.Airport-Window #gates_container #gateB9 { top:15%;left:75.75%; }
+.Airport-Window #gates_container #gateB10 { top:39.25%;left:79.5%; }
+.Airport-Window #gates_container #gateB11 { top:16%;left:79.5%; }
+.Airport-Window #gates_container #gateC1 { top:41.25%;left:52.25%; }
+.Airport-Window #gates_container #gateC2 { top:38%;left:30%; }
+.Airport-Window #gates_container #gateC3 { top:46.5%;left:50.5%; }
+.Airport-Window #gates_container #gateC4 { top:40.75%;left:33.25%; }
+.Airport-Window #gates_container #gateC6 { top:58%;left:36%; }
+.Airport-Window #gates_container #gateC9 { top:62.25%;left:50.25%; }
+.Airport-Window #gates_container #gateC10B { top:68.5%;left:35.5%; }
+.Airport-Window #gates_container #gateC10F { top:70.5%;left:38.5%; }
+.Airport-Window #gates_container #gateC11B { top:74.5%;left:50%; }
+.Airport-Window #gates_container #gateC11F { top:72%;left:47%; }
+.Airport-Window #gates_container #gateC12B { top:79.5%;left:35.5%; }
+.Airport-Window #gates_container #gateC12F { top:81.5%;left:38.5%; }
+.Airport-Window #gates_container #gateC15 { top:84.25%;left:50%; }
+.Airport-Window #gates_container #gateC16B { top:91%;left:37%; }
+.Airport-Window #gates_container #gateC16F { top:92%;left:40%; }
 
-.k-window {
+.Airport-Window .k-window {
     z-index: 100 !important;
 }
 
-.k-window-titlebar {
+.Airport-Window .k-window-titlebar {
     background-color: #BFBFBF !important;
 }
 
-.k-window-title {
+.Airport-Window .k-window-title {
     font-weight: bold !important;
 }
 
 /*CSS for gate image links*/
-#AirportWindow ul {
+.Airport-Window ul {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-#AirportWindow a {
+.Airport-Window a {
     /*/text-indent: -1000em;*/
     position: absolute; /*hides the linked copy within the li tags to the left of the window */
     width: 50px;
@@ -136,15 +137,36 @@
 }
 
 
-#AirportWindow a:hover {
+.Airport-Window a:hover {
     cursor: pointer;
 }
 
-#AirportWindow .dataTables_wrapper, table.opc-alarm {
+.Airport-Window .zone_link {
+    height: auto;
+    width: auto;
+    z-index: 300;
+    background-color: lightgreen;
+}
+
+.Airport-Window #zoneA {
+    top: 26%;
+    left: 18%;
+}
+
+.Airport-Window  #zoneB {
+   top: 25%;
+   left: 66%;  
+}
+.Airport-Window  #zoneC {
+    top: 58%;
+    left: 41.6%; 
+}
+
+.Airport-Window .dataTables_wrapper, table.opc-alarm {
     font-size: 11px;
 }
 
-#AirportWindow #AirportAlarmWindow {
+.Airport-Window #AirportAlarmWindow {
     position: absolute;
     min-height: 30% !important;
     min-width: 40% !important;
@@ -153,34 +175,34 @@
     left: 59%;
 }
 
-#AirportWindow #AirportAlarms {
+.Airport-Window #AirportAlarms {
     position: absolute;
     min-height: 100%;
     min-width: 100%;
     /*border: 1px solid blue;*/
 }
 
-#AirportAlarmWindow tr.AlarmRow {
+.Airport-Window #AirportAlarmWindow tr.AlarmRow {
 	background-color: #f00 !important;
 	color: #fff !important;
 	font-weight: bold !important;
 	border-color: #fff !important;
 }
 
-#AirportAlarmWindow tr.AlarmRow a { color:#fff !important; }
-#AirportAlarmWindow tr.AlarmRow td[class*='sorting_'] { background-color: #c00 !important; }
-#AirportAlarmWindow tr.AlarmRow:hover { background-color: #f66 !important; }
-#AirportAlarmWindow tr.AlarmRow:hover td[class*='sorting_'] { background-color: #c66 !important; }
+.Airport-Window #AirportAlarmWindow tr.AlarmRow a { color:#fff !important; }
+.Airport-Window #AirportAlarmWindow tr.AlarmRow td[class*='sorting_'] { background-color: #c00 !important; }
+.Airport-Window #AirportAlarmWindow tr.AlarmRow:hover { background-color: #f66 !important; }
+.Airport-Window #AirportAlarmWindow tr.AlarmRow:hover td[class*='sorting_'] { background-color: #c66 !important; }
 
-#AirportAlarmWindow tr.WarningRow {
+.Airport-Window #AirportAlarmWindow tr.WarningRow {
 	background-color: #ff0 !important;
 	color: #000 !important;
 	font-weight: normal !important;
 	border-color: #fff !important;
 }
-#AirportAlarmWindow tr.WarningRow a { color:#000 !important; }
-#AirportAlarmWindow tr.WarningRow td[class*='sorting_'] { background-color: #cc0 !important; }
-#AirportAlarmWindow tr.WarningRow:hover { background-color: #ff9 !important; }
-#AirportAlarmWindow tr.WarningRow:hover td[class*='sorting_'] { background-color: #cc9 !important; }
+.Airport-Window #AirportAlarmWindow tr.WarningRow a { color:#000 !important; }
+.Airport-Window #AirportAlarmWindow tr.WarningRow td[class*='sorting_'] { background-color: #cc0 !important; }
+.Airport-Window #AirportAlarmWindow tr.WarningRow:hover { background-color: #ff9 !important; }
+.Airport-Window #AirportAlarmWindow tr.WarningRow:hover td[class*='sorting_'] { background-color: #cc9 !important; }
 
 /*END OF CSS Image LInk*/
