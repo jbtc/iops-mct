@@ -3,14 +3,19 @@
 <script>
     var tags = [];
     $(document).ready(function () {
+        OPC.toggle_refresh(false);
         OPC.tags = [];
+        OPC.watch_tags = [];
+        OPC_config.tags = [];
+        OPC_config.watch_tags = [];
+        OPC_config.alarm_bindings = [];
         OPC_config.watch_tags = tags;
-        OPC_config.tag_prefix = 'Airport.SLL.Term1.Zone' + '@TempData["ZoneNumber"]' + '.Gate' + '@TempData["GateNumber"]' + '.PBB.';
+        OPC_config.tag_prefix = 'Airport.MCT.Term1.Zone' + '@TempData["ZoneNumber"]' + '.Gate' + '@TempData["GateNumber"]' + '.PBB.';
         //OPC_config.refresh_callback = refresh_update;
         OPC_config.watch_tags = tags;
 
         tags.push("Vertical Movement Count.Value");
-        tags.push("Airport.SLL.Term1.Zone1.RTUAutoOnLeadTime.Value");
+        tags.push("Airport.MCT.Term1.Zone1.RTUAutoOnLeadTime.Value");
 
         buildServiceCounters();
         OPC.init(); //re-initialize HTML HMI engine after updating prefix
@@ -56,7 +61,7 @@
                 type: "GET",
                 data: {
                     gateNum: "@TempData["GateNumber"]",
-                    zoneNum: "1"
+                    zoneNum: "@TempData["ZoneNumber"]"
                 },
                 contentType: 'text/html',
                 success: function (data) {
@@ -71,8 +76,8 @@
                 url: '@Url.Action("ShowGates", "Gate", new { area = "Gate" })',
                 type: "GET",
                 data: {
-                    zoneNum: "1",
-                    gateNum: "@TempData["GateNumber"]"
+                    gateNum: "@TempData["GateNumber"]",
+                    zoneNum: "@TempData["ZoneNumber"]"
                 },
                 contentType: 'text/html',
                 success: function (data) {

@@ -80,6 +80,8 @@
 .Zones-Window .stat-warning    { filter:url(#svg-yellow); }
 .Zones-Window .stat-docked    { filter:url(#svg-orange); }
 .Zones-Window .stat-alarm    { filter:url(#svg-red); }
+.Zones-Window .stat-disabled { filter:url(#svg-black-red); }
+
 
 
 
@@ -121,14 +123,14 @@
 .Zones-Window #zones_container #gateA3 { top:66%;left:42%; }
 .Zones-Window #zones_container #gateA4 { top:24.25%;left:45.5%; }
 .Zones-Window #zones_container #gateA6 { top:26.5%;left:38.5%; }
-.Zones-Window #zones_container #gateA7B { top:71.5%;left:29.75%; }
-.Zones-Window #zones_container #gateA7F { top:64.5%;left:30.75%; }
 .Zones-Window #zones_container #gateA8B { top:27%;left:28.25%; }
 .Zones-Window #zones_container #gateA8F { top:33.75%;left:27.25%; }
-.Zones-Window #zones_container #gateA9B { top:79%;left:16.5%; }
-.Zones-Window #zones_container #gateA9F { top:72%;left:18%; }
+.Zones-Window #zones_container #gateA9B { top:71.5%;left:29.75%; }
+.Zones-Window #zones_container #gateA9F { top:64.5%;left:30.75%; }
 .Zones-Window #zones_container #gateA10B { top:34.25%;left:15.25%; }
 .Zones-Window #zones_container #gateA10F { top:41.25%;left:14.5%; }
+.Zones-Window #zones_container #gateA11B { top:79%;left:16.5%; }
+.Zones-Window #zones_container #gateA11F { top:72%;left:18%; }
 
 .Zones-Window #zones_container #gateB1 { top:23.25%;left:19.5%; }
 .Zones-Window #zones_container #gateB2 { top:68.25%;left:24.75%; }
@@ -145,21 +147,20 @@
 .Zones-Window #zones_container #gateB11 { top:32.75%;left:61.5%; }
 
 .Zones-Window #zones_container #gateC1 { top:81.5%;left:57.75%; }
-.Zones-Window #zones_container #gateC2 { top:14.5%;left:61%; }
 .Zones-Window #zones_container #gateC3 { top:77%;left:53%; }
 .Zones-Window #zones_container #gateC4 { top:23.75%;left:58.25%; }
+.Zones-Window #zones_container #gateC2 { top:14.5%;left:61%; }
 .Zones-Window #zones_container #gateC6 { top:33%;left:42%; }
-.Zones-Window #zones_container #gateC9 { top:76%;left:37.75%; }
-.Zones-Window #zones_container #gateC10B { top:32.5%;left:30.5%; }
-.Zones-Window #zones_container #gateC10F { top:39.5%;left:29.75%; }
-.Zones-Window #zones_container #gateC11B { top:76%;left:26%; }
-.Zones-Window #zones_container #gateC11F { top:69.25%;left:27.5%; }
-.Zones-Window #zones_container #gateC12B { top:32%;left:20%; }
-.Zones-Window #zones_container #gateC12F { top:40%;left:19%; }
-.Zones-Window #zones_container #gateC15 { top:76.5%;left:16.5%; }
-.Zones-Window #zones_container #gateC16B { top:36%;left:9%; }
-.Zones-Window #zones_container #gateC16F { top:43.75%;left:8.5%; }
-
+.Zones-Window #zones_container #gateC7 { top:76%;left:37.75%; }
+.Zones-Window #zones_container #gateC8B { top:32.5%;left:30.5%; }
+.Zones-Window #zones_container #gateC8F { top:39.5%;left:29.75%; }
+.Zones-Window #zones_container #gateC9B { top:76%;left:26%; }
+.Zones-Window #zones_container #gateC9F { top:69.25%;left:27.5%; }
+.Zones-Window #zones_container #gateC10B { top:32%;left:20%; }
+.Zones-Window #zones_container #gateC10F { top:40%;left:19%; }
+.Zones-Window #zones_container #gateC11 { top:76.5%;left:16.5%; }
+.Zones-Window #zones_container #gateC12B { top:36%;left:9%; }
+.Zones-Window #zones_container #gateC12F { top:43.75%;left:8.5%; }
 
 .Zones-Window .k-window {
     z-index: 100 !important;
@@ -218,6 +219,10 @@
    
 }
 
+.Zones-Window .dataTables_wrapper, table.opc-alarm {
+    font-size: 11px;
+    width: 550px !important;
+}
 .Zones-Window #Zone_A_AlarmWindow,
 .Zones-Window #Zone_B_AlarmWindow,
 .Zones-Window #Zone_C_AlarmWindow {
@@ -226,7 +231,7 @@
     min-width: 40% !important;
     /*border: 1px solid red;*/
     top: 48%;
-    left: 59%;
+    left: 66%;
 }
 
 .Zones-Window #Zone_A_Alarms,

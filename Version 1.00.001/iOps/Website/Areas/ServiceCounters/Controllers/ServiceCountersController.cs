@@ -12,7 +12,7 @@ namespace iOps.Website.Areas.ServiceCounters.Controllers
     {
         [CustomAuthorize]
         //[CustomAuthorize(Roles = "admin")]
-        public PartialViewResult ShowServiceCounters(string gateNum)
+        public PartialViewResult ShowServiceCounters(string gateNum, string zoneNum)
         {
             var client = ConfigurationManager.AppSettings["ClientShortName"].ToString();
             var db = new iOps.Core.Model.iopsContext();
@@ -30,6 +30,8 @@ namespace iOps.Website.Areas.ServiceCounters.Controllers
 
             TempData["GateNumber"] = gateNum;
             TempData["GateLabel"] = dbData.DisplayName;
+            TempData["ZoneNumber"] = zoneNum;
+            TempData["ZoneScreeenNumber"] = dbData.DefaultDisplayOrder.ToString();
             TempData["ClientAbbr"] = client;
             TempData["AuthLevel"] = authLevel;
 

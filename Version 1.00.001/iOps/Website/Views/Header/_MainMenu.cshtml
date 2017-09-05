@@ -186,7 +186,7 @@
                             Show Tooltips <input id="showTooltips" type="checkbox" checked />
                         </li>
                         <li id="menuItemReports">
-                            <a href="/home/Reporting" target="_blank">Reports</a><br />
+                            <a id="ReportsLink" href="@Url.Action("ReportTemplate", "Reports", new { ReportName = System.Web.Configuration.WebConfigurationManager.AppSettings["SSRSReportName"] , Width = 100, Height = 650 })" type="submit" target="_blank">Reports</a>
                         </li>
                         <li id="menuItemLogOut">
                             @Html.ActionLink("Log out", "SignOff", "account")

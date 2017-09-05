@@ -247,7 +247,7 @@
         var PriorityCol = -1;
         var alarmCnt = 0;
         var warningCnt = 0;
-        PriorityCol = $('#AirportMasterAlarmWindow th:contains("Priority")').index();
+        PriorityCol = $('#AirportMasterAlarmWindow th[aria-label*="Priority"]').index();
         if (PriorityCol > -1) {
             $('#AirportMasterAlarmWindow tr').not('thead tr').each(function (idx, row) {
                 if ($(this).children('td').length > 1) {
@@ -264,12 +264,12 @@
     function updateAirportAlarms() {
         var PriorityCol = -1;
 
-        PriorityCol = $('#AirportAlarmWindow th:contains("Priority")').index();
+        PriorityCol = $('#AirportAlarmWindow th[aria-label*="Priority"]').index();
         if (PriorityCol > -1) {
             $('#AirportAlarmWindow tr').not('thead tr').each(function (idx, row) {
                 if ($(this).children('td').length > 1) {
                     var cellData = $(this).find('td').eq(PriorityCol)[0].innerText;
-                    $('#AirportAlarmWindow th:contains("Priority")').hide();
+                    $('#AirportAlarmWindow th[aria-label*="Priority"]').hide();
                     $(this).find('td').eq(PriorityCol).hide();
                     switch (cellData) {
                         case '0':
@@ -293,7 +293,7 @@
         var show_wide = false;
         var alarmVal = false;
 
-        PriorityCol = $('#AirportAlarmWindow th:contains("Priority")').index();
+        PriorityCol = $('#AirportAlarmWindow th[aria-label*="Priority"]').index();
         TextCol = $('#AirportAlarmWindow th:contains("Text")').index();
         if (PriorityCol > -1) {
             $('#AirportAlarmWindow tr').not('thead tr').each(function (idx, row) {
@@ -301,7 +301,7 @@
                     var cellData = $(this).find('td').eq(PriorityCol)[0].innerText;
                     var cellTextData = $(this).find('td').eq(TextCol)[0].innerText;
                     alarmVal = (alarmVal || cellTextData.indexOf(gateNumber) >= 0) ? true : false;
-                    $('#AirportAlarmWindow th:contains("Priority")').hide();
+                    $('#AirportAlarmWindow th[aria-label*="Priority"]').hide();
                     $(this).find('td').eq(PriorityCol).hide();
                     switch (cellData) {
                         case '0':
@@ -330,13 +330,13 @@
     function updateAirportWarnings() {
         var PriorityCol = -1;
 
-        PriorityCol = $('#AirportWarningWindow th:contains("Priority")').index();
+        PriorityCol = $('#AirportWarningWindow th[aria-label*="Priority"]').index();
         TextCol = $('#AirportWarningWindow th:contains("Text")').index();
         if (PriorityCol > -1) {
             $('#AirportWarningWindow tr').not('thead tr').each(function (idx, row) {
                 if ($(this).children('td').length > 1) {
                     var cellData = $(this).find('td').eq(PriorityCol)[0].innerText;
-                    $('#AirportWarningWindow th:contains("Priority")').hide();
+                    $('#AirportWarningWindow th[aria-label*="Priority"]').hide();
                     $(this).find('td').eq(PriorityCol).hide();
                     switch (cellData) {
                         case '0':
@@ -360,7 +360,7 @@
         var show_wide = false;
         var warningVal = false;
 
-        PriorityCol = $('#AirportWarningWindow th:contains("Priority")').index();
+        PriorityCol = $('#AirportWarningWindow th[aria-label*="Priority"]').index();
         TextCol = $('#AirportWarningWindow th:contains("Text")').index();
         if (PriorityCol > -1) {
             $('#AirportWarningWindow tr').not('thead tr').each(function (idx, row) {
@@ -368,7 +368,7 @@
                     var cellData = $(this).find('td').eq(PriorityCol)[0].innerText;
                     var cellTextData = $(this).find('td').eq(TextCol)[0].innerText;
                     warningVal = (warningVal || cellTextData.indexOf(gateNumber) >= 0) ? true : false;
-                    $('#AirportWarningWindow th:contains("Priority")').hide();
+                    $('#AirportWarningWindow th[aria-label*="Priority"]').hide();
                     $(this).find('td').eq(PriorityCol).hide();
                     switch (cellData) {
                         case '0':

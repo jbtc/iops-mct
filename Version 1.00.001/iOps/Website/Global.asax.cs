@@ -11,8 +11,6 @@ using System.Web.Security;
 using System.Web.UI;
 using iOps.Service.Security;
 using System.Web.Http;
-using Telerik.Reporting.Services.WebApi;
-
 
 namespace iOps.Website
 {
@@ -21,7 +19,6 @@ namespace iOps.Website
     {
         protected void Application_Start()
         {
-            ReportsControllerConfiguration.RegisterRoutes(GlobalConfiguration.Configuration);
             Bootstrapper.Bootstrap();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

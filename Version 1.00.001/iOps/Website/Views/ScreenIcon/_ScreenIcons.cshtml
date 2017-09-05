@@ -2,42 +2,48 @@
 @using System.Xml.Linq;
 @{
 
-    var clientName = TempData["ClientName"].ToString();
-    var dbData = new iOps.Core.Model.iopsContext().Screens.Where(s => s.Name.StartsWith(clientName) && !s.IsDeleted).OrderBy(s => s.DefaultDisplayOrder);
-    var IsFirstScreen = true;
-    foreach (Screen screen in dbData)
-    {
-        XDocument xmlData = XDocument.Load(new StringReader(screen.ScreenLayout));
-        var ajaxUrl = xmlData.Element("Screen-Layout").Element("AjaxUrl").Value;
-        var ajaxData = xmlData.Element("Screen-Layout").Element("AjaxData").Value;
-        var tagPrefix = xmlData.Element("Screen-Layout").Element("TagPrefix").Value;
-        var iconClass = String.Format("screen-icon-{0} {1} {2}", screen.DefaultIconType, screen.DefaultDisplayOrder == 1 ? "FirstIcon" : "", IsFirstScreen ? "IconSelected" : "IconIdle");
-        var opcBkgAttrib = String.Format("{{\"type\":\"group\",\"all_f\": {{\"cls\":\"IconIdle\"}},\"bad_q\":{{\"cls\":\"IconIdle\"}},\"group\": [" +
-                                        "{{\"tag\":\"{0}Alarm._HasAlarms.Value\",\"config\":{{\"cls\":\"IconAlarm\"}}}}, " +
-                                        "{{\"tag\":\"{0}Warning._HasWarnings.Value\",\"config\":{{\"cls\":\"IconWarning\"}}}}], \"ignore_prefix\":true}}", tagPrefix);
+    var clientName = "";
 
-        <tr class="screen-ajax@(screen.DefaultDisplayOrder)" title="@(screen.DisplayName)" screen-number="@(screen.DefaultDisplayOrder)" ajax-url="@(ajaxUrl)" ajax-data="@(ajaxData)" tag-prefix="@(tagPrefix)">)
-            <td class='@(iconClass)' opc-tag-bkg='@(opcBkgAttrib)'>
-                @if (screen.DisplayName.StartsWith("Gate"))
-                {
-                    @Html.Raw(string.Format("{0}", screen.DisplayName.Replace("Gate ", "").Trim()));
-                }
-            </td>
-            <td class="screen-text@(screen.DefaultDisplayOrder)">@(screen.DisplayName)</td>
-        </tr>
-        IsFirstScreen = false;
-    }
-    if (dbData.Count() < 10)
+    if (HttpContext.Current.User.Identity.IsAuthenticated == true)
     {
-        <script>
-            $("#slide-in-share").css("overflow -y", "hidden");
-        </script>
-    }
-    else
-    {
-        <script>
-            $("#slide-in-content").css("overflow-y", "scroll");
-        </script>
+
+        clientName = TempData["ClientName"].ToString();
+        var dbData = new iOps.Core.Model.iopsContext().Screens.Where(s => s.Name.StartsWith(clientName) && !s.IsDeleted).OrderBy(s => s.DefaultDisplayOrder);
+        var IsFirstScreen = true;
+        foreach (Screen screen in dbData)
+        {
+            XDocument xmlData = XDocument.Load(new StringReader(screen.ScreenLayout));
+            var ajaxUrl = xmlData.Element("Screen-Layout").Element("AjaxUrl").Value;
+            var ajaxData = xmlData.Element("Screen-Layout").Element("AjaxData").Value;
+            var tagPrefix = xmlData.Element("Screen-Layout").Element("TagPrefix").Value;
+            var iconClass = String.Format("screen-icon-{0} {1} {2}", screen.DefaultIconType, screen.DefaultDisplayOrder == 1 ? "FirstIcon" : "", IsFirstScreen ? "IconSelected" : "IconIdle");
+            var opcBkgAttrib = String.Format("{{\"type\":\"group\",\"all_f\": {{\"cls\":\"IconIdle\"}},\"bad_q\":{{\"cls\":\"IconIdle\"}},\"group\": [" +
+                                            "{{\"tag\":\"{0}Alarm._HasAlarms.Value\",\"config\":{{\"cls\":\"IconAlarm\"}}}}, " +
+                                            "{{\"tag\":\"{0}Warning._HasWarnings.Value\",\"config\":{{\"cls\":\"IconWarning\"}}}}], \"ignore_prefix\":true}}", tagPrefix);
+
+            <tr class="screen-ajax@(screen.DefaultDisplayOrder)" title="@(screen.DisplayName)" screen-number="@(screen.DefaultDisplayOrder)" ajax-url="@(ajaxUrl)" ajax-data="@(ajaxData)" tag-prefix="@(tagPrefix)">)
+                <td class='@(iconClass)' opc-tag-bkg='@(opcBkgAttrib)'>
+                    @if (screen.DisplayName.StartsWith("Gate"))
+                    {
+                        @Html.Raw(string.Format("{0}", screen.DisplayName.Replace("Gate ", "").Trim()));
+                    }
+                </td>
+                <td class="screen-text@(screen.DefaultDisplayOrder)">@(screen.DisplayName)</td>
+            </tr>
+            IsFirstScreen = false;
+        }
+        if (dbData.Count() < 10)
+        {
+            <script>
+                $("#slide-in-share").css("overflow -y", "hidden");
+            </script>
+        }
+        else
+        {
+            <script>
+                $("#slide-in-content").css("overflow-y", "scroll");
+            </script>
+        }
     }
 }
 

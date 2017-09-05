@@ -461,90 +461,6 @@
     <Compile Include="Model\SecurityTask.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\SLLReports.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SLLReports.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLLReports.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLLReports.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SLLReports.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_Network_Monitoring_Bool.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_1A_DockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_1A_UnDockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_1B_DockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_1B_UnDockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_2A_DockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_2A_UnDockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_2B_DockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_2B_UnDockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_3A_DockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_3A_UnDockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_3B_DockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_3B_UnDockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_4A_DockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_4A_UnDockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_4B_DockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_4B_UnDockTime.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_AlarmLogging.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_DailyAircraftDocked.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_DataLogging.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_DockTime_DataLogging.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_UnDockTime_DataLogging.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SLL_PBB_WarningLogging.cs">
-      <DependentUpon>SLLReports.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -608,23 +524,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
-    </None>
-    <EntityDeploy Include="Model\SLLReports.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SLLReports.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model\SLLReports.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SLLReports.edmx</DependentUpon>
-      <LastGenOutput>SLLReports.Context.cs</LastGenOutput>
-    </None>
-    <None Include="Model\SLLReports.edmx.diagram">
-      <DependentUpon>SLLReports.edmx</DependentUpon>
-    </None>
-    <None Include="Model\SLLReports.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SLLReports.edmx</DependentUpon>
-      <LastGenOutput>SLLReports.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

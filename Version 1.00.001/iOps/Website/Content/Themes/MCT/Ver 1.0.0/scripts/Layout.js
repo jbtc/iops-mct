@@ -138,5 +138,6 @@ $(document).ready(function () {
     else {
         $('.Header-FlexGroup').css('width', '100%');
     }
+
 })
 

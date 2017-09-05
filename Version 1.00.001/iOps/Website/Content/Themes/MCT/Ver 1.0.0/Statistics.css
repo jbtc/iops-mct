@@ -39,6 +39,7 @@
 
 .Header-ClientID-WebLink .HCW-Dash 
 {
+    display: none;
 }
 
 .Header-ClientID-WebLink .HCW-Name 

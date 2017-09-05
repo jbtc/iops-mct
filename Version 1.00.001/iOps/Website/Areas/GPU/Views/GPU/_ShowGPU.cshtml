@@ -303,11 +303,11 @@
 
     function update_alarms() {
         var PriorityCol = -1;
-        PriorityCol = $('#GPUAlarmWindow th:contains("Priority")').index();
+        PriorityCol = $('#GPUAlarmWindow th[aria-label*="Priority"]').index();
         if (PriorityCol > -1) {
             $('#GPUAlarmWindow tr').not('thead tr').each(function (idx, row) {
                 var cellData = $('#GPUAlarmWindow').find('td').eq(PriorityCol)[0].innerText;
-                $('#GPUAlarmWindow th:contains("Priority")').hide();
+                $('#GPUAlarmWindow th[aria-label*="Priority"]').hide();
                 $(this).find('td').eq(PriorityCol).hide();
                 switch (cellData) {
                     case '0':
@@ -325,11 +325,11 @@
 
     function update_warnings() {
         var PriorityCol = -1;
-        PriorityCol = $('#GPUWarningWindow th:contains("Priority")').index();
+        PriorityCol = $('#GPUWarningWindow th[aria-label*="Priority"]').index();
         if (PriorityCol > -1) {
             $('#GPUWarningWindow tr').not('thead tr').each(function (idx, row) {
                 var cellData = $('#GPUWarningWindow').find('td').eq(PriorityCol)[0].innerText;
-                $('#GPUWarningWindow th:contains("Priority")').hide();
+                $('#GPUWarningWindow th[aria-label*="Priority"]').hide();
                 $(this).find('td').eq(PriorityCol).hide();
                 switch (cellData) {
                     case '0':

@@ -43,26 +43,33 @@
                             { name: "Active", text: "Active", type: "boolean", visible: true, width: '40px', align: 'center' },
                             { name: "AlarmValue", text: "Alarm Value", type: "string", visible: false, align: 'right' },
                             { name: "Text", text: "Text", type: "string", visible: true },
-                            { name: "AlarmType", text: "Alarm Type", type: "string", visible: true, width: '40px'},
-                            { name: "Priority", text: "Priority", type: "string", visible: true, width: '40px', align: 'right' }
+                            //{ name: "AlarmType", text: "Alarm Type", type: "string", visible: true, width: '5px'},
+                            { name: "Priority", text: "Priority", type: "string", visible: true, width: '5px', align: 'right' }
                         ]
 
         for (i = 0; i < screens.length; i++) {
             var gateNumber = screens[i].Gate;
             airportAlarms.push(gateNumber + "_PBB_ALARMS");
-            airportAlarms.push(gateNumber + "_PCA_ALARMS");
+            airportAlarms.push(gateNumber + "_RTU_ALARMS");
             airportAlarms.push(gateNumber + "_GPU_ALARMS");
             airportWarnings.push(gateNumber + "_PBB_WARNINGS");
-            airportWarnings.push(gateNumber + "_PCA_WARNINGS");
+            airportWarnings.push(gateNumber + "_RTU_WARNINGS");
             airportWarnings.push(gateNumber + "_GPU_WARNINGS");
             airportMasterAlarms.push(gateNumber + "_PBB_ALARMS");
-            airportMasterAlarms.push(gateNumber + "_PCA_ALARMS");
+            airportMasterAlarms.push(gateNumber + "_RTU_ALARMS");
             airportMasterAlarms.push(gateNumber + "_GPU_ALARMS");
+            airportMasterAlarms.push(gateNumber + "_PBB_WARNINGS");
+            airportMasterAlarms.push(gateNumber + "_RTU_WARNINGS");
+            airportMasterAlarms.push(gateNumber + "_GPU_WARNINGS");
         }
 
         // set up moitoring of AC and Gate tags, and firing callback on data refresh
+        OPC.toggle_refresh(false);
         OPC.tags = [];
+        OPC.watch_tags = [];
+        OPC_config.tags = [];
         OPC_config.watch_tags = [];
+        OPC_config.alarm_bindings = [];
         OPC_config.tag_prefix = "Airport." + "@TempData["ClientAbbr"]" + ".Term1.";
         OPC_config.refresh_callback = opc_airport_callback;
         OPC_config.watch_tags = tags;
@@ -105,7 +112,8 @@
             tags.push(pre + "PBB.AIRCRAFTDOCKEDCALCULATION.Value");                  // aircraft is docked
             tags.push(pre + "PBB.LoggedOn.Value");                  // show green
             tags.push(pre + "PBB.Parked.Value");                  // show green
-            tags.push(pre + "PBB.AircraftSubType.Value")            // Show Jumbo Graphics
+            tags.push(pre + "PBB.AircraftSubType.Value");            // Show Jumbo Graphics
+            tags.push(pre + "PBB.Remote Bridge Status.Value");      // show Gate Disabled
         }
 
         $(".gate_fire").hide();
@@ -146,11 +154,13 @@
         if(airCraftType == null || is_parked == null || is_parked) {
             airCraftType = "NARROW";
         }
-        
+
+        var alarmCount = $("#AirportAlarms tr:contains('Gate " + gate + "')").length;
         var show_wide = (airCraftType.toUpperCase().indexOf("WIDE") >= 0) ? true : false;
         var show_ac = get_bool(pre + "AIRCRAFTDOCKEDCALCULATION.Value");            // aircraft is docked
         var show_g = get_bool(pre + "LoggedOn.Value");              // show green
         var show_o = get_bool(pre + "AIRCRAFTDOCKEDCALCULATION.Value");             // show orange
+        var show_blk = get_bool(pre + "Remote Bridge Status.Value");             // show black-red
 
         $("#Gate_" + gate + "_Plane").removeClass(function (index, css) {
             return (css.match(/\bnot_docked/g) || []).join(' ');
@@ -165,6 +175,12 @@
             $("#Gate_" + gate + "_Plane").css( (show_ac ? { 'content' : 'url(' + imgPath + 'Images/Airport/mct-gate' + gate + (show_wide ? '-wide' : '') + '-plane.png)' , 'display' : 'inline' } : { 'content' : 'none' , 'display' : 'none' }));
             //$("#Gate_" + gate + "_Plane").addClass("img gate_plane g" + gate + "_no_ac");
             switch (true) {
+                case show_blk:
+                    $("#Gate_" + gate + "_Status").addClass("stat-disabled");
+                    break;
+                case alarmCount > 0:
+                    $("#Gate_" + gate + "_Status").addClass("stat-alarm");
+                    break;
                 case show_o:
                     $("#Gate_" + gate + "_Status").addClass("stat-docked");
                     break;
@@ -174,8 +190,6 @@
                 default:
                     break;
             }
-            updateAirportGateWarnings(zone, gate);
-            updateAirportGateAlarms(zone, gate);
         }
         else {
             $("#Gate_" + gate + "_Plane").css({ "content": 'none', 'display': 'none' } );
@@ -237,13 +251,18 @@
 
     function updateMasterAirportAlarms() {
         var PriorityCol = -1;
+        var AlarmTypeCol = -1;
         var alarmCnt = 0;
         var warningCnt = 0;
-        PriorityCol = $('#AirportMasterAlarmWindow th:contains("Priority")').index();
-        if (PriorityCol > -1) {
-            $('#AirportMasterAlarmWindow tr').not('thead tr').each(function (idx, row) {
+
+        PriorityCol = $('#AirportMasterAlarms_tbl th[aria-label*="Priority"]').index() + 1;
+        if (PriorityCol > 0) {
+            //AlarmTypeCol = PriorityCol - 1;
+            //$('#AirportMasterAlarms_tbl th:nth-child(' + AlarmTypeCol + '),#AirportMasterAlarms_tbl td:nth-child(' + AlarmTypeCol + ')').hide()
+            $('#AirportMasterAlarms_tbl th:nth-child(' + PriorityCol + '),#AirportMasterAlarms_tbl td:nth-child(' + PriorityCol + ')').hide()
+            $('#AirportMasterAlarms_tbl tr').not('thead tr').each(function (idx, row) {
                 if ($(this).children('td').length > 1) {
-                    var cellData = $(this).find('td').eq(PriorityCol)[0].innerText;
+                    var cellData = $(this).find('td').eq(PriorityCol-1)[0].innerText;
                     alarmCnt = (cellData == 100) ? alarmCnt + 1 : alarmCnt;
                     warningCnt = (cellData == 0) ? warningCnt + 1 : warningCnt;
                 }
@@ -255,14 +274,16 @@
 
     function updateAirportAlarms() {
         var PriorityCol = -1;
+        var AlarmTypeCol = -1;
 
-        PriorityCol = $('#AirportAlarmWindow th:contains("Priority")').index();
-        if (PriorityCol > -1) {
-            $('#AirportAlarmWindow tr').not('thead tr').each(function (idx, row) {
+        PriorityCol = $('#AirportAlarms_tbl th[aria-label*="Priority"]').index() + 1;
+        if (PriorityCol > 0) {
+            //AlarmTypeCol = PriorityCol - 1;
+            //$('#AirportAlarms_tbl th:nth-child(' + AlarmTypeCol + '),#AirportAlarms_tbl td:nth-child(' + AlarmTypeCol + ')').hide()
+            $('#AirportAlarms_tbl th:nth-child(' + PriorityCol + '),#AirportAlarms_tbl td:nth-child(' + PriorityCol + ')').hide()
+            $('#AirportAlarms_tbl tr').not('thead tr').each(function (idx, row) {
                 if ($(this).children('td').length > 1) {
-                    var cellData = $(this).find('td').eq(PriorityCol)[0].innerText;
-                    $('#AirportAlarmWindow th:contains("Priority")').hide();
-                    $(this).find('td').eq(PriorityCol).hide();
+                    var cellData = $(this).find('td').eq(PriorityCol-1)[0].innerText;
                     switch (cellData) {
                         case '0':
                             $(this).addClass("WarningRow");
@@ -275,61 +296,21 @@
                     }
                 }
             });
-        }
-    };
-
-    function updateAirportGateAlarms(zoneNumber, gateNumber) {
-        var PriorityCol = -1;
-        var TextCol = -1;
-        var airCraftType = null;
-        var show_wide = false;
-        var alarmVal = false;
-
-        PriorityCol = $('#AirportAlarmWindow th:contains("Priority")').index();
-        TextCol = $('#AirportAlarmWindow th:contains("Text")').index();
-        if (PriorityCol > -1) {
-            $('#AirportAlarmWindow tr').not('thead tr').each(function (idx, row) {
-                if ($(this).children('td').length > 1) {
-                    var cellData = $(this).find('td').eq(PriorityCol)[0].innerText;
-                    var cellTextData = $(this).find('td').eq(TextCol)[0].innerText;
-                    alarmVal = (alarmVal || cellTextData.indexOf(gateNumber) >= 0) ? true : false;
-                    $('#AirportAlarmWindow th:contains("Priority")').hide();
-                    $(this).find('td').eq(PriorityCol).hide();
-                    switch (cellData) {
-                        case '0':
-                            $(this).addClass("WarningRow");
-                            break;
-                        case '100':
-                            $(this).addClass("AlarmRow");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            });
-        }
-        if (alarmVal) {
-            $("#Gate_" + gateNumber + "_Status").removeClass(function (index, css) {
-                return (css.match(/\bg[0-9]\S+/g) || []).join(' ');
-            });
-            airCraftType = get_value(OPC_config.tag_prefix + "Zone" + zoneNumber + ".Gate" + gateNumber + ".PBB.AircraftSubType.Value");
-            airCraftType = airCraftType == null ? "NARROW" : airCraftType;
-            show_wide = (airCraftType.toUpperCase().indexOf("WIDE") >= 0) ? true : false;
-            $("#Gate_" + gateNumber + "_Status").addClass("g" + gateNumber + "_r" + ((show_wide) ? "_wide" : ""));
         }
     };
 
     function updateAirportWarnings() {
         var PriorityCol = -1;
+        var AlarmTypeCol = -1;
 
-        PriorityCol = $('#AirportWarningWindow th:contains("Priority")').index();
-        TextCol = $('#AirportWarningWindow th:contains("Text")').index();
+        PriorityCol = $('#AirportWarnings_tbl th[aria-label*="Priority"]').index() + 1;
         if (PriorityCol > -1) {
-            $('#AirportWarningWindow tr').not('thead tr').each(function (idx, row) {
+            //AlarmTypeCol = PriorityCol - 1;
+            //$('#AirportWarnings_tbl th:nth-child(' + AlarmTypeCol + '),AirportWarnings_tbl td:nth-child(' + AlarmTypeCol + ')').hide()
+            $('#AirportWarnings_tbl th:nth-child(' + PriorityCol + '),AirportWarnings_tbl td:nth-child(' + PriorityCol + ')').hide()
+            $('#AirportWarnings_tbl tr').not('thead tr').each(function (idx, row) {
                 if ($(this).children('td').length > 1) {
-                    var cellData = $(this).find('td').eq(PriorityCol)[0].innerText;
-                    $('#AirportWarningWindow th:contains("Priority")').hide();
-                    $(this).find('td').eq(PriorityCol).hide();
+                    var cellData = $(this).find('td').eq(PriorityCol-1)[0].innerText;
                     switch (cellData) {
                         case '0':
                             $(this).addClass("WarningRow");
@@ -342,47 +323,6 @@
                     }
                 }
             });
-        }
-    };
-
-    function updateAirportGateWarnings(zoneNumber, gateNumber) {
-        var PriorityCol = -1;
-        var TextCol = -1;
-        var airCraftType = null;
-        var show_wide = false;
-        var warningVal = false;
-
-        PriorityCol = $('#AirportWarningWindow th:contains("Priority")').index();
-        TextCol = $('#AirportWarningWindow th:contains("Text")').index();
-        if (PriorityCol > -1) {
-            $('#AirportWarningWindow tr').not('thead tr').each(function (idx, row) {
-                if ($(this).children('td').length > 1) {
-                    var cellData = $(this).find('td').eq(PriorityCol)[0].innerText;
-                    var cellTextData = $(this).find('td').eq(TextCol)[0].innerText;
-                    warningVal = (warningVal || cellTextData.indexOf(gateNumber) >= 0) ? true : false;
-                    $('#AirportWarningWindow th:contains("Priority")').hide();
-                    $(this).find('td').eq(PriorityCol).hide();
-                    switch (cellData) {
-                        case '0':
-                            $(this).addClass("WarningRow");
-                            break;
-                        case '100':
-                            $(this).addClass("AlarmRow");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            });
-        }
-        if (warningVal) {
-            $("#Gate_" + gateNumber + "_Status").removeClass(function (index, css) {
-                return (css.match(/\bg[0-9]\S+/g) || []).join(' ');
-            });
-            airCraftType = get_value(OPC_config.tag_prefix + "Zone" + zoneNumber + ".Gate" + gateNumber + ".PBB.AircraftSubType.Value");
-            airCraftType = airCraftType == null ? "NARROW" : airCraftType;
-            show_wide = (airCraftType.toUpperCase().indexOf("WIDE") >= 0) ? true : false;
-            $("#Gate_" + gateNumber + "_Status").addClass("img gate_status g" + gateNumber + "_y" + ((show_wide) ? "_wide" : ""));
         }
     };
 
@@ -393,11 +333,14 @@
         <filter id="svg-red" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
             <feColorMatrix type="matrix" values="0 1 0 0.5 0   0 0 0 0 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
         </filter>
+        <filter id="svg-black-red" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="0 0 -1 -1.6 2.5   0 0 -1 0 0   0 0 -1 0 0   0 0 0 1.7 0"></feColorMatrix>
+        </filter>
         <filter id="svg-yellow" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
             <feColorMatrix type="matrix" values="0 0 0 1.1 0   0 0 0 1.1 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
         </filter>
         <filter id="svg-green" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
-            <feColorMatrix type="matrix" values="0 0 0 0 0   0 0 0 0.6 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
+            <feColorMatrix type="matrix" values="0 0 0 0 0   0 0 2 0 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
         </filter>
         <filter id="svg-orange" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
             <feColorMatrix type="matrix" values="0 0 0 1.1 0   0 0 0 0.6 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
@@ -436,7 +379,7 @@
                     <a id="gate@(gateNumber)" class="gate_link" onclick="GoZoneGate('@(zoneNumber)', '@(gateNumber)', @(displayOrder))">@(gateNumber) </a>
                 }
             }
-            <a id="zoneA" class="zone_link" onclick='GoZone("A",-2)'>North Pier</a>
+            <a id="zoneA" class="zone_link" onclick='GoZone("A",2)'>North Pier</a>
             <a id="zoneB" class="zone_link" onclick='GoZone("B",3)'>South Pier</a>
             <a id="zoneC" class="zone_link" onclick='GoZone("C",4)'>West Pier</a>
         </div>        

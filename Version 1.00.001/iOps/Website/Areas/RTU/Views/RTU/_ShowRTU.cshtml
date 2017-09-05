@@ -1,22 +1,32 @@
-﻿<script>
+﻿@using iOps.Service.Security;
+
+<script type="text/javascript" src="~/OPCHTML/js/datatables/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="~/OPCHTML/js/lib/jquery.numberformatter-1.2.3.min.js"></script>
+<script>
     var tags = [];
     $(document).ready(function () {
+        var tags = [];
+        // set up gate prefix
+        OPC.toggle_refresh(false);
         OPC.tags = [];
+        OPC.watch_tags = [];
+        OPC_config.tags = [];
         OPC_config.watch_tags = [];
-        OPC_config.tag_prefix = 'Airport.SLL.Term1.Zone' + '@TempData["ZoneNumber"]' + '.GateC' + '@TempData["GateNumber"]' + '.RTU.';
-        OPC_config.refresh_callback = refresh_update;
+        OPC_config.alarm_bindings = [];
+        OPC_config.tag_prefix = 'Airport.' + '@TempData["ClientAbbr"]' + '.Term1.Zone' + '@TempData["ZoneNumber"]' + '.Gate' + '@TempData["GateNumber"]' + '.RTU.';
+        OPC_config.refresh_callback = opc_rtu_callback;
         OPC_config.watch_tags = tags;
         OPC_config.alarm_bindings = [
             {
-                alarmid: "RTUAlarms",
-                callback: update_alarms,
+                alarmid: "RTU1Alarms",
+                callback: updateRTU1Alarms,
                 showInfo: true,
                 showHistory: false,
                 pagination: true,
                 pageLength: 10,
                 filter: {
                     alarmtypes: ["Digital"],
-                    alarmgroups: ["C" + "@TempData["GateNumber"]" + "_RTU_ALARMS"]
+                    alarmgroups: ["@TempData["GateNumber"]" + "_RTU1_ALARMS"]
                 },
                 columns: [
                     { name: "AlarmID", text: "Alarm ID", type: "string", visible: false },
@@ -29,15 +39,57 @@
                 ]
             },
             {
-                alarmid: "RTUWarnings",
-                callback: update_warnings,
+                alarmid: "RTU2Alarms",
+                callback: updateRTU2Alarms,
                 showInfo: true,
                 showHistory: false,
                 pagination: true,
                 pageLength: 10,
                 filter: {
                     alarmtypes: ["Digital"],
-                    alarmgroups: ["C" + "@TempData["GateNumber"]" + "_RTU_WARNINGS"]
+                    alarmgroups: ["@TempData["GateNumber"]" + "_RTU2_ALARMS"]
+                },
+                columns: [
+                    { name: "AlarmID", text: "Alarm ID", type: "string", visible: false },
+                    { name: "AlarmDateTime", text: "Alarm Date/Time", type: "datetime", visible: true, sort: 'desc', width: '130px', searchable: false },
+                    { name: "Active", text: "Active", type: "boolean", visible: true, width: '50px', align: 'center' },
+                    { name: "AlarmValue", text: "Alarm Value", type: "string", visible: false, align: 'right' },
+                    { name: "Text", text: "Text", type: "string", visible: true },
+                    { name: "AlarmType", text: "Alarm Type", type: "string", visible: true },
+                    { name: "Priority", text: "Priority", type: "string", visible: true, width: '50px', align: 'right' }
+                ]
+            },
+            {
+                alarmid: "RTU1Warnings",
+                callback: updateRTU1warnings,
+                showInfo: true,
+                showHistory: false,
+                pagination: true,
+                pageLength: 10,
+                filter: {
+                    alarmtypes: ["Digital"],
+                    alarmgroups: ["@TempData["GateNumber"]" + "_RTU1_WARNINGS"]
+                },
+                columns: [
+                    { name: "AlarmID", text: "Alarm ID", type: "string", visible: false },
+                    { name: "AlarmDateTime", text: "Alarm Date/Time", type: "datetime", visible: true, sort: 'desc', width: '130px', searchable: false },
+                    { name: "Active", text: "Active", type: "boolean", visible: true, width: '50px', align: 'center' },
+                    { name: "AlarmValue", text: "Alarm Value", type: "string", visible: false, align: 'right' },
+                    { name: "Text", text: "Text", type: "string", visible: true },
+                    { name: "AlarmType", text: "Alarm Type", type: "string", visible: true },
+                    { name: "Priority", text: "Priority", type: "string", visible: true, width: '50px', align: 'right' }
+                ]
+            },
+            {
+                alarmid: "RTU2Warnings",
+                callback: updateRTU2warnings,
+                showInfo: true,
+                showHistory: false,
+                pagination: true,
+                pageLength: 10,
+                filter: {
+                    alarmtypes: ["Digital"],
+                    alarmgroups: ["@TempData["GateNumber"]" + "_RTU2_WARNINGS"]
                 },
                 columns: [
                     { name: "AlarmID", text: "Alarm ID", type: "string", visible: false },
@@ -49,6 +101,7 @@
                     { name: "Priority", text: "Priority", type: "string", visible: true, width: '50px', align: 'right' }
                 ]
             }
+
         ];
 
         tags.push("TEMPDISCH.Value");                  // aircraft is docked
@@ -230,13 +283,13 @@
         gauge.pointers[0].value(parseInt(get_value(pre + "TEMRTUBIN.Value")));
     }
 
-    function update_alarms() {
+    function updateRTU1Alarms() {
         var PriorityCol = -1;
-        PriorityCol = $('#RTUAlarmWindow th:contains("Priority")').index();
+        PriorityCol = $('#RTU1AlarmWindow th[aria-label*="Priority"]').index();
         if (PriorityCol > -1) {
-            $('#RTUAlarmWindow tr').not('thead tr').each(function (idx, row) {
-                var cellData = $('#RTUAlarmWindow').find('td').eq(PriorityCol)[0].innerText;
-                $('#RTUAlarmWindow th:contains("Priority")').hide();
+            $('#RTU1AlarmWindow tr').not('thead tr').each(function (idx, row) {
+                var cellData = $('#RTU1AlarmWindow').find('td').eq(PriorityCol)[0].innerText;
+                $('#RTU1AlarmWindow th[aria-label*="Priority"]').hide();
                 $(this).find('td').eq(PriorityCol).hide();
                 switch (cellData) {
                     case '0':
@@ -252,13 +305,35 @@
         }
     };
 
-    function update_warnings() {
+    function updateRTU2Alarms() {
         var PriorityCol = -1;
-        PriorityCol = $('#RTUWarningWindow th:contains("Priority")').index();
+        PriorityCol = $('#RTU2AlarmWindow th[aria-label*="Priority"]').index();
         if (PriorityCol > -1) {
-            $('#RTUWarningWindow tr').not('thead tr').each(function (idx, row) {
-                var cellData = $('#RTUWarningWindow').find('td').eq(PriorityCol)[0].innerText;
-                $('#RTUWarningWindow th:contains("Priority")').hide();
+            $('#RTU2AlarmWindow tr').not('thead tr').each(function (idx, row) {
+                var cellData = $('#RTU2AlarmWindow').find('td').eq(PriorityCol)[0].innerText;
+                $('#RTU2AlarmWindow th[aria-label*="Priority"]').hide();
+                $(this).find('td').eq(PriorityCol).hide();
+                switch (cellData) {
+                    case '0':
+                        $(this).addClass("WarningRow").addClass("HideAlarm");
+                        break;
+                    case '100':
+                        $(this).addClass("AlarmRow");
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+    };
+
+    function updateRTU1warnings() {
+        var PriorityCol = -1;
+        PriorityCol = $('#RTU1WarningWindow th[aria-label*="Priority"]').index();
+        if (PriorityCol > -1) {
+            $('#RTU1WarningWindow tr').not('thead tr').each(function (idx, row) {
+                var cellData = $('#RTU1WarningWindow').find('td').eq(PriorityCol)[0].innerText;
+                $('#RTU1WarningWindow th[aria-label*="Priority"]').hide();
                 $(this).find('td').eq(PriorityCol).hide();
                 switch (cellData) {
                     case '0':
@@ -274,7 +349,29 @@
         }
     };
 
-    function refresh_update(data) {
+    function updateRTU2warnings() {
+        var PriorityCol = -1;
+        PriorityCol = $('#RTU2WarningWindow th[aria-label*="Priority"]').index();
+        if (PriorityCol > -1) {
+            $('#RTU2WarningWindow tr').not('thead tr').each(function (idx, row) {
+                var cellData = $('#RTU2WarningWindow').find('td').eq(PriorityCol)[0].innerText;
+                $('#RTU2WarningWindow th[aria-label*="Priority"]').hide();
+                $(this).find('td').eq(PriorityCol).hide();
+                switch (cellData) {
+                    case '0':
+                        $(this).addClass("WarningRow");
+                        break;
+                    case '100':
+                        $(this).addClass("AlarmRow").addClass("HideAlarm");
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+    };
+
+    function opc_rtu_callback(data) {
         Update_Tagged_Controls();
     }
 
@@ -782,11 +879,18 @@
     <div class="rtuPageDividerRight">
         <button id="gateLinkButtonInRTUScreen">Go to Gate</button>
     </div>
-    <div id="RTUAlarmWindow">
-        <div id="RTUAlarms"></div>
+    <div id="RTU1AlarmWindow">
+        <div id="RTU1Alarms"></div>
 
     </div>
-    <div id="RTUWarningWindow">
-        <div id="RTUWarnings"></div>
+    <div id="RTU1AlarmWindow">
+        <div id="RTU2Alarms"></div>
+
+    </div>
+    <div id="RTU2WarningWindow">
+        <div id="RTU1Warnings"></div>
+    </div>
+    <div id="RTU2WarningWindow">
+        <div id="RTU2Warnings"></div>
     </div>
 </div>

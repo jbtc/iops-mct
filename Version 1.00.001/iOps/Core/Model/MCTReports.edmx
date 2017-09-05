@@ -2356,7 +2356,7 @@ warning 6002: The table/view 'MCT_Airport_SCADA.dbo.MCT_PBB_UnDockTime_DataLoggi
           <Property Name="DateAndTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Value" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="MCT_Airport_ReportingEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MCT_IOPS_ReportingEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="MCT_PBB_A10B_DockTime" EntityType="Self.MCT_PBB_A10B_DockTime" />
           <EntitySet Name="MCT_PBB_A10B_UnDockTime" EntityType="Self.MCT_PBB_A10B_UnDockTime" />
           <EntitySet Name="MCT_PBB_A10F_DockTime" EntityType="Self.MCT_PBB_A10F_DockTime" />
@@ -3182,7 +3182,7 @@ warning 6002: The table/view 'MCT_Airport_SCADA.dbo.MCT_PBB_UnDockTime_DataLoggi
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MCT_Airport_SCADAModelStoreContainer" CdmEntityContainer="MCT_Airport_ReportingEntities">
+        <EntityContainerMapping StorageEntityContainer="MCT_Airport_SCADAModelStoreContainer" CdmEntityContainer="MCT_IOPS_ReportingEntities">
           <EntitySetMapping Name="MCT_PBB_A10B_DockTime">
             <EntityTypeMapping TypeName="MCT_Airport_SCADAModel.MCT_PBB_A10B_DockTime">
               <MappingFragment StoreEntitySet="MCT_PBB_A10B_DockTime">

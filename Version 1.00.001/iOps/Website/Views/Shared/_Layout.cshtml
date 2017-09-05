@@ -40,9 +40,9 @@
         OPC_config = {
             token: '7e61b230-481d-4551-b24b-ba9046e3d8f2',
             serverURL: '@System.Web.Configuration.WebConfigurationManager.AppSettings["OPC_config_ServerURL"]',
-            max_tags_per_msg: 25,
-            max_callbacks: 250,
-            interval: 3000
+            max_tags_per_msg: 15,
+            max_callbacks: 200,
+            interval: 2000
         };
         OPC.init();
     </script>
@@ -119,12 +119,12 @@
                 <div class="stats-001">
                     OPERATIONS
                 </div>
-                <br /><br />
+                <br />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Gate Utilization Today</b>
-                <p><img src="@Url.Content("~/Home/ViewCharts")" style="width:225px;" /></p>
+                <p><img id="dockedChart" src="@Url.Content("~/Home/ViewCharts")" style="width:225px;" /></p>
                 <br /><br /><br />
                 <b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alarms Today</b>
-                <p><img src="@Url.Content("~/Home/ViewChartsGraph")" style="width:225px;" /></p>
+                <p><img id="alarmGraph" src="@Url.Content("~/Home/ViewChartsGraph")" style="width:225px;" /></p>
             </div>
             
             <div class="splitter-main">
@@ -138,6 +138,10 @@
                 </div>
                 <div class="main-body" id="main-body">
                     @RenderBody()
+                    <div id="GateMasterAlarmWindow1" style="display: none">
+                        <div id="GateMasterAlarms1"></div>
+                    </div>
+
                 </div>
             </div>
         </div>

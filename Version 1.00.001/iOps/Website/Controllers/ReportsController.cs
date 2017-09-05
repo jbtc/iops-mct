@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web;
-using System.Web.Http;
-using Telerik.Reporting.Services.WebApi;
+using System.Web.Mvc;
+using ASPNETMVC_SSRS_Demo.Models;
 
-namespace iOps.Website.Controllers
+namespace ASPNETMVC_SSRS_Demo.Controllers
 {
-    public class ReportsController : ReportsControllerBase
+    public class ReportsController : Controller
     {
-        static Telerik.Reporting.Services.ReportServiceConfiguration configurationInstance =
-        new Telerik.Reporting.Services.ReportServiceConfiguration
-        {
-            HostAppId = "Application1",
-            ReportResolver = new ReportFileResolver(HttpContext.Current.Server.MapPath("~/Reports"))
-                .AddFallbackResolver(new ReportTypeResolver()),
-            Storage = new Telerik.Reporting.Cache.File.FileStorage(),
-        };
+        //
+        // GET: /Reports/
 
-    public ReportsController()
-    {
-        this.ReportServiceConfiguration = configurationInstance;
-    }
+        public ActionResult ReportTemplate(string ReportName, int Width, int Height)
+        {
+            var rptInfo = new ReportInfo
+            {
+                ReportName = ReportName,
+                ReportURL = String.Format("../../Reports/ReportTemplate.aspx?ReportName={0}&Height={1}", ReportName, Height),
+                Width = Width,
+                Height = Height
+            };
+
+            return View(rptInfo);
+        }
+
 
     }
 }

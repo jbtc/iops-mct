@@ -42,7 +42,7 @@
 .Airport-Window .stat-warning    { filter:url(#svg-yellow); }
 .Airport-Window .stat-docked    { filter:url(#svg-orange); }
 .Airport-Window .stat-alarm    { filter:url(#svg-red); }
-
+.Airport-Window .stat-disabled { filter:url(#svg-black-red); }
 
 .Airport-Window #gates_container a.gate_link {
     position:absolute;
@@ -69,14 +69,14 @@
 .Airport-Window #gates_container #gateA3 { top:36.5%;left:21.25%; }
 .Airport-Window #gates_container #gateA4 { top:14%;left:24.5%; }
 .Airport-Window #gates_container #gateA6 { top:15.5%;left:20.75%; }
-.Airport-Window #gates_container #gateA7B { top:39%;left:17%; }
-.Airport-Window #gates_container #gateA7F { top:34.5%;left:17%; }
 .Airport-Window #gates_container #gateA8B { top:16%;left:15.5%; }
 .Airport-Window #gates_container #gateA8F { top:19.5%;left:15.25%; }
-.Airport-Window #gates_container #gateA9B { top:42.25%;left:10.25%; }
-.Airport-Window #gates_container #gateA9F { top:38.5%;left:10.5%; }
+.Airport-Window #gates_container #gateA9B { top:39%;left:17%; }
+.Airport-Window #gates_container #gateA9F { top:34.5%;left:17%; }
 .Airport-Window #gates_container #gateA10B { top:19.25%;left:8.5%; }
 .Airport-Window #gates_container #gateA10F { top:23.25%;left:8.5%; }
+.Airport-Window #gates_container #gateA11B { top:42.25%;left:10.25%; }
+.Airport-Window #gates_container #gateA11F { top:38.5%;left:10.5%; }
 .Airport-Window #gates_container #gateB1 { top:11%;left:57.25%; }
 .Airport-Window #gates_container #gateB2 { top:35%;left:60.5%; }
 .Airport-Window #gates_container #gateB3 { top:13%;left:60.75%; }
@@ -91,20 +91,20 @@
 .Airport-Window #gates_container #gateB10 { top:39.25%;left:79.5%; }
 .Airport-Window #gates_container #gateB11 { top:16%;left:79.5%; }
 .Airport-Window #gates_container #gateC1 { top:41.25%;left:52.25%; }
-.Airport-Window #gates_container #gateC2 { top:38%;left:30%; }
 .Airport-Window #gates_container #gateC3 { top:46.5%;left:50.5%; }
+.Airport-Window #gates_container #gateC2 { top:38%;left:30%; }
 .Airport-Window #gates_container #gateC4 { top:40.75%;left:33.25%; }
 .Airport-Window #gates_container #gateC6 { top:58%;left:36%; }
-.Airport-Window #gates_container #gateC9 { top:62.25%;left:50.25%; }
-.Airport-Window #gates_container #gateC10B { top:68.5%;left:35.5%; }
-.Airport-Window #gates_container #gateC10F { top:70.5%;left:38.5%; }
-.Airport-Window #gates_container #gateC11B { top:74.5%;left:50%; }
-.Airport-Window #gates_container #gateC11F { top:72%;left:47%; }
-.Airport-Window #gates_container #gateC12B { top:79.5%;left:35.5%; }
-.Airport-Window #gates_container #gateC12F { top:81.5%;left:38.5%; }
-.Airport-Window #gates_container #gateC15 { top:84.25%;left:50%; }
-.Airport-Window #gates_container #gateC16B { top:91%;left:37%; }
-.Airport-Window #gates_container #gateC16F { top:92%;left:40%; }
+.Airport-Window #gates_container #gateC7 { top:62.25%;left:50.25%; }
+.Airport-Window #gates_container #gateC8B { top:68.5%;left:35.5%; }
+.Airport-Window #gates_container #gateC8F { top:70.5%;left:38.5%; }
+.Airport-Window #gates_container #gateC9B { top:74.5%;left:50%; }
+.Airport-Window #gates_container #gateC9F { top:72%;left:47%; }
+.Airport-Window #gates_container #gateC10B { top:79.5%;left:35.5%; }
+.Airport-Window #gates_container #gateC10F { top:81.5%;left:38.5%; }
+.Airport-Window #gates_container #gateC11 { top:84.25%;left:50%; }
+.Airport-Window #gates_container #gateC12B { top:91%;left:37%; }
+.Airport-Window #gates_container #gateC12F { top:92%;left:40%; }
 
 .Airport-Window .k-window {
     z-index: 100 !important;
@@ -164,15 +164,16 @@
 
 .Airport-Window .dataTables_wrapper, table.opc-alarm {
     font-size: 11px;
+    width: 550px !important;
 }
 
 .Airport-Window #AirportAlarmWindow {
     position: absolute;
     min-height: 30% !important;
-    min-width: 40% !important;
+    min-width: 30% !important;
     /*border: 1px solid red;*/
-    top: 81%;
-    left: 59%;
+    top: 75%;
+    left: 65%;
 }
 
 .Airport-Window #AirportAlarms {

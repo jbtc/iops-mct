@@ -122,13 +122,13 @@ namespace iOps.Website.Areas.Users.Controllers
                     userToInsert.SecurityTasks.Add(await db.SecurityTasks.FindAsync(Guid.Parse(st)));
                 }
 
-                List<Screen> cidScreens = db.Screens.Where(s => s.Name.Contains("MCT") && !s.IsDeleted).OrderBy(s => s.DisplayName).ToList<Screen>();
+                List<Screen> cidScreens = db.Screens.Where(s => s.Name.Contains("MCT") && !s.IsDeleted).OrderBy(s => s.DefaultDisplayOrder).ToList<Screen>();
                 userToInsert.UsersXrefScreens.Clear();
                 int iScreens = 0;
                 foreach(Screen scr in  cidScreens)
                 {
                     iScreens++;
-                    userToInsert.UsersXrefScreens.Add(new UsersXrefScreen() { UserID = userToInsert.ID, ScreenID = scr.ID, DisplayOrder = iScreens });
+                    userToInsert.UsersXrefScreens.Add(new UsersXrefScreen() { UserID = userToInsert.ID, ScreenID = scr.ID, DisplayOrder = (scr.DefaultDisplayOrder ?? default(int)) });
                 }
 
                 //db.Entry(userToInsert).State = EntityState.Added;
@@ -223,13 +223,11 @@ namespace iOps.Website.Areas.Users.Controllers
                     userToUpdate.SecurityTasks.Add(await db.SecurityTasks.FindAsync(Guid.Parse(st)));
                 }
 
-                List<Screen> cidScreens = db.Screens.Where(s => s.DisplayName.Contains("MCT") && !s.IsDeleted).OrderBy(s => s.DisplayName).ToList<Screen>();
+                List<Screen> cidScreens = db.Screens.Where(s => s.Name.Contains("MCT") && !s.IsDeleted).OrderBy(s => s.DefaultDisplayOrder).ToList<Screen>();
                 userToUpdate.UsersXrefScreens.Clear();
-                int iScreens = 0;
                 foreach(Screen scr in  cidScreens)
                 {
-                    iScreens++;
-                    userToUpdate.UsersXrefScreens.Add(new UsersXrefScreen() { UserID = userToUpdate.ID, ScreenID = scr.ID, DisplayOrder = iScreens });
+                    userToUpdate.UsersXrefScreens.Add(new UsersXrefScreen() { UserID = userToUpdate.ID, ScreenID = scr.ID, DisplayOrder = (scr.DefaultDisplayOrder ?? default(int)) });
                 }
 
                 db.Entry(userToUpdate).State = EntityState.Modified;

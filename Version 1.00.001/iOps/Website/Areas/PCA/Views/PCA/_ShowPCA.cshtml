@@ -271,11 +271,11 @@
 
     function update_alarms() {
         var PriorityCol = -1;
-        PriorityCol = $('#PCAAlarmWindow th:contains("Priority")').index();
+        PriorityCol = $('#PCAAlarmWindow th[aria-label*="Priority"]').index();
         if (PriorityCol > -1) {
             $('#PCAAlarmWindow tr').not('thead tr').each(function (idx, row) {
                 var cellData = $('#PCAAlarmWindow').find('td').eq(PriorityCol)[0].innerText;
-                $('#PCAAlarmWindow th:contains("Priority")').hide();
+                $('#PCAAlarmWindow th[aria-label*="Priority"]').hide();
                 $(this).find('td').eq(PriorityCol).hide();
                 switch (cellData) {
                     case '0':
@@ -293,11 +293,11 @@
 
     function update_warnings() {
         var PriorityCol = -1;
-        PriorityCol = $('#PCAWarningWindow th:contains("Priority")').index();
+        PriorityCol = $('#PCAWarningWindow th[aria-label*="Priority"]').index();
         if (PriorityCol > -1) {
             $('#PCAWarningWindow tr').not('thead tr').each(function (idx, row) {
                 var cellData = $('#PCAWarningWindow').find('td').eq(PriorityCol)[0].innerText;
-                $('#PCAWarningWindow th:contains("Priority")').hide();
+                $('#PCAWarningWindow th[aria-label*="Priority"]').hide();
                 $(this).find('td').eq(PriorityCol).hide();
                 switch (cellData) {
                     case '0':

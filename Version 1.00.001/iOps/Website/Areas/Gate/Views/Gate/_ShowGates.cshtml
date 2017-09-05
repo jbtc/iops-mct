@@ -5,9 +5,40 @@
 <script>
     $(document).ready(function () {
         var tags = [];
+
+        var gateAlarms = [];
+        var gateWarnings = [];
+        var gateMasterAlarms = [];
+        var columnDef = [
+                            { name: "AlarmID", text: "Alarm ID", type: "string", visible: false },
+                            { name: "AlarmDateTime", text: "Alarm Date/Time", type: "datetime", visible: true, sort: 'desc', width: '120px', searchable: false },
+                            { name: "Active", text: "Active", type: "boolean", visible: true, width: '40px', align: 'center' },
+                            { name: "AlarmValue", text: "Alarm Value", type: "string", visible: false, align: 'right' },
+                            { name: "Text", text: "Text", type: "string", visible: true },
+                            { name: "AlarmType", text: "Alarm Type", type: "string", visible: true, width: '5px'},
+                            { name: "Priority", text: "Priority", type: "string", visible: true, width: '5px', align: 'right' }
+        ]
+
+        gateAlarms.push("@TempData["GateNumber"]" + "_PBB_ALARMS");
+        gateAlarms.push("@TempData["GateNumber"]" + "_RTU_ALARMS");
+        gateAlarms.push("@TempData["GateNumber"]" + "_GPU_ALARMS");
+        gateWarnings.push("@TempData["GateNumber"]" + "_PBB_WARNINGS");
+        gateWarnings.push("@TempData["GateNumber"]" + "_RTU_WARNINGS");
+        gateWarnings.push("@TempData["GateNumber"]" + "_GPU_WARNINGS");
+        gateMasterAlarms.push("@TempData["GateNumber"]" + "_PBB_ALARMS");
+        gateMasterAlarms.push("@TempData["GateNumber"]" + "_RTU_ALARMS");
+        gateMasterAlarms.push("@TempData["GateNumber"]" + "_GPU_ALARMS");
+        gateMasterAlarms.push("@TempData["GateNumber"]" + "_PBB_WARNINGS");
+        gateMasterAlarms.push("@TempData["GateNumber"]" + "_RTU_WARNINGS");
+        gateMasterAlarms.push("@TempData["GateNumber"]" + "_GPU_WARNINGS");
+
         // set up gate prefix
+        OPC.toggle_refresh(false);
         OPC.tags = [];
+        OPC.watch_tags = [];
+        OPC_config.tags = [];
         OPC_config.watch_tags = [];
+        OPC_config.alarm_bindings = [];
         OPC_config.tag_prefix = 'Airport.' + '@TempData["ClientAbbr"]' + '.Term1.Zone' + '@TempData["ZoneNumber"]' + '.Gate' + '@TempData["GateNumber"]' + '.PBB.';
         OPC_config.refresh_callback = opc_gate_callback;
         OPC_config.watch_tags = tags;
@@ -20,18 +51,10 @@
                 pagination: true,
                 pageLength: 10,
                 filter: {
-                    alarmtypes: ["Digital"],
-                    alarmgroups: ["@TempData["GateNumber"]" + "_PBB_ALARMS"]
+                    alarmtypes: ["Digital"], 
+                    alarmgroups: gateAlarms
                 },
-                columns: [
-		        	{ name: "AlarmID", text: "Alarm ID", type: "string", visible: false },
-		            { name: "AlarmDateTime", text: "Alarm Date/Time", type: "datetime", visible: true, sort: 'desc', width: '130px', searchable: false },
-		            { name: "Active", text: "Active", type: "boolean", visible: true, width: '50px', align: 'center' },
-		            { name: "AlarmValue", text: "Alarm Value", type: "string", visible: false, align: 'right' },
-		            { name: "Text", text: "Text", type: "string", visible: true },
-		            { name: "AlarmType", text: "Alarm Type", type: "string", visible: true },
-		            { name: "Priority", text: "Priority", type: "string", visible: true, width: '50px', align: 'right' }
-                ]
+                columns: columnDef
             },
             {
                 alarmid: "GateWarnings",
@@ -42,17 +65,9 @@
                 pageLength: 10,
                 filter: {
                     alarmtypes: ["Digital"],
-                    alarmgroups: ["@TempData["GateNumber"]" + "_PBB_WARNINGS"]
+                    alarmgroups: gateWarnings
                 },
-                columns: [
-                    { name: "AlarmID", text: "Alarm ID", type: "string", visible: false },
-                    { name: "AlarmDateTime", text: "Alarm Date/Time", type: "datetime", visible: true, sort: 'desc', width: '130px', searchable: false },
-                    { name: "Active", text: "Active", type: "boolean", visible: true, width: '50px', align: 'center' },
-                    { name: "AlarmValue", text: "Alarm Value", type: "string", visible: false, align: 'right' },
-                    { name: "Text", text: "Text", type: "string", visible: true },
-                    { name: "AlarmType", text: "Alarm Type", type: "string", visible: true },
-                    { name: "Priority", text: "Priority", type: "string", visible: true, width: '50px', align: 'right' }
-                ]
+                columns: columnDef
             },
             {
                 alarmid: "GateMasterAlarms",
@@ -63,18 +78,9 @@
                 pageLength: 10,
                 filter: {
                     alarmtypes: ["Digital"],
-                    alarmgroups: ["A5_PBB_ALARMS", "B25L1_PBB_ALARMS", "B27_PBB_ALARMS", "A5_GPU_ALARMS", "B25L1_GPU_ALARMS", "B27_GPU_ALARMS", "A5_PBB_WARNINGS", "B25L1_PBB_WARNINGS", "B27_PBB_WARNINGS", "A5_GPU_WARNINGS", "B25L1_GPU_WARNINGS", "B27_GPU_WARNINGS"]
-
+                    alarmgroups: gateMasterAlarms
                 },
-                columns: [
-                    { name: "AlarmID", text: "Alarm ID", type: "string", visible: false },
-                    { name: "AlarmDateTime", text: "Alarm Date/Time", type: "datetime", visible: true, sort: 'desc', width: '130px', searchable: false },
-                    { name: "Active", text: "Active", type: "boolean", visible: true, width: '50px', align: 'center' },
-                    { name: "AlarmValue", text: "Alarm Value", type: "string", visible: false, align: 'right' },
-                    { name: "Text", text: "Text", type: "string", visible: true },
-                    { name: "AlarmType", text: "Alarm Type", type: "string", visible: true },
-                    { name: "Priority", text: "Priority", type: "string", visible: true, width: '50px', align: 'right' }
-                ]
+                columns: columnDef
             }
         ];
 
@@ -82,6 +88,7 @@
         tags.push("RTURemoteCntrl.Value");
         tags.push("RemoteLightingCNTL.Value");
         tags.push("Airport.SLL.Term1.Zone1.RTUAutoOnLeadTime.Value");
+        tags.push("Options.DualBridgeGateSelection.Value");
 
         //OPC.toggle_refresh(true);
         OPC.init(); //re-initialize HTML HMI engine after updating prefix
@@ -154,7 +161,8 @@
                 url: '@Url.Action("ShowServiceCounters", "ServiceCounters", new { area = "ServiceCounters" })',
                 type: "GET",
                 data: {
-                    gateNum: "@TempData["GateNumber"]"
+                    gateNum: "@TempData["GateNumber"]",
+                    zoneNum: "@TempData["ZoneNumber"]"
                 },
                 contentType: 'text/html',
                 success: function (data) {
@@ -174,7 +182,7 @@
                 data: {
                     zoneNum: "@TempData["ZoneNumber"]",
                     gateNum: "@TempData["GateNumber"]"
-            },
+                },
                 contentType: 'text/html',
                 success: function (data) {
                     CloseGateAlarmWindow();
@@ -204,51 +212,61 @@
             OPC.set_value(OPC.tag_prefix + 'RTURemoteCntrl.Value', 'True');
         })
 
-        $('#btnBridgeLighting').prop('disabled', (@TempData["AuthLevel"] > 3 ? false : true));
-        $('#btnBridgeLighting').click(function () {
-            OPC.set_value(OPC.tag_prefix + 'RemoteLightingCNTL.Value', 'True');
+            @*$('#btnRoofTopAC1Units').prop('disabled', (@TempData["AuthLevel"] > 3 ? false : true));
+        $('#btnRoofTopAC1Units').click(function () {
+            OPC.set_value(OPC.tag_prefix + 'RTU1RemoteCntrl.Value', 'True');
         })
 
-    })
+        $('#btnRoofTopAC2Units').prop('disabled', (@TempData["AuthLevel"] > 3 ? false : true));
+        $('#btnRoofTopAC2Units').click(function () {
+            OPC.set_value(OPC.tag_prefix + 'RTU2RemoteCntrl.Value', 'True');
+        })*@
 
-
-    // ***************************************************************************************
-    // MAIN WINDOW
-    // ***************************************************************************************
-    function CloseKendoGate() {
-        if ($('#GateWindow').is(':visible')) {
-            $('#GateWindow').data('kendoWindow').destroy();
-            return false;
-        }
-    }
-
-    // ***************************************************************************************
-    // ALARM POP-UP WINDOW
-    // ***************************************************************************************
-    function CreateGateAlarmWindow() {
-        var gateAlarmWindow = $('#GateAlarmWindow');
-        if (!gateAlarmWindow.data('kendoWindow')) {
-            gateAlarmWindow.kendoWindow({
-                resizable: true,
-                width: 'auto',
-                height: 'auto',
-                animation: false,
-                modal: false,
-                draggable: true,
-                title: 'Gate @TempData["GateLabel"] Alarms',
-                visible: false,
-                actions: ["Close"],
-                open: function (e) {
-                    this.wrapper.css({
-                        top: 100,
-                        left: 250
-                    });
-                },
+            $('#btnBridgeLighting').prop('disabled', (@TempData["AuthLevel"] > 3 ? false : true));
+            $('#btnBridgeLighting').click(function () {
+                OPC.set_value(OPC.tag_prefix + 'RemoteLightingCNTL.Value', 'True');
             })
-        }
-    }
 
-    @*$('#GateAlarmWindow').kendoWindow({
+        })
+
+
+        // ***************************************************************************************
+        // MAIN WINDOW
+        // ***************************************************************************************
+        function CloseKendoGate() {
+            if ($('#GateWindow').is(':visible')) {
+                $('#GateWindow').data('kendoWindow').destroy();
+                return false;
+            }
+        }
+
+        // ***************************************************************************************
+        // ALARM POP-UP WINDOW
+        // ***************************************************************************************
+        function CreateGateAlarmWindow() {
+            var gateAlarmWindow = $('#GateAlarmWindow');
+            if (!gateAlarmWindow.data('kendoWindow')) {
+                gateAlarmWindow.kendoWindow({
+                    resizable: true,
+                    width: 'auto',
+                    height: 'auto',
+                    animation: false,
+                    modal: false,
+                    draggable: true,
+                    title: 'Gate @TempData["GateLabel"] Alarms',
+                    visible: false,
+                    actions: ["Close"],
+                    open: function (e) {
+                        this.wrapper.css({
+                            top: 100,
+                            left: 250
+                        });
+                    },
+                })
+            }
+        }
+
+        @*$('#GateAlarmWindow').kendoWindow({
         width: '400px',
         height: '650px',
         animation: false,
@@ -259,239 +277,243 @@
         actions: ["Custom"]
     });*@
 
-    function CloseGateAlarmWindow() {
-        $('#GateAlarmWindow').data('kendoWindow').destroy();
-        $('#GateAlarms').empty();
-        return false;
-    }
-
-    $('#btnAlarms').click(function () {
-        CreateGateAlarmWindow();
-        $('#GateAlarmWindow').data('kendoWindow').open();
-        $('#GateAlarmWindow').closest(".k-window").css({ top: 90, left: 250 });
-        $('#GateAlarmWindow').closest(".k-window").addClass('KendoWindowToTop');
-
-        //add custom background image to custom kendo button
-        var gateAlarmWindow = $('#GateAlarmWindow').data('kendoWindow');
-        var buttonWrapper = gateAlarmWindow.wrapper.find('.k-i-custom');
-        buttonWrapper.css({ 'background': "url('/Content/Themes/SLL/Ver 1.0.0/Images/awe_icons.png') -38px -31px no-repeat", "cursor": "pointer" });
-        buttonWrapper.attr('id', 'btnAlarmClose');
-    })
-
-    //because the ID btnAlarmClose was added dynamically, jquery event delegation
-    //must be used to register the event handler
-    $(document).on('click', '#btnAlarmClose', function () {
-        if ($('#GateAlarmWindow').is(':visible')) {
-            $('#GateAlarmWindow').data('kendoWindow').close();
+        function CloseGateAlarmWindow() {
+            $('#GateAlarmWindow').data('kendoWindow').destroy();
+            $('#GateAlarms').empty();
+            return false;
         }
-        return false;
-    })
 
-    function updateMasterGateAlarms() {
-        var PriorityCol = -1;
-        var alarmCnt = 0;
-        var warningCnt = 0;
-        PriorityCol = $('#GateMasterAlarmWindow th:contains("Priority")').index();
-        if (PriorityCol > -1) {
-            $('#GateMasterAlarmWindow tr').not('thead tr').each(function (idx, row) {
-                if ($(this).children('td').length > 1) {
-                    var cellData = $(this).find('td').eq(PriorityCol)[0].innerText;
-                    alarmCnt = (cellData == 100) ? alarmCnt + 1 : alarmCnt;
-                    warningCnt = (cellData == 0) ? warningCnt + 1 : warningCnt;
-                }
-            });
-        }
-        $("#MasterAlarmCount").html(alarmCnt + " Active<br /> Alarms");
-        $("#MasterWarningCount").html(warningCnt + " Active<br /> Warnings");
-    };
+        $('#btnAlarms').click(function () {
+            CreateGateAlarmWindow();
+            $('#GateAlarmWindow').data('kendoWindow').open();
+            $('#GateAlarmWindow').closest(".k-window").css({ top: 90, left: 250 });
+            $('#GateAlarmWindow').closest(".k-window").addClass('KendoWindowToTop');
 
-    function updateGateAlarms() {
-        var PriorityCol = -1;
-        var alarmCnt = 0;
-        $("#btnAlarms").html("Alarms (" + alarmCnt + ")");
-        $("#btnAlarms").attr('class', 'btnInvisible');
-        PriorityCol = $('#GateAlarmWindow th:contains("Priority")').index();
-        if (PriorityCol > -1) {
-            $('#GateAlarmWindow tr').not('thead tr').each(function (idx, row) {
-                if ($(this).children('td').length > 1) {
-                    var cellData = $(this).find('td').eq(PriorityCol)[0].innerText;
-                    alarmCnt = (cellData == 100) ? alarmCnt + 1 : alarmCnt;
-                    $('#GateAlarmWindow th:contains("Priority")').hide();
-                    $(this).find('td').eq(PriorityCol).hide();
-                    switch (cellData) {
-                        case '0':
-                            $(this).addClass("WarningRow"); //.addClass("HideAlarmNotificationRow");
-                            break;
-                        case '100':
-                            $(this).addClass("AlarmRow");
-                            break;
-                        default:
-                            break;
+            //add custom background image to custom kendo button
+            var gateAlarmWindow = $('#GateAlarmWindow').data('kendoWindow');
+            var buttonWrapper = gateAlarmWindow.wrapper.find('.k-i-custom');
+            buttonWrapper.css({ 'background': "url('/Content/Themes/SLL/Ver 1.0.0/Images/awe_icons.png') -38px -31px no-repeat", "cursor": "pointer" });
+            buttonWrapper.attr('id', 'btnAlarmClose');
+        })
+
+        //because the ID btnAlarmClose was added dynamically, jquery event delegation
+        //must be used to register the event handler
+        $(document).on('click', '#btnAlarmClose', function () {
+            if ($('#GateAlarmWindow').is(':visible')) {
+                $('#GateAlarmWindow').data('kendoWindow').close();
+            }
+            return false;
+        })
+
+        function updateMasterGateAlarms() {
+            var PriorityCol = -1;
+            var alarmCnt = 0;
+            var warningCnt = 0;
+            PriorityCol = $('#GateMasterAlarmWindow th[aria-label*="Priority"]').index() + 1;
+            if (PriorityCol > 0) {
+                $('#GateMasterAlarmWindow tr').not('thead tr').each(function (idx, row) {
+                    if ($(this).children('td').length > 1) {
+                        var cellData = $(this).find('td').eq(PriorityCol-1)[0].innerText;
+                        alarmCnt = (cellData == 100) ? alarmCnt + 1 : alarmCnt;
+                        warningCnt = (cellData == 0) ? warningCnt + 1 : warningCnt;
                     }
-                }
-            });
+                });
+            }
+            $("#MasterAlarmCount").html(alarmCnt + " Active<br /> Alarms");
+            $("#MasterWarningCount").html(warningCnt + " Active<br /> Warnings");
+        };
+
+        function updateGateAlarms() {
+            var PriorityCol = -1;
+            var alarmCnt = 0;
             $("#btnAlarms").html("Alarms (" + alarmCnt + ")");
-            $("#btnAlarms").attr('class', (alarmCnt > 0) ? 'redFlashingBackground' : 'btnInvisible');
-        }
-    };
-
-    // ***************************************************************************************
-    // WARNING POP-UP WINDOW
-    // ***************************************************************************************
-    function CreateGateWarningWindow() {
-        var gateWarningWindow = $('#GateWarningWindow');
-        //var btnWarnings = $('#btnWarnings').bind('click', function () {
-        //    gateWarningWindow.data('kendoWindow').open();
-        //});
-
-        if (!gateWarningWindow.data('kendoWindow')) {
-            gateWarningWindow.kendoWindow({
-                resizable: true,
-                width: 'auto',
-                height: 'auto',
-                animation: false,
-                modal: false,
-                draggable: true,
-                title: 'Gate @TempData["GateLabel"] Warnings',
-                visible: false,
-                actions: ["Close"],
-                open: function (e) {
-                    this.wrapper.css({
-                        top: 100,
-                        left: 250
-                    });
-                },
-            })
-        }
-    }
-
-    $('#GateWarningWindow').kendoWindow({
-        width: '400px',
-        height: '650px',
-        animation: false,
-        modal: false,
-        draggable: true,
-        title: 'Gate @TempData["GateLabel"] Warnings',
-        visible: false,
-        actions: ["Custom"]
-    });
-
-    function CloseGateWarningWindow() {
-        $('#GateWarningWindow').data('kendoWindow').destroy();
-        $('#GateWarnings').empty();
-        return false;
-    }
-
-    $('#btnWarnings').click(function () {
-        CreateGateWarningWindow();
-        $('#GateWarningWindow').data('kendoWindow').open();
-        $('#GateWarningWindow').closest(".k-window").css({ top: 90, left: 250 });
-        $('#GateWarningWindow').closest(".k-window").addClass('KendoWindowToTop');
-
-        //add custom background image to custom kendo button
-        var gateWarningWindow = $('#GateWarningWindow').data('kendoWindow');
-        var buttonWrapper = gateWarningWindow.wrapper.find('.k-i-custom');
-        buttonWrapper.css({ 'background': "url('/Content/Themes/SLL/Ver 1.0.0/Images/awe_icons.png') -38px -31px no-repeat", "cursor": "pointer" });
-        buttonWrapper.attr('id', 'btnWarningClose');
-    })
-
-    $(document).on('click', '#btnWarningClose', function () {
-        if ($('#GateWarningWindow').is(':visible')) {
-            $('#GateWarningWindow').data('kendoWindow').close();
-        }
-        return false;
-    })
-
-    function updateGateWarnings() {
-        var PriorityCol = -1;
-        PriorityCol = $('#GateWarningWindow th:contains("Priority")').index();
-        var warningCnt = 0;
-        $("#btnWarnings").html("Notifications (" + warningCnt + ")");
-        $("#btnWarnings").attr('class', 'btnInvisible');
-        if (PriorityCol > -1) {
-            $('#GateWarningWindow tr').not('thead tr').each(function (idx, row) {
-                if ($(this).children('td').length > 1) {
-                    var cellData = $(this).find('td').eq(PriorityCol)[0].innerText;
-                    warningCnt = (cellData == 0) ? warningCnt + 1 : warningCnt;
-                    $('#GateWarningWindow th:contains("Priority")').hide();
-                    $(this).find('td').eq(PriorityCol).hide();
-                    switch (cellData) {
-                        case '0':
-                            $(this).addClass("WarningRow");
-                            break;
-                        case '100':
-                            $(this).addClass("AlarmRow").addClass("HideAlarmNotificationRow");
-                            break;
-                        default:
-                            break;
+            $("#btnAlarms").attr('class', 'btnInvisible');
+            PriorityCol = $('#GateAlarmWindow th[aria-label*="Priority"]').index() + 1;
+            if (PriorityCol > 0) {
+                $('#GateAlarmWindow tr').not('thead tr').each(function (idx, row) {
+                    if ($(this).children('td').length > 1) {
+                        var cellData = $(this).find('td').eq(PriorityCol-1)[0].innerText;
+                        alarmCnt = (cellData == 100) ? alarmCnt + 1 : alarmCnt;
+                        $('#GateAlarmWindow th[aria-label*="Priority"]').hide();
+                        $(this).find('td').eq(PriorityCol).hide();
+                        switch (cellData) {
+                            case '0':
+                                $(this).addClass("WarningRow"); //.addClass("HideAlarmNotificationRow");
+                                break;
+                            case '100':
+                                $(this).addClass("AlarmRow");
+                                break;
+                            default:
+                                break;
+                        }
                     }
-                }
-            });
+                });
+                $("#btnAlarms").html("Alarms (" + alarmCnt + ")");
+                $("#btnAlarms").attr('class', (alarmCnt > 0) ? 'redFlashingBackground' : 'btnInvisible');
+            }
+        };
+
+        // ***************************************************************************************
+        // WARNING POP-UP WINDOW
+        // ***************************************************************************************
+        function CreateGateWarningWindow() {
+            var gateWarningWindow = $('#GateWarningWindow');
+            //var btnWarnings = $('#btnWarnings').bind('click', function () {
+            //    gateWarningWindow.data('kendoWindow').open();
+            //});
+
+            if (!gateWarningWindow.data('kendoWindow')) {
+                gateWarningWindow.kendoWindow({
+                    resizable: true,
+                    width: 'auto',
+                    height: 'auto',
+                    animation: false,
+                    modal: false,
+                    draggable: true,
+                    title: 'Gate @TempData["GateLabel"] Warnings',
+                    visible: false,
+                    actions: ["Close"],
+                    open: function (e) {
+                        this.wrapper.css({
+                            top: 100,
+                            left: 250
+                        });
+                    },
+                })
+            }
         }
-        $("#btnWarnings").html("Notifications (" + warningCnt + ")");
-        $("#btnWarnings").attr('class', (warningCnt > 0) ? 'yellowFlashingBackground' : 'btnInvisible');
 
-    };
+        $('#GateWarningWindow').kendoWindow({
+            width: '400px',
+            height: '650px',
+            animation: false,
+            modal: false,
+            draggable: true,
+            title: 'Gate @TempData["GateLabel"] Warnings',
+            visible: false,
+            actions: ["Custom"]
+        });
 
-    // ***************************************************************************************
-    // TAGS
-    // ***************************************************************************************
-    function get_value(tag) {
-        return OPC.get_value(OPC_config.tag_prefix + tag);
-    }
+        function CloseGateWarningWindow() {
+            $('#GateWarningWindow').data('kendoWindow').destroy();
+            $('#GateWarnings').empty();
+            return false;
+        }
 
-    function get_bool(tag) {
-        var b = OPC.get_value(OPC_config.tag_prefix + tag);
-        return (b && b == "True") ? true : false;
-    }
+        $('#btnWarnings').click(function () {
+            CreateGateWarningWindow();
+            $('#GateWarningWindow').data('kendoWindow').open();
+            $('#GateWarningWindow').closest(".k-window").css({ top: 90, left: 250 });
+            $('#GateWarningWindow').closest(".k-window").addClass('KendoWindowToTop');
 
-    function update_labels() {
-        // AUTO_LEVEL_MODE = AUTOLEVELMODEFLAG=1 && AUTOLEVELKEY=1 = "Auto Level"
-        // MANUAL_MODE = OPERATEKEY=1 && MANUALMODEFLAG=1 = "Manual Mode"
-        // LOGGED OFF
+            //add custom background image to custom kendo button
+            var gateWarningWindow = $('#GateWarningWindow').data('kendoWindow');
+            var buttonWrapper = gateWarningWindow.wrapper.find('.k-i-custom');
+            buttonWrapper.css({ 'background': "url('/Content/Themes/SLL/Ver 1.0.0/Images/awe_icons.png') -38px -31px no-repeat", "cursor": "pointer" });
+            buttonWrapper.attr('id', 'btnWarningClose');
+        })
 
-        // Get required tag values
-        var autolevelmode = get_bool("AIRCRAFTDOCKEDCALCULATION.Value");
-        var operatekey = get_bool("OPERATEKEY.Value");
-        var manualmode = get_bool("MANUALMODEFLAG.Value");
-        var autolevelok = get_bool("AUTOLEVELOK.Value");
-        var vertupok = get_bool("VERTUPOK.Value");
-        var vertdnok = get_bool("VERTDNOK.Value");
-        var horizextlimit = get_value("HORIZ_EXT_LIMIT_FLAG.Value");
-        //var horizretlimit = get_value("HORIZ_RET_LIMIT_FLAG.Value");
-        var horizextult = get_value("Alarm.HORIZ_EXT_ULT.Value");
-        //var horizretult = get_value("Alarm.HORIZ_RET_ULT.Value");
+        $(document).on('click', '#btnWarningClose', function () {
+            if ($('#GateWarningWindow').is(':visible')) {
+                $('#GateWarningWindow').data('kendoWindow').close();
+            }
+            return false;
+        })
 
-        // PBB Mode
-        if (autolevelmode) { $("#btnPBBMode").html("Auto Level"); }
-        else if (operatekey && manualmode) { $("#btnPBBMode").html("Manual Mode"); }
-        else { $("#btnPBBMode").html("Logged Off"); }
+        function updateGateWarnings() {
+            var PriorityCol = -1;
+            PriorityCol = $('#GateWarningWindow th[aria-label*="Priority"]').index() + 1;
+            var warningCnt = 0;
+            $("#btnWarnings").html("Notifications (" + warningCnt + ")");
+            $("#btnWarnings").attr('class', 'btnInvisible');
+            if (PriorityCol > 0) {
+                $('#GateWarningWindow tr').not('thead tr').each(function (idx, row) {
+                    if ($(this).children('td').length > 1) {
+                        var cellData = $(this).find('td').eq(PriorityCol-1)[0].innerText;
+                        warningCnt = (cellData == 0) ? warningCnt + 1 : warningCnt;
+                        $('#GateWarningWindow th[aria-label*="Priority"]').hide();
+                        $(this).find('td').eq(PriorityCol-1).hide();
+                        switch (cellData) {
+                            case '0':
+                                $(this).addClass("WarningRow");
+                                break;
+                            case '100':
+                                $(this).addClass("AlarmRow").addClass("HideAlarmNotificationRow");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+            }
+            $("#btnWarnings").html("Notifications (" + warningCnt + ")");
+            $("#btnWarnings").attr('class', (warningCnt > 0) ? 'yellowFlashingBackground' : 'btnInvisible');
 
-        //Auto Level
-        if (autolevelmode) { $("#btnAutoLevel").html("Activated"); }
-        else if (autolevelok) { $("#btnAutoLevel").html("Ready/OK"); }
-        else { $("#btnAutoLevel").html("Not Ready"); }
+        };
 
-        //Vertical Movement
-        if (vertupok || vertdnok) { $("#btnVerticalMvt").html("Ready/OK"); }
-        else { $("#btnVerticalMvt").html("Not Ready"); }
+        // ***************************************************************************************
+        // TAGS
+        // ***************************************************************************************
+        function get_value(tag) {
+            return OPC.get_value(OPC_config.tag_prefix + tag);
+        }
 
-        //Horizontal Movement
-        if (horizextlimit && horizextult) { $("#btnHorizontalMvt").html("Ready/OK"); }
-        else { $("#btnHorizontalMvt").html("Not Ready"); }
-    }
+        function get_bool(tag) {
+            var b = OPC.get_value(OPC_config.tag_prefix + tag);
+            return (b && b == "True") ? true : false;
+        }
 
-    function opc_gate_callback(data, cid) {
-        // put any other js here that needs to be executed on every server tag update
-        update_labels();
-        $('#imageinfoid').css('visibility', 'visible');
-    }
+        function update_labels() {
+            // AUTO_LEVEL_MODE = AUTOLEVELMODEFLAG=1 && AUTOLEVELKEY=1 = "Auto Level"
+            // MANUAL_MODE = OPERATEKEY=1 && MANUALMODEFLAG=1 = "Manual Mode"
+            // LOGGED OFF
+
+            // Get required tag values
+            var autolevelmode = get_bool("AIRCRAFTDOCKEDCALCULATION.Value");
+            var operatekey = get_bool("OPERATEKEY.Value");
+            var manualmode = get_bool("MANUALMODEFLAG.Value");
+            var autolevelok = get_bool("AUTOLEVELOK.Value");
+            var vertupok = get_bool("VERTUPOK.Value");
+            var vertdnok = get_bool("VERTDNOK.Value");
+            var isDualBridge = get_bool("Options.DualBridgeGateSelection.Value");
+            var horizextlimit = get_value("HORIZ_EXT_LIMIT_FLAG.Value");
+            //var horizretlimit = get_value("HORIZ_RET_LIMIT_FLAG.Value");
+            var horizextult = get_value("Alarm.HORIZ_EXT_ULT.Value");
+            //var horizretult = get_value("Alarm.HORIZ_RET_ULT.Value");
+
+            // PBB Mode
+            if (autolevelmode) { $("#btnPBBMode").html("Auto Level"); }
+            else if (operatekey && manualmode) { $("#btnPBBMode").html("Manual Mode"); }
+            else { $("#btnPBBMode").html("Logged Off"); }
+
+            //Auto Level
+            if (autolevelmode) { $("#btnAutoLevel").html("Activated"); }
+            else if (autolevelok) { $("#btnAutoLevel").html("Ready/OK"); }
+            else { $("#btnAutoLevel").html("Not Ready"); }
+
+            //Vertical Movement
+            if (vertupok || vertdnok) { $("#btnVerticalMvt").html("Ready/OK"); }
+            else { $("#btnVerticalMvt").html("Not Ready"); }
+
+            //Horizontal Movement
+            if (horizextlimit && horizextult) { $("#btnHorizontalMvt").html("Ready/OK"); }
+            else { $("#btnHorizontalMvt").html("Not Ready"); }
+
+            if (isDualBridge) {$('#lbl400HzCenterPit').parent('tr').show();}
+            else {$('#lbl400HzCenterPit').parent('tr').hide();}
+        }
+
+        function opc_gate_callback(data, cid) {
+            // put any other js here that needs to be executed on every server tag update
+            update_labels();
+            $('#imageinfoid').css('visibility', 'visible');
+        }
 
 </script>
 
 <!--Because jquery syntax does not like razor tags, input will be used instead-->
 <!--NOTE: OPC tag values that are BOOLEANS will show a button image; all other values will show text-->
-<input type="hidden" id="txtScreenNumber" value='@TempData["CIDMaxScreens"]' />
+@*<input type="hidden" id="txtScreenNumber" value='@TempData["CIDMaxScreens"]' />*@
 <div id="GateWindow" opc-tag-bkg='{"type":"group","all_f":{"cls":"AutoLevelingFalse"},"bad_q":{"cls":"AutoLevelingFalse"},"group":[
             {"tag":"AIRCRAFTDOCKEDCALCULATION.Value","config":{"cls":"AutoLevelingTrue"}}
 
@@ -783,7 +805,7 @@
     </div>
     <div class="gatesPageDividerRight">
         <button id="showServiceCounters">Service Counters</button>
-        <button id="rtuLinkButtonInGateScreen">Go To RTU</button>
+        <button id="rtuLinkButtonInGateScreen" style="display:none;">Go To RTU</button>
     </div>
     <div id="GateAlarmWindow">
         <div id="GateAlarms"></div>

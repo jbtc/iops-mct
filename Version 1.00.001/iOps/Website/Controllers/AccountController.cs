@@ -42,20 +42,24 @@ namespace iOps.Website.Controllers
             string _clientName = "MCT";
 
             User user = us.Get(_clientName ,input.Username, input.Password);
-            
+
             ////ACHTUNG: remove this line in a real app
             //if (user == null && input.Username == "crane" && input.Password == "i0ps2@14") user = new User { Username = "crane", SecurityRoles = new[] { new SecurityRole { Name = "Admin" } } };
 
             if (user == null)
             {
-                ModelState.AddModelError("", "Try Username: crane and Password: i0ps2@14");
-                return View();
+                ModelState.AddModelError("CustomError", "Invalid Username or Password.");
+                return RedirectToAction("SignIn", "Account");
+                    //return View();
             }
+            //else
+            //{
 
-            //formsAuth.SignIn(user.Login, input.Remember, user.Roles.Select(o => o.Name));
-			formsAuth.SignIn(user, input.Remember);
+                //formsAuth.SignIn(user.Login, input.Remember, user.Roles.Select(o => o.Name));
+                formsAuth.SignIn(user, input.Remember);
 
-            return RedirectToAction("ShowAirport", "Airport", new { area = "Airport", clientName = _clientName, numberOfScreens = user.UsersXrefScreens.Count() });
+                return RedirectToAction("ShowAirport", "Airport", new { area = "Airport", clientName = _clientName, numberOfScreens = user.UsersXrefScreens.Count() });
+            //}
             //return RedirectToAction("Index", "Home");
             //return RedirectToAction("Index", "_GatesJBT");
             //return RedirectToAction("Index", "RDUGates");

@@ -1,3 +1,12 @@
 ﻿#pageData {
     margin-left: 10px
 }
+
+#pageData .loginError {
+    color: red;
+    margin: 10px;
+    font-size: larger;
+    text-align: center;
+    width: 120%;
+}
+

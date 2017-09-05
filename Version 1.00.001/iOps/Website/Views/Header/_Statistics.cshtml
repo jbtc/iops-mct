@@ -13,18 +13,18 @@
     <div class="Header-iOpsStats FlexItem FlexItem-FlexOn FlexItem-AlignCenter">
        @{
 
-            var db = new iOps.Core.Model.SLL_IOPS_ReportingEntities();
+            var db = new iOps.Core.Model.MCT_IOPS_ReportingEntities();
             var dateStart = DateTime.Now.AddDays(-2).Date;
             var dateEnd = DateTime.Now.AddDays(-1).Date;
 
-            string[] test = db.SLL_PBB_DockTime_DataLogging.Where(w => (w.DateAndTime >= dateStart && w.DateAndTime < dateEnd)).Select(w => w.Value).ToArray();
-            string[] test1 = db.SLL_PBB_UnDockTime_DataLogging.Where(w => (w.DateAndTime >= dateStart && w.DateAndTime < dateEnd)).Select(w => w.Value).ToArray();
+            string[] test = db.MCT_PBB_DockTime_DataLogging.Where(w => (w.DateAndTime >= dateStart && w.DateAndTime < dateEnd)).Select(w => w.Value).ToArray();
+            string[] test1 = db.MCT_PBB_UnDockTime_DataLogging.Where(w => (w.DateAndTime >= dateStart && w.DateAndTime < dateEnd)).Select(w => w.Value).ToArray();
 
             var noOfRecordsinDockedTable = test.Length;
             var noOfRecordsinUnDockedTable = test1.Length;
 
             // Average without rows with 0 values
-            //var dbData1 = db.SLL_PBB_DockTime_DataLogging.Where(w => (w.DateAndTime >= dateStart && w.DateAndTime < dateEnd && w.Airport_JFK_Term4_ZoneA1_GateA5_PBB_DOCKTIME_Value != "0")).Select(w => w.Airport_JFK_Term4_ZoneA1_GateA5_PBB_DOCKTIME_Value).AsEnumerable().Average(output => { decimal Value; Decimal.TryParse(output, out Value); return Value; });
+            //var dbData1 = db.MCT_PBB_DockTime_DataLogging.Where(w => (w.DateAndTime >= dateStart && w.DateAndTime < dateEnd && w.Airport_JFK_Term4_ZoneA1_GateA5_PBB_DOCKTIME_Value != "0")).Select(w => w.Airport_JFK_Term4_ZoneA1_GateA5_PBB_DOCKTIME_Value).AsEnumerable().Average(output => { decimal Value; Decimal.TryParse(output, out Value); return Value; });
 
             var dbData1x = 0.0;
             var dbData2x = 0.0;
@@ -33,13 +33,13 @@
 
             if (noOfRecordsinDockedTable != 0)
             {
-                dbData1x = db.SLL_PBB_DockTime_DataLogging.Where(w => (w.DateAndTime >= dateStart && w.DateAndTime < dateEnd)).Select(w => w.Value).AsEnumerable().Average(output => { Double Value; Double.TryParse(output, out Value); return Value; });
+                dbData1x = db.MCT_PBB_DockTime_DataLogging.Where(w => (w.DateAndTime >= dateStart && w.DateAndTime < dateEnd)).Select(w => w.Value).AsEnumerable().Average(output => { Double Value; Double.TryParse(output, out Value); return Value; });
                 dbData1 = Math.Round(dbData1x, 2);
             }
 
             if (noOfRecordsinUnDockedTable != 0)
             {
-                dbData2x = db.SLL_PBB_UnDockTime_DataLogging.Where(w => (w.DateAndTime >= dateStart && w.DateAndTime < dateEnd)).Select(w => w.Value).AsEnumerable().Average(output => { Double Value; Double.TryParse(output, out Value); return Value; });
+                dbData2x = db.MCT_PBB_UnDockTime_DataLogging.Where(w => (w.DateAndTime >= dateStart && w.DateAndTime < dateEnd)).Select(w => w.Value).AsEnumerable().Average(output => { Double Value; Double.TryParse(output, out Value); return Value; });
                 dbData2 = Math.Round(dbData2x, 2);
             }
         }

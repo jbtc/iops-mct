@@ -1,0 +1,48 @@
+﻿/*  iOps Ver 1.0.0 - Layout.css styleSheet
+    Purpose: Contains the main styles for this themes 
+    Author: Crane Whitehead
+    
+    History
+    ---------------------------------------------------------------------------
+    CSW  08-10-2014 - Initial Release
+    CSW  09-17-2014 - Revised for MVC5 and better use of HTML5
+     
+*/
+
+body.reports #main {
+    height: 890px;
+    min-height: 800px !important;
+    padding: 0 10%; 
+}
+
+body.reports .settings {
+    visibility: hidden;
+}
+
+body.reports .Header-iOpsStats {
+    visibility: hidden;
+}
+
+body.reports .Header-Weather {
+    visibility: hidden;
+}
+
+body.reports .Header-DropDownMenu {
+    pointer-events: none;
+    opacity: .4;
+}
+
+body.reports #main-body h1 {
+    visibility: hidden;
+}
+
+body.reports #myModal {
+    display: none;
+    visibility: hidden;
+}
+
+body.reports #myModal1 {
+    display: none;
+    visibility: hidden;
+}
+

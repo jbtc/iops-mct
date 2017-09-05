@@ -1,4 +1,6 @@
-﻿<script>
+﻿<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<script>
     $(document).ready(function () {
         $("#NetworkMonitorWindow").kendoWindow({
             title: "Network Monitor",
@@ -69,59 +71,1145 @@
         }
     }
 
-    function buildNetworkMonitor() {
-        var counters = [
-            { tag: ".E_Stop", label: "E-Stop", id: "E_Stop" },
-            { tag: ".AutolevelModeflag", label: "Autolevel", id: "AutolevelModeflag" },
-            { tag: ".ShoeConnected", label: "Autolevel (Backup)", id: "ShoeConnected" },
-            { tag: ".CanopyDown", label: "Canopy", id: "CanopyDown" },
-            { tag: ".Vertical Movement Count", label: "Vertical Movement", id: "VerticalMovementCount" },
-            { tag: ".Horizontal Movement Count", label: "Horizontal Movement", id: "HorizontalMovementCount" },
-            { tag: ".ServiceDoorInterlockFlag", label: "Front Shutter/Doors", id: "ServiceDoorInterlockFlag" },
-            { tag: "_S", label: "Sensor/Photo Cells", id: "SensorPhotoCells" },
-            { tag: "_R", label: "Roof Top AC Units", id: "RooftopACUnits" },
-            { tag: ".MainConNotEnergized Count", label: "Power to Bridge", id: "MainConNotEnergizedCount" },
-            { tag: "_U", label: "UPS Power Supply", id: "UPSPowerSupply" },
-            { tag: ".RemoteLightingInd", label: "Bridge Lighting", id: "RemoteLightingInd" },
-            { tag: ".SmokeDetector", label: "Fire Alarm System", id: "SmokeDetector" },
-            { tag: ".VDGSInterlock", label: "VDGS Interlock", id: "VDGSInterlock" },
-            { tag: ".PCAir_Pit_Interlock", label: "PCA Pit", id: "PCAir_Pit_Interlock" },
-            { tag: ".Hz400_Pit_Interlock", label: "400hz Pit", id: "Hz400_Pit_Interlock" }
-        ];
-
-        tbl = $("#tblPoints.tblNetworkMonitor");
-        for (var i = 0; i < counters.length; i++) {
-            var c = counters[i];
-            tbl.append($("<tr><td>" + c.label + "</td><td id='" + c.id + "_count' opc-tag-txt='{\"tag\":\"" + c.tag + "\.ValueCountTotal\"}'>--</td>" +
-                            "<td id='" + c.id + "_ts' opc-tag-txt='{\"tag\":\"" + c.tag + ".Timestamp\"}'>--</td>" +
-                            "<td class=\"pointsTableDataCells\"><button id=\"" + c.id + "\" class=\"btn btnGray\" opc-tag-set='{\"tag\":\"" + c.tag + " Reset.Value\", \"config\":{\"evt\":\"click\", \"set\":\"value\", \"set_value\":\"True\"}}'>Reset</button>" +
-                            "</td></tr>"));
-        }
-
-        $("#btnScResetAll").click(function () {
-            for (var i = 0; i < counters.length; i++) {
-                var c = counters[i];
-                if (c.tag != "") { OPC.set_value(c.tag + " Reset.Value", "True"); }
-            }
-        });
-    }
-
     $(document).ready(function () {
         // set up gate prefix
         //OPC.toggle_refresh(false);
         //OPC.tags = '';
         //OPC_config.tags = '';
         //OPC.wa
+        OPC.toggle_refresh(false);
+        OPC.tags = [];
+        OPC.watch_tags = [];
+        OPC_config.tags = [];
+        OPC_config.watch_tags = [];
+        OPC_config.alarm_bindings = [];
         OPC_config.tag_prefix = "MCT Network Monitoring.";
         OPC.init(); //re-initialize HTML HMI engine after updating prefix
-        debugger;
+
+        $('#NetworkMonitorWindow ul.tabs li').click(function () {
+            var tab_id = $(this).attr('data-tab');
+            $('#NetworkMonitorWindow ul.tabs li').removeClass('current');
+            $('#NetworkMonitorWindow .tab-content').removeClass('current');
+
+            $(this).addClass('current');
+            $("#NetworkMonitorWindow #" + tab_id).addClass('current');
+        })
+
     });
 
 </script>
 <!--Because jquery syntax does not like razor tags, input will be used instead-->
 <input type="hidden" id="txtScreenNumber" value='@TempData["CIDMaxScreens"]' />
 <div id="NetworkMonitorWindow" class="Window-Container NetworkMonitor-Window">
-    <div class="networkMonitorPageDividerLeft">
+    <div class="container">
+        <ul class="tabs">
+            <li class="tab-link current" data-tab="tab-1">North Pier</li>
+            <li class="tab-link" data-tab="tab-2">West Pier</li>
+            <li class="tab-link" data-tab="tab-3">South Pier</li>
+            <li class="tab-link" data-tab="tab-4">Servers and PC's</li>
+        </ul>
+        <div id="tab-1" class="tab-content current">
+            <table>
+                <tr>
+                    <td>
+                        <table class="pointsTable tblNetworkMonitor" id="tblPoints">
+                            <tr class="pointsTableRowHeader">
+                                <th class="pointsTableHeader" style="text-align:left;">Description</th>
+                                <th class="pointsTableHeader" style="text-align:left;">Device ID</th>
+                                <th class="pointsTableHeader" style="text-align:left">Status</th>
+                                <th class="pointsTableHeader" style="text-align:left">Round Trip Time</th>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA2HMI_Description" opc-tag-txt='{"tag":"Gate A2 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA2HMI_ID" opc-tag-txt='{"tag":"Gate A2 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA2HMI_Status">
+                                    <button id="button_GateA2HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A2 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A2 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA2HMI_RTT" opc-tag-txt='{"tag":"Gate A2 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA2PLC_Description" opc-tag-txt='{"tag":"Gate A2 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA2PLC_ID" opc-tag-txt='{"tag":"Gate A2 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA2PLC_Status">
+                                    <button id="button_GateA2PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A2 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A2 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA2PLC_RTT" opc-tag-txt='{"tag":"Gate A2 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA3HMI_Description" opc-tag-txt='{"tag":"Gate A3 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA3HMI_ID" opc-tag-txt='{"tag":"Gate A3 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA3HMI_Status">
+                                    <button id="button_GateA3HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A3 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A3 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA3HMI_RTT" opc-tag-txt='{"tag":"Gate A3 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA3PLC_Description" opc-tag-txt='{"tag":"Gate A3 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA3PLC_ID" opc-tag-txt='{"tag":"Gate A3 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA3PLC_Status">
+                                    <button id="button_GateA3PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A3 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A3 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA3PLC_RTT" opc-tag-txt='{"tag":"Gate A3 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA4HMI_Description" opc-tag-txt='{"tag":"Gate A4 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA4HMI_ID" opc-tag-txt='{"tag":"Gate A4 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA4HMI_Status">
+                                    <button id="button_GateA4HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A4 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A4 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA4HMI_RTT" opc-tag-txt='{"tag":"Gate A4 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA4PLC_Description" opc-tag-txt='{"tag":"Gate A4 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA4PLC_ID" opc-tag-txt='{"tag":"Gate A4 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA4PLC_Status">
+                                    <button id="button_GateA4PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A4 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A4 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA4PLC_RTT" opc-tag-txt='{"tag":"Gate A4 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA6HMI_Description" opc-tag-txt='{"tag":"Gate A6 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA6HMI_ID" opc-tag-txt='{"tag":"Gate A6 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA6HMI_Status">
+                                    <button id="button_GateA6HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A6 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A6 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA6HMI_RTT" opc-tag-txt='{"tag":"Gate A6 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA6PLC_Description" opc-tag-txt='{"tag":"Gate A6 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA6PLC_ID" opc-tag-txt='{"tag":"Gate A6 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA6PLC_Status">
+                                    <button id="button_GateA6PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A6 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A6 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA6PLC_RTT" opc-tag-txt='{"tag":"Gate A6 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA8BHMI_Description" opc-tag-txt='{"tag":"Gate A8B HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA8BHMI_ID" opc-tag-txt='{"tag":"Gate A8B HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA8BHMI_Status">
+                                    <button id="button_GateA8BHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A8B HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A8B HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA8BHMI_RTT" opc-tag-txt='{"tag":"Gate A8B HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA8BPLC_Description" opc-tag-txt='{"tag":"Gate A8B PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA8BPLC_ID" opc-tag-txt='{"tag":"Gate A8B PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA8BPLC_Status">
+                                    <button id="button_GateA8BPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A8B PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A8B PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA8BPLC_RTT" opc-tag-txt='{"tag":"Gate A8B PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA8FHMI_Description" opc-tag-txt='{"tag":"Gate A8F HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA8FHMI_ID" opc-tag-txt='{"tag":"Gate A8F HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA8FHMI_Status">
+                                    <button id="button_GateA8FHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A8F HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A8F HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA8FHMI_RTT" opc-tag-txt='{"tag":"Gate A8F HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA8FPLC_Description" opc-tag-txt='{"tag":"Gate A8F PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA8FPLC_ID" opc-tag-txt='{"tag":"Gate A8F PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA8FPLC_Status">
+                                    <button id="button_GateA8FPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A8F PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A8F PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA8FPLC_RTT" opc-tag-txt='{"tag":"Gate A8F PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA9BHMI_Description" opc-tag-txt='{"tag":"Gate A9B HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA9BHMI_ID" opc-tag-txt='{"tag":"Gate A9B HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA9BHMI_Status">
+                                    <button id="button_GateA9BHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A9B HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A9B HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA9BHMI_RTT" opc-tag-txt='{"tag":"Gate A9B HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA9BPLC_Description" opc-tag-txt='{"tag":"Gate A9B PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA9BPLC_ID" opc-tag-txt='{"tag":"Gate A9B PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA9BPLC_Status">
+                                    <button id="button_GateA9BPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A9B PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A9B PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA9BPLC_RTT" opc-tag-txt='{"tag":"Gate A9B PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA9FHMI_Description" opc-tag-txt='{"tag":"Gate A9F HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA9FHMI_ID" opc-tag-txt='{"tag":"Gate A9F HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA9FHMI_Status">
+                                    <button id="button_GateA9FHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A9F HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A9F HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA9FHMI_RTT" opc-tag-txt='{"tag":"Gate A9F HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA9FPLC_Description" opc-tag-txt='{"tag":"Gate A9F PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA9FPLC_ID" opc-tag-txt='{"tag":"Gate A9F PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA9FPLC_Status">
+                                    <button id="button_GateA9FPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A9F PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A9F PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA9FPLC_RTT" opc-tag-txt='{"tag":"Gate A9F PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA10BHMI_Description" opc-tag-txt='{"tag":"Gate A10B HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA10BHMI_ID" opc-tag-txt='{"tag":"Gate A10B HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA10BHMI_Status">
+                                    <button id="button_GateA10BHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A10B HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A10B HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA10BHMI_RTT" opc-tag-txt='{"tag":"Gate A10B HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA10BPLC_Description" opc-tag-txt='{"tag":"Gate A10B PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA10BPLC_ID" opc-tag-txt='{"tag":"Gate A10B PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA10BPLC_Status">
+                                    <button id="button_GateA10BPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A10B PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A10B PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA10BPLC_RTT" opc-tag-txt='{"tag":"Gate A10B PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA10FHMI_Description" opc-tag-txt='{"tag":"Gate A10F HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA10FHMI_ID" opc-tag-txt='{"tag":"Gate A10F HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA10FHMI_Status">
+                                    <button id="button_GateA10FHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A10F HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A10F HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA10FHMI_RTT" opc-tag-txt='{"tag":"Gate A10F HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA10FPLC_Description" opc-tag-txt='{"tag":"Gate A10F PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA10FPLC_ID" opc-tag-txt='{"tag":"Gate A10F PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA10FPLC_Status">
+                                    <button id="button_GateA10FPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A10F PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A10F PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA10FPLC_RTT" opc-tag-txt='{"tag":"Gate A10F PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA11BHMI_Description" opc-tag-txt='{"tag":"Gate A11B HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA11BHMI_ID" opc-tag-txt='{"tag":"Gate A11B HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA11BHMI_Status">
+                                    <button id="button_GateA11BHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A11B HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A11B HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA11BHMI_RTT" opc-tag-txt='{"tag":"Gate A11B HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA11BPLC_Description" opc-tag-txt='{"tag":"Gate A11B PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA11BPLC_ID" opc-tag-txt='{"tag":"Gate A11B PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA11BPLC_Status">
+                                    <button id="button_GateA11BPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A11B PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A11B PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA11BPLC_RTT" opc-tag-txt='{"tag":"Gate A11B PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA11FHMI_Description" opc-tag-txt='{"tag":"Gate A11F HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA11FHMI_ID" opc-tag-txt='{"tag":"Gate A11F HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA11FHMI_Status">
+                                    <button id="button_GateA11FHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A11F HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A11F HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA11FHMI_RTT" opc-tag-txt='{"tag":"Gate A11F HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateA11FPLC_Description" opc-tag-txt='{"tag":"Gate A11F PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA11FPLC_ID" opc-tag-txt='{"tag":"Gate A11F PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateA11FPLC_Status">
+                                    <button id="button_GateA11FPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate A11F PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate A11F PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateA11FPLC_RTT" opc-tag-txt='{"tag":"Gate A11F PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="tab-2" class="tab-content">
+            <table>
+                <tr>
+                    <td>
+                        <table class="pointsTable tblNetworkMonitor" id="tblPoints">
+                            <tr class="pointsTableRowHeader">
+                                <th class="pointsTableHeader" style="text-align:left;">Description</th>
+                                <th class="pointsTableHeader" style="text-align:left;">Device ID</th>
+                                <th class="pointsTableHeader" style="text-align:left">Status</th>
+                                <th class="pointsTableHeader" style="text-align:left">Round Trip Time</th>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB1HMI_Description" opc-tag-txt='{"tag":"Gate B1 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB1HMI_ID" opc-tag-txt='{"tag":"Gate B1 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB1HMI_Status">
+                                    <button id="button_GateB1HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B1 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B1 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB1HMI_RTT" opc-tag-txt='{"tag":"Gate B1 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB1PLC_Description" opc-tag-txt='{"tag":"Gate B1 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB1PLC_ID" opc-tag-txt='{"tag":"Gate B1 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB1PLC_Status">
+                                    <button id="button_GateB1PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B1 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B1 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB1PLC_RTT" opc-tag-txt='{"tag":"Gate B1 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB2HMI_Description" opc-tag-txt='{"tag":"Gate B2 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB2HMI_ID" opc-tag-txt='{"tag":"Gate B2 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB2HMI_Status">
+                                    <button id="button_GateB2HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B2 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B2 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB2HMI_RTT" opc-tag-txt='{"tag":"Gate B2 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB2PLC_Description" opc-tag-txt='{"tag":"Gate B2 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB2PLC_ID" opc-tag-txt='{"tag":"Gate B2 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB2PLC_Status">
+                                    <button id="button_GateB2PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B2 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B2 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB2PLC_RTT" opc-tag-txt='{"tag":"Gate B2 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB3HMI_Description" opc-tag-txt='{"tag":"Gate B3 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB3HMI_ID" opc-tag-txt='{"tag":"Gate B3 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB3HMI_Status">
+                                    <button id="button_GateB3HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B3 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B3 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB3HMI_RTT" opc-tag-txt='{"tag":"Gate B3 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB3PLC_Description" opc-tag-txt='{"tag":"Gate B3 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB3PLC_ID" opc-tag-txt='{"tag":"Gate B3 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB3PLC_Status">
+                                    <button id="button_GateB3PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B3 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B3 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB3PLC_RTT" opc-tag-txt='{"tag":"Gate B3 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB4BHMI_Description" opc-tag-txt='{"tag":"Gate B4B HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB4BHMI_ID" opc-tag-txt='{"tag":"Gate B4B HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB4BHMI_Status">
+                                    <button id="button_GateB4BHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B4B HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B4B HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB4BHMI_RTT" opc-tag-txt='{"tag":"Gate B4B HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB4BPLC_Description" opc-tag-txt='{"tag":"Gate B4B PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB4BPLC_ID" opc-tag-txt='{"tag":"Gate B4B PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB4BPLC_Status">
+                                    <button id="button_GateB4BPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B4B PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B4B PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB4BPLC_RTT" opc-tag-txt='{"tag":"Gate B4B PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB4FHMI_Description" opc-tag-txt='{"tag":"Gate B4F HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB4FHMI_ID" opc-tag-txt='{"tag":"Gate B4F HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB4FHMI_Status">
+                                    <button id="button_GateB4FHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B4F HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B4F HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB4FHMI_RTT" opc-tag-txt='{"tag":"Gate B4F HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB4FPLC_Description" opc-tag-txt='{"tag":"Gate B4F PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB4FPLC_ID" opc-tag-txt='{"tag":"Gate B4F PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB4FPLC_Status">
+                                    <button id="button_GateB4FPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B4F PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B4F PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB4FPLC_RTT" opc-tag-txt='{"tag":"Gate B4F PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB5HMI_Description" opc-tag-txt='{"tag":"Gate B5 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB5HMI_ID" opc-tag-txt='{"tag":"Gate B5 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB5HMI_Status">
+                                    <button id="button_GateB5HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B5 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B5 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB5HMI_RTT" opc-tag-txt='{"tag":"Gate B5 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB5PLC_Description" opc-tag-txt='{"tag":"Gate B5 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB5PLC_ID" opc-tag-txt='{"tag":"Gate B5 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB5PLC_Status">
+                                    <button id="button_GateB5PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B5 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B5 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB5PLC_RTT" opc-tag-txt='{"tag":"Gate B5 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB7BHMI_Description" opc-tag-txt='{"tag":"Gate B7B HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB7BHMI_ID" opc-tag-txt='{"tag":"Gate B7B HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB7BHMI_Status">
+                                    <button id="button_GateB7BHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B7B HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B7B HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB7BHMI_RTT" opc-tag-txt='{"tag":"Gate B7B HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB7BPLC_Description" opc-tag-txt='{"tag":"Gate B7B PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB7BPLC_ID" opc-tag-txt='{"tag":"Gate B7B PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB7BPLC_Status">
+                                    <button id="button_GateB7BPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B7B PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B7B PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB7BPLC_RTT" opc-tag-txt='{"tag":"Gate B7B PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB7FHMI_Description" opc-tag-txt='{"tag":"Gate B7F HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB7FHMI_ID" opc-tag-txt='{"tag":"Gate B7F HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB7FHMI_Status">
+                                    <button id="button_GateB7FHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B7F HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B7F HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB7FHMI_RTT" opc-tag-txt='{"tag":"Gate B7F HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB7FPLC_Description" opc-tag-txt='{"tag":"Gate B7F PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB7FPLC_ID" opc-tag-txt='{"tag":"Gate B7F PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB7FPLC_Status">
+                                    <button id="button_GateB7FPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B7F PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B7F PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB7FPLC_RTT" opc-tag-txt='{"tag":"Gate B7F PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB8BHMI_Description" opc-tag-txt='{"tag":"Gate B8B HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB8BHMI_ID" opc-tag-txt='{"tag":"Gate B8B HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB8BHMI_Status">
+                                    <button id="button_GateB8BHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B8B HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B8B HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB8BHMI_RTT" opc-tag-txt='{"tag":"Gate B8B HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB8BPLC_Description" opc-tag-txt='{"tag":"Gate B8B PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB8BPLC_ID" opc-tag-txt='{"tag":"Gate B8B PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB8BPLC_Status">
+                                    <button id="button_GateB8BPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B8B PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B8B PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB8BPLC_RTT" opc-tag-txt='{"tag":"Gate B8B PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB8FHMI_Description" opc-tag-txt='{"tag":"Gate B8F HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB8FHMI_ID" opc-tag-txt='{"tag":"Gate B8F HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB8FHMI_Status">
+                                    <button id="button_GateB8FHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B8F HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B8F HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB8FHMI_RTT" opc-tag-txt='{"tag":"Gate B8F HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB8FPLC_Description" opc-tag-txt='{"tag":"Gate B8F PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB8FPLC_ID" opc-tag-txt='{"tag":"Gate B8F PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB8FPLC_Status">
+                                    <button id="button_GateB8FPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B8F PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B8F PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB8FPLC_RTT" opc-tag-txt='{"tag":"Gate B8F PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB9HMI_Description" opc-tag-txt='{"tag":"Gate B9 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB9HMI_ID" opc-tag-txt='{"tag":"Gate B9 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB9HMI_Status">
+                                    <button id="button_GateB9HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B9 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B9 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB9HMI_RTT" opc-tag-txt='{"tag":"Gate B9 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB9PLC_Description" opc-tag-txt='{"tag":"Gate B9 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB9PLC_ID" opc-tag-txt='{"tag":"Gate B9 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB9PLC_Status">
+                                    <button id="button_GateB9PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B9 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B9 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB9PLC_RTT" opc-tag-txt='{"tag":"Gate B9 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB10HMI_Description" opc-tag-txt='{"tag":"Gate B10 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB10HMI_ID" opc-tag-txt='{"tag":"Gate B10 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB10HMI_Status">
+                                    <button id="button_GateB10HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B10 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B10 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB10HMI_RTT" opc-tag-txt='{"tag":"Gate B10 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB10PLC_Description" opc-tag-txt='{"tag":"Gate B10 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB10PLC_ID" opc-tag-txt='{"tag":"Gate B10 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB10PLC_Status">
+                                    <button id="button_GateB10PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B10 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B10 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB10PLC_RTT" opc-tag-txt='{"tag":"Gate B10 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB11HMI_Description" opc-tag-txt='{"tag":"Gate B11 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB11HMI_ID" opc-tag-txt='{"tag":"Gate B11 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB11HMI_Status">
+                                    <button id="button_GateB11HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B11 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B11 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB11HMI_RTT" opc-tag-txt='{"tag":"Gate B11 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateB11PLC_Description" opc-tag-txt='{"tag":"Gate B11 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB11PLC_ID" opc-tag-txt='{"tag":"Gate B11 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateB11PLC_Status">
+                                    <button id="button_GateB11PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate B11 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate B11 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateB11PLC_RTT" opc-tag-txt='{"tag":"Gate B11 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="tab-3" class="tab-content">
+            <table>
+                <tr>
+                    <td>
+                        <table class="pointsTable tblNetworkMonitor" id="tblPoints">
+                            <tr class="pointsTableRowHeader">
+                                <th class="pointsTableHeader" style="text-align:left;">Description</th>
+                                <th class="pointsTableHeader" style="text-align:left;">Device ID</th>
+                                <th class="pointsTableHeader" style="text-align:left">Status</th>
+                                <th class="pointsTableHeader" style="text-align:left">Round Trip Time</th>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC1BHMI_Description" opc-tag-txt='{"tag":"Gate C1B HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC1BHMI_ID" opc-tag-txt='{"tag":"Gate C1B HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC1BHMI_Status">
+                                    <button id="button_GateC1BHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C1B HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C1B HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC1BHMI_RTT" opc-tag-txt='{"tag":"Gate C1B HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC1BPLC_Description" opc-tag-txt='{"tag":"Gate C1B PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC1BPLC_ID" opc-tag-txt='{"tag":"Gate C1B PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC1BPLC_Status">
+                                    <button id="button_GateC1BPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C1B PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C1B PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC1BPLC_RTT" opc-tag-txt='{"tag":"Gate C1B PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC1FHMI_Description" opc-tag-txt='{"tag":"Gate C1F HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC1FHMI_ID" opc-tag-txt='{"tag":"Gate C1F HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC1FHMI_Status">
+                                    <button id="button_GateC1FHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C1F HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C1F HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC1FHMI_RTT" opc-tag-txt='{"tag":"Gate C1F HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC1FPLC_Description" opc-tag-txt='{"tag":"Gate C1F PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC1FPLC_ID" opc-tag-txt='{"tag":"Gate C1F PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC1FPLC_Status">
+                                    <button id="button_GateC1FPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C1F PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C1F PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC1FPLC_RTT" opc-tag-txt='{"tag":"Gate C1F PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC2BHMI_Description" opc-tag-txt='{"tag":"Gate C2B HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC2BHMI_ID" opc-tag-txt='{"tag":"Gate C2B HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC2BHMI_Status">
+                                    <button id="button_GateC2BHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C2B HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C2B HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC2BHMI_RTT" opc-tag-txt='{"tag":"Gate C2B HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC2BPLC_Description" opc-tag-txt='{"tag":"Gate C2B PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC2BPLC_ID" opc-tag-txt='{"tag":"Gate C2B PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC2BPLC_Status">
+                                    <button id="button_GateC2BPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C2B PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C2B PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC2BPLC_RTT" opc-tag-txt='{"tag":"Gate C2B PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC2FHMI_Description" opc-tag-txt='{"tag":"Gate C2F HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC2FHMI_ID" opc-tag-txt='{"tag":"Gate C2F HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC2FHMI_Status">
+                                    <button id="button_GateC2FHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C2F HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C2F HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC2FHMI_RTT" opc-tag-txt='{"tag":"Gate C2F HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC2FPLC_Description" opc-tag-txt='{"tag":"Gate C2F PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC2FPLC_ID" opc-tag-txt='{"tag":"Gate C2F PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC2FPLC_Status">
+                                    <button id="button_GateC2FPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C2F PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C2F PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC2FPLC_RTT" opc-tag-txt='{"tag":"Gate C2F PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC6HMI_Description" opc-tag-txt='{"tag":"Gate C6 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC6HMI_ID" opc-tag-txt='{"tag":"Gate C6 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC6HMI_Status">
+                                    <button id="button_GateC6HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C6 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C6 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC6HMI_RTT" opc-tag-txt='{"tag":"Gate C6 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC6PLC_Description" opc-tag-txt='{"tag":"Gate C6 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC6PLC_ID" opc-tag-txt='{"tag":"Gate C6 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC6PLC_Status">
+                                    <button id="button_GateC6PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C6 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C6 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC6PLC_RTT" opc-tag-txt='{"tag":"Gate C6 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC7HMI_Description" opc-tag-txt='{"tag":"Gate C7 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC7HMI_ID" opc-tag-txt='{"tag":"Gate C7 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC7HMI_Status">
+                                    <button id="button_GateC7HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C7 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C7 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC7HMI_RTT" opc-tag-txt='{"tag":"Gate C7 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC7PLC_Description" opc-tag-txt='{"tag":"Gate C7 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC7PLC_ID" opc-tag-txt='{"tag":"Gate C7 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC7PLC_Status">
+                                    <button id="button_GateC7PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C7 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C7 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC7PLC_RTT" opc-tag-txt='{"tag":"Gate C7 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC8BHMI_Description" opc-tag-txt='{"tag":"Gate C8B HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC8BHMI_ID" opc-tag-txt='{"tag":"Gate C8B HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC8BHMI_Status">
+                                    <button id="button_GateC8BHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C8B HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C8B HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC8BHMI_RTT" opc-tag-txt='{"tag":"Gate C8B HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC8BPLC_Description" opc-tag-txt='{"tag":"Gate C8B PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC8BPLC_ID" opc-tag-txt='{"tag":"Gate C8B PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC8BPLC_Status">
+                                    <button id="button_GateC8BPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C8B PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C8B PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC8BPLC_RTT" opc-tag-txt='{"tag":"Gate C8B PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC8FHMI_Description" opc-tag-txt='{"tag":"Gate C8F HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC8FHMI_ID" opc-tag-txt='{"tag":"Gate C8F HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC8FHMI_Status">
+                                    <button id="button_GateC8FHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C8F HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C8F HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC8FHMI_RTT" opc-tag-txt='{"tag":"Gate C8F HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC8FPLC_Description" opc-tag-txt='{"tag":"Gate C8F PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC8FPLC_ID" opc-tag-txt='{"tag":"Gate C8F PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC8FPLC_Status">
+                                    <button id="button_GateC8FPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C8F PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C8F PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC8FPLC_RTT" opc-tag-txt='{"tag":"Gate C8F PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC9BHMI_Description" opc-tag-txt='{"tag":"Gate C9B HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC9BHMI_ID" opc-tag-txt='{"tag":"Gate C9B HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC9BHMI_Status">
+                                    <button id="button_GateC9BHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C9B HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C9B HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC9BHMI_RTT" opc-tag-txt='{"tag":"Gate C9B HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC9BPLC_Description" opc-tag-txt='{"tag":"Gate C9B PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC9BPLC_ID" opc-tag-txt='{"tag":"Gate C9B PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC9BPLC_Status">
+                                    <button id="button_GateC9BPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C9B PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C9B PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC9BPLC_RTT" opc-tag-txt='{"tag":"Gate C9B PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC9FHMI_Description" opc-tag-txt='{"tag":"Gate C9F HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC9FHMI_ID" opc-tag-txt='{"tag":"Gate C9F HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC9FHMI_Status">
+                                    <button id="button_GateC9FHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C9F HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C9F HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC9FHMI_RTT" opc-tag-txt='{"tag":"Gate C9F HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC9FPLC_Description" opc-tag-txt='{"tag":"Gate C9F PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC9FPLC_ID" opc-tag-txt='{"tag":"Gate C9F PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC9FPLC_Status">
+                                    <button id="button_GateC9FPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C9F PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C9F PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC9FPLC_RTT" opc-tag-txt='{"tag":"Gate C9F PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC10BHMI_Description" opc-tag-txt='{"tag":"Gate C10B HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC10BHMI_ID" opc-tag-txt='{"tag":"Gate C10B HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC10BHMI_Status">
+                                    <button id="button_GateC10BHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C10B HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C10B HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC10BHMI_RTT" opc-tag-txt='{"tag":"Gate C10B HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC10BPLC_Description" opc-tag-txt='{"tag":"Gate C10B PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC10BPLC_ID" opc-tag-txt='{"tag":"Gate C10B PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC10BPLC_Status">
+                                    <button id="button_GateC10BPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C10B PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C10B PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC10BPLC_RTT" opc-tag-txt='{"tag":"Gate C10B PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC10FHMI_Description" opc-tag-txt='{"tag":"Gate C10F HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC10FHMI_ID" opc-tag-txt='{"tag":"Gate C10F HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC10FHMI_Status">
+                                    <button id="button_GateC10FHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C10F HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C10F HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC10FHMI_RTT" opc-tag-txt='{"tag":"Gate C10F HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC10FPLC_Description" opc-tag-txt='{"tag":"Gate C10F PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC10FPLC_ID" opc-tag-txt='{"tag":"Gate C10F PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC10FPLC_Status">
+                                    <button id="button_GateC10FPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C10F PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C10F PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC10FPLC_RTT" opc-tag-txt='{"tag":"Gate C10F PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC11HMI_Description" opc-tag-txt='{"tag":"Gate C11 HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC11HMI_ID" opc-tag-txt='{"tag":"Gate C11 HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC11HMI_Status">
+                                    <button id="button_GateC11HMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C11 HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C11 HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC11HMI_RTT" opc-tag-txt='{"tag":"Gate C11 HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC11PLC_Description" opc-tag-txt='{"tag":"Gate C11 PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC11PLC_ID" opc-tag-txt='{"tag":"Gate C11 PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC11PLC_Status">
+                                    <button id="button_GateC11PLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C11 PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C11 PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC11PLC_RTT" opc-tag-txt='{"tag":"Gate C11 PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC12BHMI_Description" opc-tag-txt='{"tag":"Gate C12B HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC12BHMI_ID" opc-tag-txt='{"tag":"Gate C12B HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC12BHMI_Status">
+                                    <button id="button_GateC12BHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C12B HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C12B HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC12BHMI_RTT" opc-tag-txt='{"tag":"Gate C12B HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC12BPLC_Description" opc-tag-txt='{"tag":"Gate C12B PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC12BPLC_ID" opc-tag-txt='{"tag":"Gate C12B PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC12BPLC_Status">
+                                    <button id="button_GateC12BPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C12B PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C12B PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC12BPLC_RTT" opc-tag-txt='{"tag":"Gate C12B PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC12FHMI_Description" opc-tag-txt='{"tag":"Gate C12F HMI._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC12FHMI_ID" opc-tag-txt='{"tag":"Gate C12F HMI._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC12FHMI_Status">
+                                    <button id="button_GateC12FHMI_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C12F HMI.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C12F HMI.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC12FHMI_RTT" opc-tag-txt='{"tag":"Gate C12F HMI.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_GateC12FPLC_Description" opc-tag-txt='{"tag":"Gate C12F PLC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC12FPLC_ID" opc-tag-txt='{"tag":"Gate C12F PLC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_GateC12FPLC_Status">
+                                    <button id="button_GateC12FPLC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"Gate C12F PLC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"Gate C12F PLC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_GateC12FPLC_RTT" opc-tag-txt='{"tag":"Gate C12F PLC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="tab-4" class="tab-content">
+            <table>
+                <tr>
+                    <td>
+                        <table class="pointsTable tblNetworkMonitor" id="tblPoints">
+                            <tr class="pointsTableRowHeader">
+                                <th class="pointsTableHeader" style="text-align:left;">Description</th>
+                                <th class="pointsTableHeader" style="text-align:left;">Device ID</th>
+                                <th class="pointsTableHeader" style="text-align:left">Status</th>
+                                <th class="pointsTableHeader" style="text-align:left">Round Trip Time</th>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_FOC001ClusterSYNC_Description" opc-tag-txt='{"tag":"FOC001- Cluster SYNC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_FOC001ClusterSYNC_ID" opc-tag-txt='{"tag":"FOC001- Cluster SYNC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_FOC001ClusterSYNC_Status">
+                                    <button id="button_FOC001ClusterSYNC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"FOC001- Cluster SYNC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"FOC001- Cluster SYNC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_FOC001ClusterSYNC_RTT" opc-tag-txt='{"tag":"FOC001- Cluster SYNC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_FOC001Heartbeat_Description" opc-tag-txt='{"tag":"FOC001-Heartbeat._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_FOC001Heartbeat_ID" opc-tag-txt='{"tag":"FOC001-Heartbeat._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_FOC001Heartbeat_Status">
+                                    <button id="button_FOC001Heartbeat_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"FOC001-Heartbeat.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"FOC001-Heartbeat.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_FOC001Heartbeat_RTT" opc-tag-txt='{"tag":"FOC001-Heartbeat.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_FOC001VSYNC_Description" opc-tag-txt='{"tag":"FOC001-VSYNC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_FOC001VSYNC_ID" opc-tag-txt='{"tag":"FOC001-VSYNC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_FOC001VSYNC_Status">
+                                    <button id="button_FOC001VSYNC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"FOC001-VSYNC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"FOC001-VSYNC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_FOC001VSYNC_RTT" opc-tag-txt='{"tag":"FOC001-VSYNC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_FOC002ClusterSYNC_Description" opc-tag-txt='{"tag":"FOC002-Cluster SYNC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_FOC002ClusterSYNC_ID" opc-tag-txt='{"tag":"FOC002-Cluster SYNC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_FOC002ClusterSYNC_Status">
+                                    <button id="button_FOC002ClusterSYNC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"FOC002-Cluster SYNC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"FOC002-Cluster SYNC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_FOC002ClusterSYNC_RTT" opc-tag-txt='{"tag":"FOC002-Cluster SYNC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_FOC002Heartbeat_Description" opc-tag-txt='{"tag":"FOC002-Heartbeat._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_FOC002Heartbeat_ID" opc-tag-txt='{"tag":"FOC002-Heartbeat._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_FOC002Heartbeat_Status">
+                                    <button id="button_FOC002Heartbeat_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"FOC002-Heartbeat.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"FOC002-Heartbeat.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_FOC002Heartbeat_RTT" opc-tag-txt='{"tag":"FOC002-Heartbeat.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_FOC002VSYNC_Description" opc-tag-txt='{"tag":"FOC002-VSYNC._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_FOC002VSYNC_ID" opc-tag-txt='{"tag":"FOC002-VSYNC._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_FOC002VSYNC_Status">
+                                    <button id="button_FOC002VSYNC_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"FOC002-VSYNC.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"FOC002-VSYNC.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_FOC002VSYNC_RTT" opc-tag-txt='{"tag":"FOC002-VSYNC.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_MCT1HVFOC001_Description" opc-tag-txt='{"tag":"MCT1HVFOC001._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1HVFOC001_ID" opc-tag-txt='{"tag":"MCT1HVFOC001._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1HVFOC001_Status">
+                                    <button id="button_MCT1HVFOC001_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"MCT1HVFOC001.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"MCT1HVFOC001.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_MCT1HVFOC001_RTT" opc-tag-txt='{"tag":"MCT1HVFOC001.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_MCT1HVFOC002_Description" opc-tag-txt='{"tag":"MCT1HVFOC002._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1HVFOC002_ID" opc-tag-txt='{"tag":"MCT1HVFOC002._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1HVFOC002_Status">
+                                    <button id="button_MCT1HVFOC002_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"MCT1HVFOC002.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"MCT1HVFOC002.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_MCT1HVFOC002_RTT" opc-tag-txt='{"tag":"MCT1HVFOC002.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSAD1_Description" opc-tag-txt='{"tag":"MCT1IOPSAD1._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSAD1_ID" opc-tag-txt='{"tag":"MCT1IOPSAD1._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSAD1_Status">
+                                    <button id="button_MCT1IOPSAD1_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"MCT1IOPSAD1.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"MCT1IOPSAD1.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSAD1_RTT" opc-tag-txt='{"tag":"MCT1IOPSAD1.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSOPC1_Description" opc-tag-txt='{"tag":"MCT1IOPSOPC1._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSOPC1_ID" opc-tag-txt='{"tag":"MCT1IOPSOPC1._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSOPC1_Status">
+                                    <button id="button_MCT1IOPSOPC1_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"MCT1IOPSOPC1.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"MCT1IOPSOPC1.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSOPC1_RTT" opc-tag-txt='{"tag":"MCT1IOPSOPC1.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSSQL1_Description" opc-tag-txt='{"tag":"MCT1IOPSSQL1._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSSQL1_ID" opc-tag-txt='{"tag":"MCT1IOPSSQL1._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSSQL1_Status">
+                                    <button id="button_MCT1IOPSSQL1_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"MCT1IOPSSQL1.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"MCT1IOPSSQL1.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSSQL1_RTT" opc-tag-txt='{"tag":"MCT1IOPSSQL1.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSWEB1_Description" opc-tag-txt='{"tag":"MCT1IOPSWEB1._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSWEB1_ID" opc-tag-txt='{"tag":"MCT1IOPSWEB1._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSWEB1_Status">
+                                    <button id="button_MCT1IOPSWEB1_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"MCT1IOPSWEB1.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"MCT1IOPSWEB1.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSWEB1_RTT" opc-tag-txt='{"tag":"MCT1IOPSWEB1.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSWS1_Description" opc-tag-txt='{"tag":"MCT1IOPSWS1._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSWS1_ID" opc-tag-txt='{"tag":"MCT1IOPSWS1._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSWS1_Status">
+                                    <button id="button_MCT1IOPSWS1_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"MCT1IOPSWS1.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"MCT1IOPSWS1.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSWS1_RTT" opc-tag-txt='{"tag":"MCT1IOPSWS1.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSWS2_Description" opc-tag-txt='{"tag":"MCT1IOPSWS2._System._Description.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSWS2_ID" opc-tag-txt='{"tag":"MCT1IOPSWS2._System._DeviceId.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSWS2_Status">
+                                    <button id="button_MCT1IOPSWS2_Status" opc-tag-bkg='{"type":"group","all_f":{"cls":"btnRed"},"bad_q":{"cls":"btnGray"},"group":[{"tag":"MCT1IOPSWS2.Status.Value","config":{"cls":"btnGreen"}}]}'
+                                            opc-tag-txt='{"tag":"MCT1IOPSWS2.Status.Value","config":{"formats":{"bad_q":"Bad Data","bool_f":"No Connection","bool_t":"Connected"}}}'>
+                                        Loading
+                                    </button>
+                                </td>
+                                <td class="pointsTableDataCells" id="device_MCT1IOPSWS2_RTT" opc-tag-txt='{"tag":"MCT1IOPSWS2.RoundTripTime.Value", "config":{"bad_q":"Bad Data"}}'>Loading...</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- #region Old-Code -->
+    @*<div class="networkMonitorPageDividerLeft">
         <table>
             <tr>
                 <td>
@@ -376,5 +1464,6 @@
                 </td>
             </tr>
         </table>
-    </div>
+    </div>*@
+    <!-- #endregion Old-Code -->
 </div>

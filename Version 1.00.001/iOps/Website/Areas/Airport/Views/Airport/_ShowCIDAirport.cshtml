@@ -108,11 +108,11 @@
 
         function update_alarms() {
             var PriorityCol = -1;
-            PriorityCol = $('#GateAlarmWindow th:contains("Priority")').index();
+            PriorityCol = $('#GateAlarmWindow th[aria-label*="Priority"]').index();
             if (PriorityCol > -1) {
                 $('#GateAlarmWindow tr').not('thead tr').each(function (idx, row) {
                     var cellData = $(this).find('td').eq(PriorityCol)[0].innerText;
-                    $('#GateAlarmWindow th:contains("Priority")').hide();
+                    $('#GateAlarmWindow th[aria-label*="Priority"]').hide();
                     $(this).find('td').eq(PriorityCol).hide();
                     switch (cellData) {
                         case '0':

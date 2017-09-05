@@ -38,7 +38,7 @@
     text-align: center;
     width: 231px;
     font-weight:bold;
-    height: 25px;
+    height: 23px;
 }
 
 div.k-widget.k-window.KendoWindowToTop {
@@ -196,3 +196,42 @@ div.k-widget.k-window.KendoWindowToTop {
     height: 20px;
 }
 
+#NetworkMonitorWindow .container {
+    margin: 10px 0px 0px -10px;
+    width: 98%;
+    height: 100%;
+    position: relative;
+}
+
+#NetworkMonitorWindow ul.tabs {
+    margin: 0px;
+    padding: 0px 0px 0px 3px;
+    list-style: none;
+}
+
+#NetworkMonitorWindow ul.tabs li {
+    background: none;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin: 0px -3px;
+    border: 1px solid gray;
+}
+
+#NetworkMonitorWindow ul.tabs li.current{
+	background: #e4eae4;
+	color: #222;
+}
+
+#NetworkMonitorWindow .tab-content{
+    width: 100%;
+    height: 100%;
+    border: 1px solid gray;
+    display: none;
+    padding: 15px;
+}
+
+#NetworkMonitorWindow .tab-content.current{
+	display: inherit;
+}

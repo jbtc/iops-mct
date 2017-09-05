@@ -15,10 +15,10 @@ namespace iOps.Core.Model
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class MCT_Airport_ReportingEntities : DbContext
+    public partial class MCT_IOPS_ReportingEntities : DbContext
     {
-        public MCT_Airport_ReportingEntities()
-            : base("name=MCT_Airport_ReportingEntities")
+        public MCT_IOPS_ReportingEntities()
+            : base("name=MCT_IOPS_ReportingEntities")
         {
         }
     
