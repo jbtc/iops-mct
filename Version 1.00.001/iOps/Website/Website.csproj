@@ -92,6 +92,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Windows\assembly\GAC_MSIL\Microsoft.ReportViewer.Common\11.0.0.0__89845dcd8080cc91\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\MicosoftReportViewerWebForms_v11.1.0.1\lib\Microsoft.ReportViewer.WebForms.DLL</HintPath>
       <Private>True</Private>
@@ -752,6 +756,10 @@
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateB8F-wide-plane.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateB9-idle.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateB9-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC1-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC1-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC1-wide-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC1-wide-plane.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC10B-idle.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC10B-plane.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC10B-wide-idle.png" />
@@ -770,22 +778,18 @@
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC12F-plane.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC12F-wide-idle.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC12F-wide-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC1B-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC1B-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC1B-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC1B-wide-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC1F-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC1F-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC1F-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC1F-wide-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC2B-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC2B-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC2B-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC2B-wide-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC2F-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC2F-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC2F-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC2F-wide-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC2-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC2-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC2-wide-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC2-wide-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC3-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC3-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC3-wide-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC3-wide-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC4-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC4-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC4-wide-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC4-wide-plane.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC6-idle.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC6-plane.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateC7-idle.png" />
@@ -975,6 +979,10 @@
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneB\mct-gateB9-plane.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneB\mct-zone-b-nc-Rev-1.001.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneB\mct-zone-b-Rev-1.001.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC1-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC1-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC1-wide-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC1-wide-plane.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC10B-idle.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC10B-plane.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC10B-wide-idle.png" />
@@ -993,22 +1001,18 @@
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC12F-plane.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC12F-wide-idle.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC12F-wide-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC1B-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC1B-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC1B-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC1B-wide-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC1F-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC1F-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC1F-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC1F-wide-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC2B-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC2B-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC2B-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC2B-wide-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC2F-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC2F-plane.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC2F-wide-idle.png" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC2F-wide-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC2-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC2-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC2-wide-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC2-wide-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC3-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC3-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC3-wide-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC3-wide-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC4-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC4-plane.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC4-wide-idle.png" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC4-wide-plane.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC6-idle.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC6-plane.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\ZoneC\mct-gateC7-idle.png" />
