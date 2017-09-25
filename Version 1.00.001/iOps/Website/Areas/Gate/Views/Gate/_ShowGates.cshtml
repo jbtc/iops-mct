@@ -21,16 +21,12 @@
 
         gateAlarms.push("@TempData["GateNumber"]" + "_PBB_ALARMS");
         gateAlarms.push("@TempData["GateNumber"]" + "_RTU_ALARMS");
-        gateAlarms.push("@TempData["GateNumber"]" + "_GPU_ALARMS");
         gateWarnings.push("@TempData["GateNumber"]" + "_PBB_WARNINGS");
         gateWarnings.push("@TempData["GateNumber"]" + "_RTU_WARNINGS");
-        gateWarnings.push("@TempData["GateNumber"]" + "_GPU_WARNINGS");
         gateMasterAlarms.push("@TempData["GateNumber"]" + "_PBB_ALARMS");
         gateMasterAlarms.push("@TempData["GateNumber"]" + "_RTU_ALARMS");
-        gateMasterAlarms.push("@TempData["GateNumber"]" + "_GPU_ALARMS");
         gateMasterAlarms.push("@TempData["GateNumber"]" + "_PBB_WARNINGS");
         gateMasterAlarms.push("@TempData["GateNumber"]" + "_RTU_WARNINGS");
-        gateMasterAlarms.push("@TempData["GateNumber"]" + "_GPU_WARNINGS");
 
         // set up gate prefix
         OPC.toggle_refresh(false);
@@ -95,7 +91,6 @@
 
         $('#menuItemUserAdmin').css('display', ('@TempData["AuthLevel"]' > 3 ? 'list-item' : 'none'));
         $("#menuItemRTUAutoOnSP").css('display', ('@TempData["AuthLevel"]' > 3 ? 'list-item' : 'none'));
-
         $('#imageinfoid').css('visibility', 'hidden');
 
         //Setup the main Kendo Window inside splitter-main
@@ -155,7 +150,6 @@
 
         //regular text link(to GPU)
         $('#btnRemoteBridgeControl').attr('visibility', (@TempData["AuthLevel"] > 0 ? 'visible' : 'hidden'));
-
         $('#showServiceCounters').click(function (e) {
             $.ajax({
                 url: '@Url.Action("ShowServiceCounters", "ServiceCounters", new { area = "ServiceCounters" })',
@@ -194,7 +188,6 @@
         });
 
         CreateGateAlarmWindow();
-
         CreateGateWarningWindow();
 
         $('#btnRemoteBridgeControl').prop('disabled', (@TempData["AuthLevel"] > 3 ? false : true));
@@ -211,16 +204,6 @@
         $('#btnRoofTopACUnits').click(function () {
             OPC.set_value(OPC.tag_prefix + 'RTURemoteCntrl.Value', 'True');
         })
-
-        @*$('#btnRoofTopAC1Units').prop('disabled', (@TempData["AuthLevel"] > 3 ? false : true));
-        $('#btnRoofTopAC1Units').click(function () {
-            OPC.set_value(OPC.tag_prefix + 'RTU1RemoteCntrl.Value', 'True');
-        })
-
-        $('#btnRoofTopAC2Units').prop('disabled', (@TempData["AuthLevel"] > 3 ? false : true));
-        $('#btnRoofTopAC2Units').click(function () {
-            OPC.set_value(OPC.tag_prefix + 'RTU2RemoteCntrl.Value', 'True');
-        })*@
 
         $('#btnBridgeLighting').prop('disabled', (@TempData["AuthLevel"] > 3 ? false : true));
         $('#btnBridgeLighting').click(function () {
@@ -265,17 +248,6 @@
             })
         }
     }
-
-    @*$('#GateAlarmWindow').kendoWindow({
-        width: '400px',
-        height: '650px',
-        animation: false,
-        modal: false,
-        draggable: true,
-        title: 'Gate @TempData["GateNumber"] Alarms',
-        visible: false,
-        actions: ["Custom"]
-    });*@
 
     function CloseGateAlarmWindow() {
         $('#GateAlarmWindow').data('kendoWindow').destroy();
@@ -358,9 +330,6 @@
     // ***************************************************************************************
     function CreateGateWarningWindow() {
         var gateWarningWindow = $('#GateWarningWindow');
-        //var btnWarnings = $('#btnWarnings').bind('click', function () {
-        //    gateWarningWindow.data('kendoWindow').open();
-        //});
 
         if (!gateWarningWindow.data('kendoWindow')) {
             gateWarningWindow.kendoWindow({
@@ -477,9 +446,7 @@
         var vertdnok = get_bool("VERTDNOK.Value");
         var isDualBridge = get_bool("Options.DualBridgeGateSelection.Value");
         var horizextlimit = get_value("HORIZ_EXT_LIMIT_FLAG.Value");
-        //var horizretlimit = get_value("HORIZ_RET_LIMIT_FLAG.Value");
         var horizextult = get_value("Alarm.HORIZ_EXT_ULT.Value");
-        //var horizretult = get_value("Alarm.HORIZ_RET_ULT.Value");
 
         // PBB Mode
         if (autolevelmode) { $("#btnPBBMode").html("Auto Level"); }
@@ -517,9 +484,6 @@
 
 </script>
 
-<!--Because jquery syntax does not like razor tags, input will be used instead-->
-<!--NOTE: OPC tag values that are BOOLEANS will show a button image; all other values will show text-->
-@*<input type="hidden" id="txtScreenNumber" value='@TempData["CIDMaxScreens"]' />*@
 <div id="GateWindow" opc-tag-bkg='{"type":"group","all_f":{"cls":"AutoLevelingFalse"},"bad_q":{"cls":"AutoLevelingFalse"},"group":[
             {"tag":"AIRCRAFTDOCKEDCALCULATION.Value","config":{"cls":"AutoLevelingTrue"}}
 
@@ -535,8 +499,8 @@
                         <tr>
                             <td>Remote Bridge Control</td>
                             <td class="pointsTableDataCells">
-                                <button id="btnRemoteBridgeControl"
-                                        class="btn btnGray"
+                                <button id="btnRemoteBridgeControl" title="Remotely Activate/Deactivate a bridge&#10 to being in/out of service"
+                                        class="btn btnGray hasTooltip"
                                         opc-tag-bkg='{"type":"group",
                                             "all_f":{"cls":"btnGreen"},
                                             "bad_q":{"cls":"btnGray"},

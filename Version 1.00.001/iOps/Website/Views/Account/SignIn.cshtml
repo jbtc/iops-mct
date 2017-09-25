@@ -109,6 +109,7 @@
                         clientName: "MCT"
                     },
                     success: function (data) {
+                        Init();
                         $('#tblScreenNav').html(data);
                         //hide the link text for gate list and show the icons on startup on the slide-in-handle splitter column
                         if ($('#slide-in-handle').is(':visible')) {

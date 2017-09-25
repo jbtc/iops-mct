@@ -1,4 +1,5 @@
-﻿function ChangeIcons(iconNum) {
+﻿// Changes the Screens Nav icon class to show proper icon and color
+function ChangeIcons(iconNum) {
     console.log("_ScreenIcons::ChangeIcons(...) -> iconNum=" + iconNum);
     $("#tblScreenNav tr").each(function () {
         var currentIcon = $(this).attr('class').replace("screen-ajax", "");
@@ -9,30 +10,6 @@
             }
         })
     })
-    //for (var b = 0; b <= $('#txtScreenNumber').val() ; b++) {
-    //    if (b === 0) {
-    //        if (b === iconNum) {
-    //            $('.screen-icon' + b).removeClass('iconNormalTop');
-    //            $('.screen-icon' + b).addClass('iconSelectedTop');
-    //        }
-    //        else {
-    //            $('.screen-icon' + b).removeClass('iconSelectedTop');
-    //            $('.screen-icon' + b).addClass('iconNormalTop');
-    //        }
-    //    }
-    //    else {
-    //        $('.screen-icon' + b).removeClass('iconSelectedTop');
-    //        $('.screen-icon' + b).addClass('iconNormalTop');
-    //        if (b === iconNum) {
-    //            $('.screen-icon' + b).removeClass('iconNormalBottom');
-    //            $('.screen-icon' + b).addClass('iconSelectedBottom');
-    //        }
-    //        else {
-    //            $('.screen-icon' + b).removeClass('iconSelectedBottom');
-    //            $('.screen-icon' + b).addClass('iconNormalBottom');
-    //        }
-    //    }
-    //}
 }
 
 $(document).ready(function () {
@@ -43,6 +20,7 @@ $(document).ready(function () {
         //$('[class^="screen-icon"]').css('height', '25px');
     }
 
+    // Creates the kendo splitter for left (Operational Charts) and the Main Window area
     $("#splitter").kendoSplitter({
         orientation: "horizontal",
         panes: [
@@ -65,6 +43,8 @@ $(document).ready(function () {
         //contentLoad: onContentLoad,
         //resize: onResize
     });
+
+    // Create the spitter for screen nav
     $("#splitter1").kendoSplitter({
         orientation: "horizontal",
         panes: [

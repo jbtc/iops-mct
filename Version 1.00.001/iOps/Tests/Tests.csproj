@@ -141,7 +141,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CruderControllerTests.cs" />
     <Compile Include="IntegrationTestsBase.cs" />
     <Compile Include="MappingTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

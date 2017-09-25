@@ -437,22 +437,6 @@ li.awe-li.dinner
     padding: 0;
 }
 
-#doggy
-{
-    width: 100px;
-    height: 100px;
-    background-image: url('dogs.gif');
-    z-index: 9000;
-    position: fixed;
-    right: 30px;
-    bottom: 50px;
-}
-
-#doggy:hover
-{
-    background-image: url('dog.gif');
-}
-
 #tip
 {
     width: 130px;
@@ -528,23 +512,6 @@ li.awe-li.dinner
 {
     overflow: hidden;
 }
-
-#Countries .awe-li:not(.awe-morecont), #CountryId-awepw .awe-li:not(.awe-morecont)
-{
-    height: 34px;
-}
-/*#Countries .act, #CountryId-awepw .act
-{
-display: none;
-}*/
-#Countries .awe-li:not(.awe-morecont):hover
-{
-    outline: 1px solid gold;
-}
-/*#Countries .awe-li:hover .act, #CountryId-awepw .awe-li:hover .act
-{
-display: inherit;
-}*/
 
 ul.awe-ajaxlist
 {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ASPNETMVC_SSRS_Demo.Models;
+using iOps.Website.Models;
 
-namespace ASPNETMVC_SSRS_Demo.Controllers
+namespace iOps.Website.Controllers
 {
     public class ReportsController : Controller
     {

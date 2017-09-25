@@ -40,11 +40,5 @@ namespace iOps.Website.Areas.Gate.Controllers
             setGateTemps(gateNum,zoneNum);
             return PartialView("_ShowGates");            
         }
-
-        //public PartialViewResult ShowServiceCounters(int gateNum)
-        //{
-        //    //setGateTemps(gateNum,1);
-        //    return PartialView("_ShowServiceCounters");
-        //}
     }
 }

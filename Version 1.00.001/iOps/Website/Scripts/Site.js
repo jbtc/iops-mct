@@ -1,9 +1,4 @@
-﻿//by default jquery.validate 1.9 doesn't validate hidden inputs
-//if ($.validator)
-//    $.validator.setDefaults({
-//                                ignore: []
-//                            });
-
+﻿
 awe.err = function (o, xhr, textStatus, errorThrown) {
     var msg = "unexpected error occured";
     if (xhr) {
@@ -157,19 +152,6 @@ _gaq.push(['_setAccount', 'UA-27119754-1']);
 _gaq.push(['_setDomainName', 'aspnetawesome.com']);
 _gaq.push(['_trackPageview']);
 
-
-/*Google Analytics code
-(function () {
-    var ga = document.createElement('script');
-    ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-})();
-*/
-
-
 storg = function () {
     if (localStorage)
         return localStorage;
@@ -191,98 +173,3 @@ function Paramaterize(gateTag)
     gateTag = gateTag.replace(pattern, "[@Gate]");
     return gateTag;
 }
-
-//$(function () {
-//    var dog = Dog();
-//    dog.load();
-    
-//    function setText() {
-//        if (dog.state() != "hidden") {
-//            $('#chDog').html('hide dog');
-//        } else {
-//            $('#chDog').html('show dog');
-//        }
-//    }
-    
-//    setText();
-
-//    $('#chDog').click(function () {
-//        dog.state() != "hidden" ? dog.hide() : dog.show();
-//        setText();
-//    });
-//});
-
-//function Dog() {
-//    var state = "visible";
-//    var h;
-
-//    function load() {
-//        var s = storg.getItem("dogstate");
-//        if (s)
-//            state = s;
-//        changeStateTo(state);
-//        $('#doggy').click(function () {
-//            changeStateTo(state == "visible" ? "visiblenotip" : "visible");
-//        });
-//        $('#tip').click(function () {
-//            clearTimeout(h);
-//            tell();
-//        });
-        
-//        $('#doggy').draggable({
-//                                  drag: function () {
-//                                      var dl = parseFloat($('#doggy').css('left'));
-//                                      var dt = parseFloat($('#doggy').css('top'));
-//                                      $('#tip').css('left', (dl - 115) + "px").css('top', (dt - 100) + 'px');
-//                                  }
-//                              });
-//    }
-    
-//    function changeStateTo(ns) {
-//        states[ns]();
-//        state = ns;
-//        storg.setItem("dogstate", state);
-//    }
-    
-//    var times = 0;
-//    function tell() {
-//        if (state == "visible")
-//            $.post(_root + "doggy/tell", { c: _controller, a: _action },
-//                   function (d) {
-//                       $('#tipcontent').html(d.o);
-//                       times++;
-//                       if (times < 10)
-//                           h = setTimeout(tell, Math.random() * 8000 + 5000);
-//                   });
-//    }
-
-//    var states = {
-//        visible: function () {
-//            $('#doggy,#tip').show();
-//            h = setTimeout(tell, 5000);
-//        },
-//        visiblenotip: function () {
-//            $('#doggy').show();
-//            $('#tip').hide();
-//            clearTimeout(h);
-//        },
-//        hidden: function () {
-//            $('#doggy,#tip').hide();
-//            clearTimeout(h);
-//        }
-//    };
-
-//    return {
-//        load: load,
-//        hide: function () {
-//            changeStateTo("hidden");
-//        },
-//        show: function () {
-//            changeStateTo("visible");
-//        },
-//        state: function () {
-//            return state;
-//        }
-//    };
-//}
-

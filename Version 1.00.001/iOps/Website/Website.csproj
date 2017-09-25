@@ -252,14 +252,10 @@
     <Compile Include="Areas\Airport\Controllers\AirportController.cs" />
     <Compile Include="Areas\Gate\Controllers\GateController.cs" />
     <Compile Include="Areas\Gate\GateAreaRegistration.cs" />
-    <Compile Include="Areas\GPU\Controllers\GPUController.cs" />
-    <Compile Include="Areas\GPU\GPUAreaRegistration.cs" />
     <Compile Include="Areas\NetworkMonitor\Controllers\NetworkMonitorController.cs" />
     <Compile Include="Areas\NetworkMonitor\NetworkMonitorAreaRegistration.cs" />
     <Compile Include="Areas\RTU\Controllers\RTUController.cs" />
     <Compile Include="Areas\RTU\RTUAreaRegistration.cs" />
-    <Compile Include="Areas\PCA\Controllers\PCAController.cs" />
-    <Compile Include="Areas\PCA\PCAAreaRegistration.cs" />
     <Compile Include="Areas\ServiceCounters\Controllers\ServiceCountersController.cs" />
     <Compile Include="Areas\ServiceCounters\ServiceCountersAreaRegistration.cs" />
     <Compile Include="Areas\Flights\Controllers\FlightsController.cs" />
@@ -270,12 +266,11 @@
     <Compile Include="Areas\Zones\ZonesAreaRegistration.cs" />
     <Compile Include="AwesomeConfigurator.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ScreenIconController.cs" />
-    <Compile Include="Controllers\ScreensController.cs" />
     <Compile Include="Controllers\WeatherController.cs" />
     <Compile Include="Dto\GuidInput.cs" />
+    <Compile Include="Dto\LoginUniqueAttribute.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="HtmlUtil.cs" />
@@ -294,21 +289,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ChangeThemeController.cs" />
-    <Compile Include="Controllers\CountryIdAjaxDropdownController.cs" />
-    <Compile Include="Controllers\CountryController.cs" />
-    <Compile Include="Controllers\CountryIdLookupController.cs" />
     <Compile Include="Controllers\Cruder.cs" />
     <Compile Include="Controllers\Crudere.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\DoggyController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FormAuthService.cs" />
     <Compile Include="Controllers\MuiController.cs" />
-    <Compile Include="Controllers\NavController.cs" />
     <Compile Include="Controllers\RolesLookupController.cs" />
     <Compile Include="Dto\ErrorDisplay.cs" />
     <Compile Include="Dto\Input.cs" />
-    <Compile Include="Dto\LoginUniqueAttribute.cs" />
     <Compile Include="Dto\StrLenAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -650,10 +639,6 @@
     <Content Include="Content\Themes\Images\pm.png" />
     <Content Include="Content\Themes\iOps-Site.css" />
     <Content Include="Areas\Gate\Views\web.config" />
-    <Content Include="Areas\GPU\Views\web.config" />
-    <Content Include="Areas\PCA\Views\web.config" />
-    <Content Include="Areas\GPU\Views\GPU\_ShowGPU.cshtml" />
-    <Content Include="Areas\PCA\Views\PCA\_ShowPCA.cshtml" />
     <Content Include="Areas\Gate\Views\Gate\_ShowGates.cshtml" />
     <Content Include="Areas\Airport\Views\Airport\_ShowJFKAirport.cshtml" />
     <Content Include="Areas\Airport\Views\web.config" />
@@ -675,7 +660,6 @@
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Clock.css" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Flights.css" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Gates.css" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\GPU.css" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Header.css" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gate-nc-Rev-1.001.png" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Images\Airport\mct-gateA10B-idle.png" />
@@ -1039,13 +1023,12 @@
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Layout.css" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\MainMenu.css" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\NetworkMonitor.css" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\PCA.css" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\RTU.css" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\scripts\Clock.js" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\scripts\Gates.js" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\scripts\GPU.js" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\scripts\Layout.js" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\scripts\MainMenu.js" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\scripts\PCA.js" />
+    <Content Include="Content\Themes\MCT\Ver 1.0.0\scripts\RTU.js" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\ServiceCounters.css" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\signIn.css" />
     <Content Include="Content\Themes\MCT\Ver 1.0.0\Site.css" />
@@ -1193,9 +1176,6 @@
     <Content Include="Areas\Flights\Views\Flights\Index.cshtml" />
     <Content Include="Areas\Flights\Views\web.config" />
     <Content Include="Areas\Airport\Views\Airport\_ShowMCTAirport.cshtml" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\.DS_Store" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\._.DS_Store" />
-    <Content Include="Content\Themes\MCT\Ver 1.0.0\AwesomeMvc.css.old" />
     <Content Include="Areas\Zones\Views\Zones\_ShowMCTZone.cshtml" />
     <Content Include="Areas\RTU\Views\RTU\_ShowRTU.cshtml" />
     <Content Include="Areas\RTU\Views\web.config" />
@@ -1222,6 +1202,30 @@
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.2\external\jquery\jquery.js" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\jquery-ui-1.11.2\index.html" />
+    <Content Include="Scripts\jquery-ui-1.11.2\jquery-ui.css" />
+    <Content Include="Scripts\jquery-ui-1.11.2\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui-1.11.2\jquery-ui.min.css" />
+    <Content Include="Scripts\jquery-ui-1.11.2\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.2\jquery-ui.structure.css" />
+    <Content Include="Scripts\jquery-ui-1.11.2\jquery-ui.structure.min.css" />
+    <Content Include="Scripts\jquery-ui-1.11.2\jquery-ui.theme.css" />
+    <Content Include="Scripts\jquery-ui-1.11.2\jquery-ui.theme.min.css" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
@@ -1368,10 +1372,8 @@
     <Content Include="Views\Header\_Clock.cshtml" />
     <Content Include="Views\Header\_Header.cshtml" />
     <Content Include="Views\Screens\_Screens.cshtml" />
-    <Content Include="Views\Weather\_Weather.cshtml" />
     <Content Include="Views\Header\_Statistics.cshtml" />
     <Content Include="Views\Header\_MainMenu.cshtml" />
-    <Content Include="Views\Shared\ListItems\Screens.cshtml" />
     <Content Include="Views\Screens\Index.cshtml" />
     <Content Include="Views\Screens\_Index.cshtml" />
     <None Include="Properties\PublishProfiles\Demo.iOpsNow.com.pubxml" />
@@ -1506,9 +1508,7 @@
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Views\Header\_Weather.cshtml" />
-    <Content Include="Views\Shared\ListItems\UserGuid.cshtml" />
     <Content Include="Views\Home\ViewCharts.cshtml" />
-    <Content Include="Views\Account\_Charts.cshtml" />
     <Content Include="Views\Home\ViewChartsGraph.cshtml" />
     <Content Include="Views\Reports\ReportTemplate.cshtml" />
     <Content Include="Views\Shared\_LayoutReports.cshtml" />
@@ -1528,17 +1528,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\broccoli.png" />
-    <Content Include="Content\dog.gif" />
-    <Content Include="Content\dogs.gif" />
-    <Content Include="Content\error-lolcat-problemz.jpg" />
     <Content Include="Content\error.png" />
     <Content Include="Content\Jcrop.gif" />
     <Content Include="Content\jquery.fileupload-ui.css" />
     <Content Include="Content\jquery.Jcrop.css" />
     <Content Include="Content\pbar-ani.gif" />
-    <Content Include="Content\pros.png" />
-    <Content Include="Content\strawberry.png" />
     <Content Include="Content\Themes\start\AwesomeMvc.css" />
     <Content Include="Content\Themes\start\Site.css" />
     <Content Include="Content\tip.png" />
@@ -1558,18 +1552,12 @@
     <Content Include="Scripts\Site.js" />
     <Content Include="Views\Account\SignIn.cshtml" />
     <Content Include="Views\ChangeTheme\index.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\CountryIdLookup\item.cshtml" />
-    <Content Include="Views\Shared\doggy.ascx" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.aspx" />
     <Content Include="Views\Shared\EditorTemplates\TinyMCE.aspx" />
     <Content Include="Views\Shared\EditorTemplates\Int32.aspx" />
     <Content Include="Views\Shared\EditorTemplates\MultiLookup.aspx" />
     <Content Include="Views\Shared\EditorTemplates\TextArea.aspx" />
     <Content Include="Views\Shared\login.ascx" />
-    <Content Include="Views\Shared\ListItems\User.cshtml" />
-    <Content Include="Views\Country\Index.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AjaxDropdown.aspx" />
     <Content Include="Views\Shared\EditorTemplates\Autocomplete.aspx" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.aspx" />
@@ -1590,17 +1578,12 @@
     <Content Include="Views\Error\expectedp.cshtml" />
     <Content Include="Views\Error\HttpError404.cshtml" />
     <Content Include="Views\Error\HttpError505.cshtml" />
-    <Content Include="Views\Country\Create.cshtml" />
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Nav\Index.cshtml" />
     <Content Include="Views\Mui\Index.cshtml" />
     <Content Include="Views\Mui\Langs.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Template.Master" />
-    <Content Include="Views\Shared\deletebtn.cshtml" />
-    <Content Include="Views\Shared\ListItems\Country.cshtml" />
-    <Content Include="Views\Shared\ListItems\UserThead.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1610,11 +1593,7 @@
     <Folder Include="Areas\Flights\Views\Shared\" />
     <Folder Include="Areas\Gate\Models\" />
     <Folder Include="Areas\Gate\Views\Shared\" />
-    <Folder Include="Areas\GPU\Models\" />
-    <Folder Include="Areas\GPU\Views\Shared\" />
     <Folder Include="Areas\NetworkMonitor\Models\" />
-    <Folder Include="Areas\PCA\Models\" />
-    <Folder Include="Areas\PCA\Views\Shared\" />
     <Folder Include="Areas\RTU\Models\" />
     <Folder Include="Areas\RTU\Views\Shared\" />
     <Folder Include="Areas\ServiceCounters\Models\" />
@@ -1622,7 +1601,6 @@
     <Folder Include="Areas\Users\Views\Shared\" />
     <Folder Include="Areas\Zones\Models\" />
     <Folder Include="Areas\Zones\Views\Shared\" />
-    <Folder Include="pictures\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
@@ -1671,15 +1649,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\_ViewStart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Feedback\Index.cshtml" />
-    <Content Include="Views\Feedback\Create.cshtml" />
-    <Content Include="Views\Shared\ListItems\Feedback.cshtml" />
-    <Content Include="Views\CountryIdLookup\SearchForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\iOps-Test.pubxml" />

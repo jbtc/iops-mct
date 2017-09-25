@@ -19,21 +19,26 @@ namespace iOps.Website
         {
             // Bundle basic Add-Ons
             bundles.Add(new ScriptBundle("~/bundles/Add-Ons/js").Include(
-                "~/Scripts/jquery-{version}.js",
-                "~/Scripts/jqueryUI.1.11.2.min.js",
+                //"~/Scripts/jquery-{version}.js",
+                "~/Scripts/jquery-3.1.1.min.js",
+                //"~/Scripts/jqueryUI.1.11.2.min.js",
                 "~/Scripts/jquery.validate.min.js",
                 "~/Scripts/additional-methods.min.js",
                 "~/Scripts/jquery.validate.unobtrusive.min.js",
                 "~/Scripts/jquery.unobtrusive-ajax.min.js",
-                "~/Scripts/bootstrap.min.js",
                 "~/Scripts/modernizr-*",
                 "~/Scripts/jquery.fileupload-ui.js",
                 "~/Scripts/angular.min.js",
                 "~/Scripts/respond.min.js",
+                "~/Scripts/bootstrap.min.js",
+                "~/Scripts/jquery-ui-1.11.2/jquery-ui.min.js",
                 "~/Scripts/JSON2.js"
             ));
             bundles.Add(new StyleBundle("~/Content/Add-Ons/css").Include(
-                "~/Content/bootstrap.min.css"
+                "~/Content/bootstrap.min.css",
+                "~/Scripts/jquery-ui-1.11.2/jquery-ui.min.css",
+                "~/Scripts/jquery-ui-1.11.2/jquery-ui.structure.min.css",
+                "~/Scripts/jquery-ui-1.11.2/jquery-ui.theme.min.css"
             ));
 
             // Bundle Telerik Kendo     

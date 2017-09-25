@@ -8,32 +8,13 @@ namespace iOps.Website.Controllers
         {
         }
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        //public ActionResult ReportIndex()
-        //{
-        //    return View();
-        //}
-
-        public ActionResult About()
-        {
-            return View();
-        }
         public ActionResult ViewCharts()
         {
             return View();
         }
-         public ActionResult ViewChartsGraph()
+        public ActionResult ViewChartsGraph()
         {
             return View();
         }
-        public ActionResult Reporting()
-        {
-            return View();
-        }
-
     }
 }

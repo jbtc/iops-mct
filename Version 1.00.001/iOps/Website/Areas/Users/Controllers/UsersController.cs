@@ -24,7 +24,6 @@ namespace iOps.Website.Areas.Users.Controllers
         public async Task<ActionResult> Index(string sortingOrder)
         {
            ViewBag.SortingName = String.IsNullOrEmpty(sortingOrder) ? "Username" : "";
-            //var user = db.Users.Include(u => u.Salutation).Select(u => u.Organizations.Where(o => o.Designator.Equals('MCT')));
            var user = db.Users.Where(u => u.Organizations.Any(o => o.Designator.Equals("MCT")));
 
              switch (sortingOrder)
@@ -39,8 +38,6 @@ namespace iOps.Website.Areas.Users.Controllers
                 }
             return View(await user.ToListAsync());
         }
-
- 
 
         // GET: Users/Users/Details/5
         public async Task<ActionResult> Details(Guid? id)
@@ -131,12 +128,10 @@ namespace iOps.Website.Areas.Users.Controllers
                     userToInsert.UsersXrefScreens.Add(new UsersXrefScreen() { UserID = userToInsert.ID, ScreenID = scr.ID, DisplayOrder = (scr.DefaultDisplayOrder ?? default(int)) });
                 }
 
-                //db.Entry(userToInsert).State = EntityState.Added;
                 db.Users.Add(userToInsert);
                 await db.SaveChangesAsync();
-                //return Json(new { success = true });
+
                 return RedirectToAction("Index", "Users", new { area = "Users" });
-                //return RedirectToAction("Index");
             }
             catch (RetryLimitExceededException /* dex */)
             {
@@ -232,7 +227,7 @@ namespace iOps.Website.Areas.Users.Controllers
 
                 db.Entry(userToUpdate).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                //return View(userToUpdate);
+
                 return RedirectToAction("Index");
             }
             catch (RetryLimitExceededException /* dex */)

@@ -1,0 +1,493 @@
+﻿.RTU-Window {
+    height: 860px;
+    background-image: url(Images/RTU-rev-20150114-1024x792.jpg);
+    background-repeat: no-repeat;
+    background-size: 60% 60%;
+    background-position: right 75px;
+    margin: auto auto;
+    display: block;
+}
+
+.RTU-Window table
+{
+    width: 50%;
+}
+.k-window 
+{
+    z-index:100 !important;
+}
+.k-window-titlebar 
+{
+    background-color: #b8ce93 !important; 
+}
+.k-window-title 
+{
+    font-weight: bold !important;
+}
+
+
+/*changes background image for the Kendo Window icons*/
+#rtuWindowLink0 {
+    background-image: url('Images/leftArrow.gif')
+}
+
+#rtuWindowLink1 {
+    background-image: url('Images/upArrow.gif')
+}
+
+#rtuWindowLink2 {
+    background-image: url('Images/settings.gif')
+}
+
+#gateLinkButtonInRTUScreen {
+    position: absolute;
+    top: 1%;
+    left: 68%;
+}
+
+#gpuLinkButtonInRTUScreen {
+    position: absolute;
+    top: 1%;
+    left: 78%;
+}
+
+#gateLinkButtonInRTUScreen, #gpuLinkButtonInRTUScreen {
+    -moz-box-shadow: 3px 4px 0px 0px #dcecfb;
+    -webkit-box-shadow: 3px 4px 0px 0px #dcecfb;
+    box-shadow: -1px 3px 0px 0px #BBB8B8;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.10, #dcecfb), color-stop(1, #4aa0f7));
+    background: -moz-linear-gradient(top, #dcecfb 10%, #4aa0f7 100%);
+    background: -webkit-linear-gradient(top, #dcecfb 10%, #4aa0f7 100%);
+    background: -o-linear-gradient(top, #dcecfb 10%, #4aa0f7 100%);
+    background: -ms-linear-gradient(top, #dcecfb 10%, #4aa0f7 100%);
+    background: linear-gradient(to bottom, #dcecfb 10%, #4aa0f7 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dcecfb', endColorstr='#4aa0f7',GradientType=0);
+    background-color: #dcecfb;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #7D5253;
+    display: inline-block;
+    cursor: default;
+    color: #FFFFFF;
+    font-family: arial;
+    font-size: 16px;
+    padding: 2px 34px;
+    margin: 1px 0px 3px 0px;
+    text-decoration: none;
+    text-shadow: 0px 1px 10px #5F142D;
+
+    /*color: blue;
+    position: relative;
+    top: 5px;
+    left: 15%;
+    font-size: 20px;
+    width: 122px;
+    background: transparent;*/
+}
+
+.rtuPageDividerLeft {
+    float: left
+}
+
+.rtuPageDividerRight {
+    width: 51%;
+    float: right;
+}
+
+#RTUWindow #btnAlarms {
+    position: absolute;
+    top: 84%;
+    left: 5%;
+    margin-top: 400px;
+}
+
+#RTUWindow #pointTableContainer .pointTableContainerCol {
+    width: 40%;
+} 
+
+#RTUWindow #pointTableContainer .pointTableContainerSeperator {
+    width: 20%;
+}
+ 
+#RTUWindow #tblPointsLeft .pointsTableRowHeader,
+#RTUWindow #tblPointsRight .pointsTableRowHeader {
+    background-color: #e3e3e3;
+    color: #2e2e2e;
+    height: 30px;
+}
+
+#RTUWindow #tblPointsLeft .pointsTableHeader,
+#RTUWindow #tblPointsRight .pointsTableHeader {
+    text-align: center;
+}
+
+#RTUWindow #tblPointsLeft{
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    border-collapse: collapse;
+    width: 500px;
+    opacity: .8
+}
+#RTUWindow #tblPointsRight{
+    position: absolute;
+    top: 72%;
+    left: 60%;
+    border-collapse: collapse;
+    width: 500px;
+    opacity: .8
+}
+
+#RTUWindow #tblPointsLeft th,
+#RTUWindow #tblPointsLeft td,
+#RTUWindow #tblPointsRight th,
+#RTUWindow #tblPointsRight td{
+    border: 1px solid #c5c5c5;
+}
+
+#RTUWindow .pointsTable tr:nth-child(even){
+    background-color:#f5f5f5;
+}
+
+#RTUWindow .pointsTable tr:nth-child(odd){
+    background-color:#fff
+}
+
+#RTUWindow .pointsTableDataCells {
+     text-align: center;
+    width: 231px;
+    font-weight:bold;
+    height: 25px;
+}
+
+div.k-widget.k-window.KendoWindowToTop {
+    z-index: 500 !important;
+}
+
+#RTUAlarmWindow tr.AlarmRow, #GateWarningWindow tr.AlarmRow{
+	background-color: #f00 !important;
+	color: #fff !important;
+	font-weight: bold !important;
+	border-color: #fff !important;
+}
+
+#RTUAlarmWindow tr.AlarmRow a { color:#fff !important; }
+#RTUAlarmWindow tr.AlarmRow td[class*='sorting_'] { background-color: #c00 !important; }
+#RTUAlarmWindow tr.AlarmRow:hover { background-color: #f66 !important; }
+#RTUAlarmWindow tr.AlarmRow:hover td[class*='sorting_'] { background-color: #c66 !important; }
+
+#RTUAlarmWindow tr.WarningRow, #GateWarningWindow tr.WarningRow {
+	background-color: #ff0 !important;
+	color: #000 !important;
+	font-weight: normal !important;
+	border-color: #fff !important;
+}
+#RTUAlarmWindow tr.WarningRow a { color:#000 !important; }
+#RTUAlarmWindow tr.WarningRow td[class*='sorting_'] { background-color: #cc0 !important; }
+#RTUAlarmWindow tr.WarningRow:hover { background-color: #ff9 !important; }
+#RTUAlarmWindow tr.WarningRow:hover td[class*='sorting_'] { background-color: #cc9 !important; }
+
+#RTUWarningWindow tr.AlarmRow a { color:#fff !important; }
+#RTUWarningWindow.AlarmRow td[class*='sorting_'] { background-color: #c00 !important; }
+#RTUWarningWindow tr.AlarmRow:hover { background-color: #f66 !important; }
+#RTUWarningWindow tr.AlarmRow:hover td[class*='sorting_'] { background-color: #c66 !important; }
+
+#RTUWarningWindow tr.WarningRow a { color:#000 !important; }
+#RTUWarningWindow tr.WarningRow td[class*='sorting_'] { background-color: #cc0 !important; }
+#RTUWarningWindow tr.WarningRow:hover { background-color: #ff9 !important; }
+#RTUWarningWindow tr.WarningRow:hover td[class*='sorting_'] { background-color: #cc9 !important; }
+
+/*ALARM POPUP DISPLAY*/
+#RTUAlarmWindow #tblAlarms{
+    border-collapse: collapse;
+    width:300px;
+    top:200px;
+    left: 400px;
+}
+
+#RTUAlarmWindow #tblAlarms .rowHeader{
+    background-color:#e3e3e3;
+    color:#2e2e2e;
+}
+
+#RTUAlarmWindow #tblAlarms .alarmTableHeader{
+    text-align:center;
+}
+
+#RTUAlarmWindow #tblAlarms th, #RTUAlarmWindow #tblAlarms td{
+    border: 1px solid #c5c5c5;
+}
+
+#RTUAlarmWindow .alarmTable tr:nth-child(even){
+    background-color:#f5f5f5;
+}
+
+#RTUAlarmWindow .alarmTable tr:nth-child(odd){
+    background-color:#FFF;
+}
+
+#RTUAlarmWindow #tblAlarms .alarmDataCells{
+    text-align:center;
+}
+
+/*Hide*/
+#RTUWindow .btnInvisible, #RTUAlarmWindow .btnInvisible, #RTUWarningWindow .btnInvisible {
+    visibility:hidden
+}
+
+#RTUWindow .btnRed, #RTUAlarmWindow .btnRed {
+    -moz-box-shadow: 3px 4px 0px 0px #FEA1A1;
+    -webkit-box-shadow: 3px 4px 0px 0px #FEA1A1;
+    box-shadow: -1px 3px 0px 0px #BBB8B8;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.10, #FEA1A1), color-stop(1, #B30602));
+    background: -moz-linear-gradient(top, #FEA1A1 10%, #B30602 100%);
+    background: -webkit-linear-gradient(top, #FEA1A1 10%, #B30602 100%);
+    background: -o-linear-gradient(top, #FEA1A1 10%, #B30602 100%);
+    background: -ms-linear-gradient(top, #FEA1A1 10%, #B30602 100%);
+    background: linear-gradient(to bottom, #FEA1A1 10%, #B30602 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FEA1A1', endColorstr='#B30602',GradientType=0);
+    background-color: #FEA1A1;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #7D5253;
+    display: inline-block;
+    cursor: default;
+    color: #FFFFFF;
+    font-family: arial;
+    font-size: 16px;
+    padding: 2px 47px;
+    margin: 1px 0px 3px 0px;
+    text-decoration: none;
+    text-shadow: 0px 1px 10px #5F142D;
+}
+
+/*#RTUWindow .btnRed:hover, #RTUAlarmWindow .btnRed:hover, #RTUWarningWindow .btnRed:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #8b0d0d), color-stop(1, #FAB4B4));
+    background:-moz-linear-gradient(top, #8b0d0d 5%, #FAB4B4 100%);
+    background:-webkit-linear-gradient(top, #8b0d0d 5%, #FAB4B4 100%);
+    background:-o-linear-gradient(top, #8b0d0d 5%, #FAB4B4 100%);
+    background:-ms-linear-gradient(top, #8b0d0d 5%, #FAB4B4 100%);
+    background:linear-gradient(to bottom, #8b0d0d 5%, #FAB4B4 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8b0d0d', endColorstr='#FAB4B4',GradientType=0);
+    background-color:#8b0d0d;
+}*/
+
+#RTUWindow .btnRed:active, #RTUAlarmWindow .btnRed:active, #RTUWarningWindow .btnRed:active {
+    position:relative;
+    top:1px;
+}
+
+/* Red Button Layout */
+#RTUWindow .btnGreen, #RTUAlarmWindow .btnGreen, #RTUWarningWindow .btnGreen {
+    color: green;
+    position: relative;
+    font-size: 16px;
+    font-family: arial;
+    width: 128px;
+    background : transparent;
+}
+
+/*#RTUWindow .btnGreen:hover, #RTUAlarmWindow .btnGreen:hover, #RTUWarningWindow .btnGreen:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #568d39), color-stop(1, #E6EEAA));
+    background:-moz-linear-gradient(top, #568d39 5%, #E6EEAA 100%);
+    background:-webkit-linear-gradient(top, #568d39 5%, #E6EEAA 100%);
+    background:-o-linear-gradient(top, #568d39 5%, #E6EEAA 100%);
+    background:-ms-linear-gradient(top, #568d39 5%, #E6EEAA 100%);
+    background:linear-gradient(to bottom, #568d39 5%, #E6EEAA 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#568d39', endColorstr='#E6EEAA',GradientType=0);
+    background-color:#568d39;
+}*/
+
+#RTUWindow .btnGreen:active, #RTUAlarmWindow .btnGreen:active, #RTUWarningWindow .btnGreen:active {
+    position:relative;
+    top:1px;
+}
+
+/* Blue button Layout */
+#RTUWindow .btnBlue, #RTUAlarmWindow .btnBlue, #RTUWarningWindow .btnBlue {
+    -moz-box-shadow: 3px 4px 0px 0px #dcecfb;
+    -webkit-box-shadow: 3px 4px 0px 0px #dcecfb;
+    box-shadow: -1px 3px 0px 0px #BBB8B8;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.10, #dcecfb), color-stop(1, #4aa0f7));
+    background: -moz-linear-gradient(top, #dcecfb 10%, #4aa0f7 100%);
+    background: -webkit-linear-gradient(top, #dcecfb 10%, #4aa0f7 100%);
+    background: -o-linear-gradient(top, #dcecfb 10%, #4aa0f7 100%);
+    background: -ms-linear-gradient(top, #dcecfb 10%, #4aa0f7 100%);
+    background: linear-gradient(to bottom, #dcecfb 10%, #4aa0f7 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dcecfb', endColorstr='#4aa0f7',GradientType=0);
+    background-color: #dcecfb;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #7D5253;
+    display: inline-block;
+    cursor: default;
+    color: #FFFFFF;
+    font-family: arial;
+    font-size: 16px;
+    padding: 2px 34px;
+    margin: 1px 0px 3px 0px;
+    text-decoration: none;
+    text-shadow: 0px 1px 10px #5F142D;
+}
+
+/*#RTUWindow .btnBlue:hover, #RTUAlarmWindow .btnBlue:hover, #RTUWarningWindow .btnBlue:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #4aa0f7), color-stop(1, #dcecfb));
+    background:-moz-linear-gradient(top, #4aa0f7 5%, #dcecfb 100%);
+    background:-webkit-linear-gradient(top, #4aa0f7 5%, #dcecfb 100%);
+    background:-o-linear-gradient(top, #4aa0f7 5%, #dcecfb 100%);
+    background:-ms-linear-gradient(top, #4aa0f7 5%, #dcecfb 100%);
+    background:linear-gradient(to bottom, #4aa0f7 5%, #dcecfb 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4aa0f7', endColorstr='#dcecfb',GradientType=0);
+    background-color:#4aa0f7;
+}*/
+
+#RTUWindow .btnBlue:active, #RTUAlarmWindow .btnBlue:active, #RTUWarningWindow .btnBlue:active {
+    position:relative;
+    top:1px;
+}
+
+#RTUWindow .btnsBlue, #RTUAlarmWindow .btnsBlue {
+    color: blue;
+    position: relative;
+    font-size: 16px;
+    font-family: arial;
+    width: 128px;
+    background: transparent;
+}
+#RTUWindow .btnsRed, #RTUAlarmWindow .btnsRed {
+    color: red;
+    position: relative;
+    font-size: 16px;
+    font-family: arial;
+    width: 128px;
+    background: transparent;
+}
+/* Gray Button Layout */
+#RTUWindow .btnGray, #RTUAlarmWindow .btnGray, #RTUWarningWindow .btnGray {
+    color: slategray;
+    position: relative;
+    font-size: 16px;
+    font-family: arial;
+    width: 128px;
+    background : transparent;
+}
+
+/*#RTUWindow .btnGray:hover, #RTUAlarmWindow .btnGray:hover, #RTUWarningWindow .btnGray:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bbb1b1), color-stop(1, #ffffff));
+    background:-moz-linear-gradient(top, #bbb1b1 5%, #ffffff 100%);
+    background:-webkit-linear-gradient(top, #bbb1b1 5%, #ffffff 100%);
+    background:-o-linear-gradient(top, #bbb1b1 5%, #ffffff 100%);
+    background:-ms-linear-gradient(top, #bbb1b1 5%, #ffffff 100%);
+    background:linear-gradient(to bottom, #bbb1b1 5%, #ffffff 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bbb1b1', endColorstr='#ffffff',GradientType=0);
+    background-color:#bbb1b1;
+}*/
+
+#RTUWindow .btnGray:active, #RTUAlarmWindow .btnGray:active, #RTUWarningWindow .btnGray:active {
+    position:relative;
+    top:1px;
+}
+
+
+#RTUWindow .redFlashingBackground {
+    background-image: url('Images/red-black-flashing-image.gif');
+    color: #FFF;
+    -moz-border-radius: 22px;
+    -webkit-border-radius: 22px;
+    border-radius: 22px;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    font-family: arial;
+    font-size: 18px;
+    padding: 6px 16px;
+    margin: 1px auto;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #ffffff;
+    width: 280px;
+    height: 21px;
+}
+
+#RTUWindow .yellowFlashingBackground {
+    background-image: url('Images/yellow-black-flashing-image.gif');
+    color: #3A3A12;
+    -moz-border-radius: 22px;
+    -webkit-border-radius: 22px;
+    border-radius: 22px;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    font-family: arial;
+    font-size: 16px;
+    padding: 6px 16px;
+    margin: 1px auto;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #ffffff;
+    width: 200px;
+    height: 20px;
+}
+
+
+#RTUAlarmWindow .HideAlarm {
+    display: none;
+    visibility: hidden;
+}
+
+#RTUAlarmWindow .ShowAlarm {
+    display: table-row;
+    visibility: visible;
+}
+
+#RTUAlarmWindow .RingBellAlarmGrayBackground, #RTUWarningWindow .RingBellAlarmGrayBackground {
+    background-image: url('Images/RingBellButton-Gray-64x64-rev1.00.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 32px;
+    height: 32px;
+    margin: 2px;
+}
+
+#RTUAlarmWindow .RingBellAlarmBadQualityBackground, #RTUWarningWindow .RingBellAlarmBadQualityBackground {
+    background-image: url('Images/RingBellButton-BadQuality-64x64-rev1.00.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 32px;
+    height: 32px;
+    margin: 2px;
+}
+
+#RTUAlarmWindow .RingBellAlarmFlashingBackground, #RTUWarningWindow .RingBellAlarmFlashingBackground {
+    background-image: url('Images/RingBellButton-RedFlashing-64x64-rev1.00.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 32px;
+    height: 32px;
+    margin: 2px;
+}
+
+#RTUWindow .SegmentDisplay {
+  font-family: 'digital-7regular','Arial', sans-serif;
+  font-size: 23pt;
+  top: -20px;
+  position: relative;
+  color: #33AB0B;
+}
+
+#RTUWindow .gauge-container {
+    background: transparent url('Images/gauge/gauge-container-partial001.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin: 0 auto 10px auto;
+}
+
+#RTUWindow .gauge {
+    width: 190px;
+    height: 165px;
+    margin: 0 auto 0; 
+}

@@ -101,7 +101,6 @@
             this site works best with javascript allowed
         </div>
     </noscript>
-    @*@Html.Partial("doggy")*@
     <header>
         @Html.Partial("~/Views/Header/_Header.cshtml")
     </header>
@@ -110,9 +109,6 @@
         <div class="settings cbt">
             <label for="chTheme">Theme:@Html.Action("Index", "ChangeTheme", new { area = "" })</label>
             <label for="chLang">Lang:@Html.Action("index", "mui", new { area = "" })</label>
-            @*<label>
-                    <button type="button" id="chDog" class="awe-btn">hide dog</button>
-                </label>*@
         </div>
         <div class="main-body" id="main-body">
             @RenderBody()
@@ -120,26 +116,6 @@
     </div>
     <footer>
         <div class="cont" style="visibility:hidden; display:none;">
-            @*<span>
-                    <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2Faspnet-mvc-project-awesome%2F145701755486515&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:103px; height:21px;margin-top:5px;" allowtransparency="true"></iframe>
-                </span>*@
-            @*<span style="margin: 10px; float: right;">
-                    <a href="https://twitter.com/share"
-                       class="twitter-share-button" data-url="http://prodinner.aspnetawesome.com" data-count="none"
-                       data-hashtags="aspnetawesome">Tweet</a>
-                    <script>
-                        !function (d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0];
-                            if (!d.getElementById(id)) {
-                                js = d.createElement(s);
-                                js.id = id;
-                                js.src = "//platform.twitter.com/widgets.js";
-                                fjs.parentNode.insertBefore(js, fjs);
-                            }
-                        }(document, "script", "twitter-wjs");</script>
-                </span><br /><span>
-                    <a href='http://prodinner.codeplex.com'>project home: http://prodinner.codeplex.com</a>
-                </span>*@
         </div>
         <p style="text-align:center">Copyright &copy; 2014 JBT - iOps 2014</p>
     </footer>

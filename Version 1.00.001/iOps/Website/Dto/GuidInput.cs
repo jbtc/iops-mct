@@ -56,19 +56,19 @@ namespace iOps.Website.Dto
         public bool Remember { get; set; }
     }
 
-    public class GuidDelBtn
-    {
-        public Guid ID { get; set; }
-        public string Controller { get; set; }
-        public bool IsDeleted { get; set; }
-    }
+    //public class GuidDelBtn
+    //{
+    //    public Guid ID { get; set; }
+    //    public string Controller { get; set; }
+    //    public bool IsDeleted { get; set; }
+    //}
 
-    public class GuidCountryInput : GuidInput
-    {
-        [Required(ErrorMessageResourceName = "required", ErrorMessageResourceType = typeof(Mui))]
-        [StrLen(20)]
-        [Display(ResourceType = typeof(Mui), Name = "Name")]
-        public string Name { get; set; }
-    }
+    //public class GuidCountryInput : GuidInput
+    //{
+    //    [Required(ErrorMessageResourceName = "required", ErrorMessageResourceType = typeof(Mui))]
+    //    [StrLen(20)]
+    //    [Display(ResourceType = typeof(Mui), Name = "Name")]
+    //    public string Name { get; set; }
+    //}
 
 }

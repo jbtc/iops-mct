@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ASPNETMVC_SSRS_Demo.Reports {
+namespace iOps.Website.Reports {
     
     
     public partial class ReportTemplate {

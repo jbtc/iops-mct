@@ -76,13 +76,13 @@ namespace iOps.Website.Dto
         public string Password { get; set; }
     }
 
-    public class CountryInput : Input
-    {
-        [Required(ErrorMessageResourceName = "required", ErrorMessageResourceType = typeof(Mui))]
-        [StrLen(20)]
-        [Display(ResourceType = typeof(Mui), Name = "Name")]
-        public string Name { get; set; }
-    }
+    //public class CountryInput : Input
+    //{
+    //    [Required(ErrorMessageResourceName = "required", ErrorMessageResourceType = typeof(Mui))]
+    //    [StrLen(20)]
+    //    [Display(ResourceType = typeof(Mui), Name = "Name")]
+    //    public string Name { get; set; }
+    //}
 
     public class SignInInput
     {

@@ -7,7 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.Reporting.WebForms;
 
-namespace ASPNETMVC_SSRS_Demo.Reports
+namespace iOps.Website.Reports
 {
     public partial class ReportTemplate : System.Web.UI.Page
     {
