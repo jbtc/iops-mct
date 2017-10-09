@@ -94,7 +94,7 @@
 
             if ($(e.target).is('.active')) {
                 close_accordion_section();
-                $("#menuItemGroup").height("145px");
+                $("#menuItemGroup").height("185px");
             } else {
                 close_accordion_section();
 
@@ -102,7 +102,7 @@
                 $(this).addClass('active');
                 // Open up the hidden content panel
                 $('.rtusp-accordion ' + currentAttrValue).slideDown(300).addClass('open');
-                $("#menuItemGroup").height("195px");
+                $("#menuItemGroup").height("225px");
 
             }
 
@@ -114,7 +114,7 @@
             var old_tag_prefix = OPC_config.tag_prefix;
             var old_refresh_callback = OPC_config.refresh_callback;
             var testValue = 0;
-            OPC.refresh('false');
+            OPC.toggle_refresh('false');
             OPC.tags = [];
             OPC_config.watch_tags = [];
             OPC_config.tag_prefix = '';
@@ -132,7 +132,15 @@
             OPC_config.refresh_callback = old_refresh_callback;
             OPC.init();
         })
-
+        $("#disableTimeout").click(function () {
+            if (this.checked) {
+                clearTimeout(tmrLogout);
+                tmrLogout = null;
+            }
+            else {
+                Init();
+            }
+        });
     });
 
     function get_value(tag) {
@@ -177,13 +185,16 @@
     <li>
         <div id="menuIcon" class="Header-FlexGroup FlexContainer Flex-Column">
         </div>
-        <ul id="menuItemGroup" style="right: 15px; width: 300px;top:7px;height:145px">
+        <ul id="menuItemGroup" style="right: 15px; width: 300px;top:7px;height:185px">
             <li>
                 <div style="height:87%; padding: 10px; -ms-word-break: normal; word-break: normal; white-space: normal;background-color:#FFF6E8;border: 1px ridge black">
                     <h1><strong>Welcome to iOps</strong></h1>
                     <ul id="menuItems">
                         <li id="menuItemShowTooltips">
                             Show Tooltips <input id="showTooltips" type="checkbox" checked />
+                        </li>
+                        <li id="menuItemDisableTimeout">
+                            Disable Timeout <input id="disableTimeout" type="checkbox" />
                         </li>
                         <li id="menuItemReports">
                             <a id="ReportsLink" href="@Url.Action("ReportTemplate", "Reports", new { ReportName = System.Web.Configuration.WebConfigurationManager.AppSettings["SSRSReportName"] , Width = 100, Height = 650 })" type="submit" target="_blank">Reports</a>

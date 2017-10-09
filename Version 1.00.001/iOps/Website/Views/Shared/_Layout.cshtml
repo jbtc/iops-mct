@@ -37,9 +37,6 @@
     @Styles.Render("~/Content/kendo/dataviz/css")
     @Scripts.Render("~/bundles/kendo/js")
 
-    <!-- Add Awesome MVC Script -->
-    @*<script src="@Url.Content("~/Scripts/AwesomeMvc.js")?v=81" type="text/javascript"></script>*@
-
     @RenderSection("Scripts", required:false)
     
     <!-- Config OPC Systems -->
@@ -49,7 +46,7 @@
             serverURL: '@System.Web.Configuration.WebConfigurationManager.AppSettings["OPC_config_ServerURL"]',
             max_tags_per_msg: 15,
             max_callbacks: 200,
-            interval: 2000
+            interval: 3000
         };
         OPC.init();
     </script>
@@ -62,30 +59,26 @@
 
         setjQueryValidateDateFormat('@(JQueryDate.ConvertDateFormat(Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern))');
 
-        var timer = null;
+        var tmrLogout = null;
 
         function Init() {
             // Set up the timer. Set it for 5 seconds
-            if (timer == null  && '@HttpContext.Current.User.Identity.IsAuthenticated' == 'True') {
-                alert("start Timer");
-                timer = setTimeout(Logout, 5000);
+            if (tmrLogout == null && !$('#disableTimeout').is(':checked') && $('span#CurrentUser').html() != '-') {
+                var autoLogoutMinutes = parseFloat('@System.Web.Configuration.WebConfigurationManager.AppSettings["AutoLogoutMinutes"]') * 60000;
+                tmrLogout = setTimeout(Logout, autoLogoutMinutes);
             }
         };
 
         function Logout() {
-            // Take whatever action is required at this point
-            //alaert "Logging out..."
-            alert("Log Out");
             window.location = location.protocol + '//' + location.host + '@Url.Action("SignOff","Account")';
-            //window.location = "Logoff.asp";
         };
 
         function Delay() {
-            // Delay the logout
-            alert("In Delay");
-            clearInterval(timer);
-            timer = null;
-            Init;
+            if (!$('#disableTimeout').is(':checked')) {
+                clearTimeout(tmrLogout);
+                tmrLogout = null;
+                Init();
+            }
         };
 
         $(function () {
@@ -124,8 +117,19 @@
 
         //alert('In Script-001');
         $(document).ready(function () {
-            alert('test');
-            Init();
+            //alert('test');
+            //Init();
+
+            //OnClick="Delay" OnMouseMove="Delay" OnKeyPress="Delay"
+            $('body').click(function () {
+                Delay();
+            });
+            $('body').mousemove(function () {
+                Delay();
+            });
+            $('body').keypress(function () {
+                Delay();
+            });
         });
     </script>
     <!--[if IE]>
@@ -152,7 +156,32 @@
 	<script src="@Url.Content("~/Scripts/kendo/2015.1.408/kendo.aspnetmvc.min.js")"></script>
 </head>
 <body id="index" class="home" OnLoad="Init" OnClick="Delay" OnMouseMove="Delay" OnKeyPress="Delay">
-    <noscript>
+    <svg class="defs-only" style="display:none;">
+        <filter id="svg-red" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="0 0.8 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
+        </filter>
+        <filter id="svg-black-red" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="0 0 -1.6 -1.1 2.3   0 0 0 0 0   0 0 -3 0 0   0 0 0 1.7 0"></feColorMatrix>
+        </filter>
+        <filter id="svg-yellow" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="0 0 0 1.1 0   0 0 0 1.1 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
+        </filter>
+        <filter id="svg-green" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="0 0.3 0 0 0   0 0.8 0 0 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
+        </filter>
+        <filter id="svg-orange" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="0 0.8 0 0 0   0 0.4 0 0 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
+        </filter>
+        <filter id="svg-ghost" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   -1 -0.6 0 1 0"></feColorMatrix>
+        </filter>
+        <filter id="svg-gray" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 -0.5 1 0"></feColorMatrix>
+        </filter>
+        <filter id="svg-purple" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
+            <feColorMatrix type="matrix" values="1 0 0 0 0   0 0 0 0 0   0 1.5 0 0 0   0 0 0 1 0"></feColorMatrix>
+        </filter>
+    </svg>    <noscript>
         <div id=" nos">
             this site works best with javascript allowed
         </div>

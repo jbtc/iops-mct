@@ -1,25 +1,4 @@
 ﻿
-awe.err = function (o, xhr, textStatus, errorThrown) {
-    var msg = "unexpected error occured";
-    if (xhr) {
-        msg = xhr.responseText;
-    }
-    var btnHide = $('<button type="button"> hide </button>').click(function () {
-        $(this).parent().remove();
-    });
-
-    var c = $('<div/>').html(msg).append(btnHide);
-
-    if (o.p && o.p.isOpen) {
-        o.p.d.prepend(c);
-    } else if (o.f) {
-        o.f.html(c);
-    } else if (o.d) {
-        o.d.after(c);
-    } else
-        $('body').prepend(c);
-};
-
 $(function () {
     $('#chTheme').change(changeTheme);
 
@@ -33,8 +12,8 @@ $(function () {
     adjustLayout();
     $(window).on('resize', adjustLayout);
     
-    wrapGrids();
-    $(document).ajaxComplete(wrapGrids);
+    //wrapGrids();
+    //$(document).ajaxComplete(wrapGrids);
     
     if (_isMobileOrTablet) {
         awe.ff = function (o) {
@@ -43,16 +22,16 @@ $(function () {
     }
 
     //parsing the unobtrusive attributes when we get content via ajax
-    $(document).ajaxComplete(function () {
-        $.validator.unobtrusive.parse(document);
-        //make server-side generated validation errors look like the client side ones
-        $('.field-validation-error').each(function () {
-            if (!$(this).find('span').length) {
-                var x = $(this).html();
-                $(this).html('<span>' + x + '</span>');
-            }
-        });
-    });
+    //$(document).ajaxComplete(function () {
+    //    $.validator.unobtrusive.parse(document);
+    //    //make server-side generated validation errors look like the client side ones
+    //    $('.field-validation-error').each(function () {
+    //        if (!$(this).find('span').length) {
+    //            var x = $(this).html();
+    //            $(this).html('<span>' + x + '</span>');
+    //        }
+    //    });
+    //});
 
     // on ie hitting enter doesn't trigger change, 
     // all searchtxt inputs will trigger change on enter in all browsers
@@ -76,25 +55,24 @@ $(function () {
 });
 
 //wrap grids for horizontal scrolling on small screens
-function wrapGrids() {
-    $('.awe-grid:not([wrapped]), table.awe-ajaxlist:not([wrapped])').each(function () {
-        var mw = 700;
-        if ($(this).data('mw')) {
-            mw = $(this).data('mw');
-        }
+//function wrapGrids() {
+//    $('.awe-grid:not([wrapped]), table.awe-ajaxlist:not([wrapped])').each(function () {
+//        var mw = 700;
+//        if ($(this).data('mw')) {
+//            mw = $(this).data('mw');
+//        }
 
-        $(this).wrap('<div style="width:100%; overflow:auto;"></div>')
-            .wrap('<div style="min-width:' + mw + 'px;padding-bottom:0px;"></div>')
-            .attr('wrapped', 'wrapped');
-    });
-}
+//        $(this).wrap('<div style="width:100%; overflow:auto;"></div>')
+//            .wrap('<div style="min-width:' + mw + 'px;padding-bottom:0px;"></div>')
+//            .attr('wrapped', 'wrapped');
+//    });
+//}
 
 function changeTheme() {
     var v = $(this).val().split("|");
     var theme = v[0];
     var jqTheme = v[1];
     $('#jqStyle').attr('href', "http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/" + jqTheme + "/jquery-ui.css");
-    $('#aweStyle').attr('href', _root + "Content/themes/" + theme + "/AwesomeMvc.css");
     $('#demoStyle').attr('href', _root + "Content/themes/" + theme + "/Site.css");
     $.post(_root + "ChangeTheme/Change", { s: theme });
 }
@@ -146,12 +124,6 @@ function setjQueryValidateDateFormat(format) {
         );
 }
 
-var _gaq = _gaq || [];
-
-_gaq.push(['_setAccount', 'UA-27119754-1']);
-_gaq.push(['_setDomainName', 'aspnetawesome.com']);
-_gaq.push(['_trackPageview']);
-
 storg = function () {
     if (localStorage)
         return localStorage;
@@ -165,7 +137,6 @@ storg = function () {
         }
     };
 }();
-
 
 function Paramaterize(gateTag)
 {

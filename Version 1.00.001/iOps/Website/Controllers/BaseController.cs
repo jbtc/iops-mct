@@ -14,16 +14,11 @@ namespace iOps.Website.Controllers
         protected virtual new User User
         {
             get 
-            { 
+            {
                 var db = new iOps.Core.Model.iopsContext();
                 JsonSerializer serializer = new JsonSerializer();
 
                 HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-                if(authCookie == null)
-                {
-                    LogOff();
-                    return null;
-                }
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
                 
                 string name = authTicket.Name;

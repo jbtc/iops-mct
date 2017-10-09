@@ -10,7 +10,6 @@ namespace iOps.Website
         {
             ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(IoC.Container));
             WindsorConfigurator.Configure();
-            awesomeConfigurator.Configure();
 
             Globals.PicturesPath = HttpContext.Current.Server.MapPath("~/pictures");
         }

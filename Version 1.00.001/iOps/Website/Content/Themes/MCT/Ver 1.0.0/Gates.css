@@ -298,6 +298,12 @@ div.k-widget.k-window.KendoWindowToTop {
 #GateWarningWindow tr.WarningRow:hover { background-color: #ff9 !important; }
 #GateWarningWindow tr.WarningRow:hover td[class*='sorting_'] { background-color: #cc9 !important; }
 
+#GateWindow #ErrorButton_Container {
+    position: absolute;
+    top: 5px;
+    left: 45%;
+}
+
 /*Hide*/
 #GateWindow .btnInvisible, #GateAlarmWindow .btnInvisible, #GateWarningWindow .btnInvisible {
     visibility: hidden;
@@ -530,7 +536,7 @@ cursor: default;
     margin: 1px auto;
     text-decoration: none;
     text-shadow: 0px 1px 0px #ffffff;
-    width: 200px;
+    width: 136px;
     height: 20px;
 }
 
@@ -549,7 +555,7 @@ cursor: default;
     margin: 1px auto;
     text-decoration: none;
     text-shadow: 0px 1px 0px #ffffff;
-    width: 200px;
+    width: 136px;
     height: 20px;
 }
 

@@ -743,40 +743,44 @@
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
-            <tr>
-                <td>
-                    @*<button id="btnAlarms" opc-tag-bkg='{
-                                "type":"group",
-                                "all_f":{"cls":"btnInvisible"},
-                                "bad_q":{"cls":"btnGray"},
-                                "group":[
-                                    {"tag":"Alarm._HasAlarms.Value","config": {"cls":"redFlashingBackground"}}
-                                ]}' opc-tag-txt='{"tag":"Alarm._Count.Value","config":{"formats":{"bad_q":"Alarms (Bad Data)","string":"Alarms ({0})"}}}'>
-                            Alarms
-                        </button>*@
-                    <button id="btnAlarms" class="btnInvisible">
-                        Alarms
-                    </button>
-                    @*<button id="btnWarnings" opc-tag-bkg='{
-                                "type":"group",
-                                "all_f":{"cls":"btnInvisible"},
-                                "bad_q":{"cls":"btnGray"},
-                                "group":[
-                                    {"tag":"Warning._HasWarnings.Value","config": {"cls":"yellowFlashingBackground"}}
-                                ]}' opc-tag-txt='{"tag":"Warning._Count.Value","config":{"formats":{"bad_q":"Warnings (Bad Data)","string":"Warnings ({0})"}}}'>
-                            Warnings
-                        </button>*@
-                    <button id="btnWarnings" class="btnInvisible">
-                        Warnings
-                    </button>
-                </td>
-            </tr>
         </table>
+
+
     </div>
+
+
     <div class="gatesPageDividerRight">
         <button id="showServiceCounters">Service Counters</button>
         <button id="rtuLinkButtonInGateScreen" style="display:none;">Go To RTU</button>
     </div>
+
+    <div id="ErrorButton_Container">
+        @*<button id="btnAlarms" opc-tag-bkg='{
+                    "type":"group",
+                    "all_f":{"cls":"btnInvisible"},
+                    "bad_q":{"cls":"btnGray"},
+                    "group":[
+                        {"tag":"Alarm._HasAlarms.Value","config": {"cls":"redFlashingBackground"}}
+                    ]}' opc-tag-txt='{"tag":"Alarm._Count.Value","config":{"formats":{"bad_q":"Alarms (Bad Data)","string":"Alarms ({0})"}}}'>
+                Alarms
+            </button>*@
+        <button id="btnAlarms" class="btnInvisible">
+            Alarms
+        </button>
+        @*<button id="btnWarnings" opc-tag-bkg='{
+                    "type":"group",
+                    "all_f":{"cls":"btnInvisible"},
+                    "bad_q":{"cls":"btnGray"},
+                    "group":[
+                        {"tag":"Warning._HasWarnings.Value","config": {"cls":"yellowFlashingBackground"}}
+                    ]}' opc-tag-txt='{"tag":"Warning._Count.Value","config":{"formats":{"bad_q":"Warnings (Bad Data)","string":"Warnings ({0})"}}}'>
+                Warnings
+            </button>*@
+        <button id="btnWarnings" class="btnInvisible">
+            Warnings
+        </button>
+    </div>
+
     <div id="GateAlarmWindow">
         <div id="GateAlarms"></div>
     </div>

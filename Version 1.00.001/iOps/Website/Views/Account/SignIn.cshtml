@@ -5,13 +5,23 @@
 }
 <script>
     $(document).ready(function () {
+        // Ensure we are actually logged out before beginning a new SignIn
         if ('@HttpContext.Current.User.Identity.IsAuthenticated' == 'True') {
             window.location = location.protocol + '//' + location.host + '@Url.Action("SignOff","Account")';
             return false;
         }
+
+        // Clear the Auto Logout Timer and Current Username
+        clearTimeout(tmrLogout);
+        tmrLogout = null;
+        $("span#CurrentUser").html("-");
+        OPC.toggle_refresh(false);
+
+        // Hide Admin Menu Items
         $('#menuItemUserAdmin').css('display', 'none');
         $("#menuItemRTUAutoOnSP").css('display', 'none');
 
+        // Create the Login Window
         $("#pageData").kendoWindow({
             title: "Login",
             draggable: false,
@@ -24,6 +34,7 @@
             },
             resizable: false
         });
+
         //removes all buttons from kendo window
         $('.k-window-titlebar').find('.k-window-actions').css('visibility', 'hidden');
 
@@ -40,7 +51,46 @@
                 this.refresh();
             }
         });
+
+        // Add click event handler to forgot Password button
+        $('#btnForgot').click(function (e) {
+            e.preventDefault();
+        })
+
     })
+
+    // Main function for successfyul login
+    function LoadScreenIconsAndWeather() {
+        // load the screen navigation area
+        $.ajax({
+            url: '/ScreenIcon/GetScreenIcons',
+            type: "GET",
+            contentType: 'text/html',
+            data: {
+                clientName: "MCT"
+            },
+            success: function (data) {
+                $('#tblScreenNav').html(data);
+                //hide the link text for gate list and show the icons on startup on the slide-in-handle splitter column
+                if ($('#slide-in-handle').is(':visible')) {
+                    $('[class^="screen-text"]').hide();
+                    //$('[class^="screen-icon"]').css('height', '25px');
+                }
+            }
+        });
+        // Load the Weather header area
+        //$.ajax({
+        //    url: '/Weather/GetWeatherData',
+        //    type: "GET",
+        //    contentType: 'text/html',
+        //    data: {
+        //        clientName: "MCT"
+        //    },
+        //    success: function (data) {
+        //        $('#WeatherPlaceHolder').html(data);
+        //    }
+        //});
+    }
 
     // customize the _show method to call options.beforeShow
     // to allow preventing the tooltip from being shown..
@@ -66,17 +116,6 @@
 </script>
 <div id="pageData">
     <div style="margin:auto;width:600px;">
-        @*@using (Html.BeginForm())
-            {
-                    @Html.EditorFor(o => o.Login)
-                    @Html.EditorFor(o => o.Password)
-                    @Html.EditorFor(o => o.Remember)
-                    <div class="efield">
-                        <div class="elabel">&nbsp;</div>
-                        <input type='submit' value='log in' />
-
-                    </div>
-            }*@
         @using (Ajax.BeginForm("SignIn", "Account", null, new AjaxOptions { UpdateTargetId = "main-body", OnSuccess = "LoadScreenIconsAndWeather()" }))
         {
             <div style="width:100%; margin: 59px auto;text-align:center">
@@ -96,40 +135,7 @@
             </div>
         }
         <script>
-            $('#btnForgot').click(function (e) {
-                e.preventDefault();
-            })
 
-            function LoadScreenIconsAndWeather() {
-                $.ajax({
-                    url: '/ScreenIcon/GetScreenIcons',
-                    type: "GET",
-                    contentType: 'text/html',
-                    data: {
-                        clientName: "MCT"
-                    },
-                    success: function (data) {
-                        Init();
-                        $('#tblScreenNav').html(data);
-                        //hide the link text for gate list and show the icons on startup on the slide-in-handle splitter column
-                        if ($('#slide-in-handle').is(':visible')) {
-                            $('[class^="screen-text"]').hide();
-                            //$('[class^="screen-icon"]').css('height', '25px');
-                        }
-                    }
-                });
-                $.ajax({
-                    url: '/Weather/GetWeatherData',
-                    type: "GET",
-                    contentType: 'text/html',
-                    data: {
-                        clientName: "MCT"
-                    },
-                    success: function (data) {
-                        $('#WeatherPlaceHolder').html(data);
-                    }
-                });
-            }
         </script>
 
         @Html.ValidationSummary(true)

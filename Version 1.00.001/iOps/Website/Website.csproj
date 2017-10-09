@@ -117,10 +117,6 @@
       <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Omu.AwesomeMvc, Version=3.0.1.0, Culture=neutral, PublicKeyToken=9c6fbba722ea1caf, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\Omu.AwesomeMvc.dll</HintPath>
-    </Reference>
     <Reference Include="Omu.Encrypto, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\Omu.Encrypto.dll</HintPath>
@@ -264,7 +260,6 @@
     <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
     <Compile Include="Areas\Zones\Controllers\ZonesController.cs" />
     <Compile Include="Areas\Zones\ZonesAreaRegistration.cs" />
-    <Compile Include="AwesomeConfigurator.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ScreenIconController.cs" />
@@ -289,13 +284,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ChangeThemeController.cs" />
-    <Compile Include="Controllers\Cruder.cs" />
-    <Compile Include="Controllers\Crudere.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FormAuthService.cs" />
     <Compile Include="Controllers\MuiController.cs" />
-    <Compile Include="Controllers\RolesLookupController.cs" />
     <Compile Include="Dto\ErrorDisplay.cs" />
     <Compile Include="Dto\Input.cs" />
     <Compile Include="Dto\StrLenAttribute.cs" />
@@ -1047,7 +1039,6 @@
     <Content Include="Content\Themes\start\Images\pm.png" />
     <Compile Include="Utils.cs" />
     <Compile Include="WindsorConfigurator.cs" />
-    <Content Include="Icon.png" />
     <Content Include="OPCHTML\alarm_example.html" />
     <Content Include="OPCHTML\css\font-awesome.min.css" />
     <Content Include="OPCHTML\css\jquery.dataTables.css" />
@@ -1537,7 +1528,6 @@
     <Content Include="Content\Themes\start\Site.css" />
     <Content Include="Content\tip.png" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\AwesomeMVC.js" />
     <Content Include="OPCHTML\Example\html_hmi_demo.zip" />
     <Content Include="OPCHTML\fonts\fontawesome-webfont.eot" />
     <Content Include="OPCHTML\fonts\fontawesome-webfont.ttf" />
@@ -1557,7 +1547,6 @@
     <Content Include="Views\Shared\EditorTemplates\Int32.aspx" />
     <Content Include="Views\Shared\EditorTemplates\MultiLookup.aspx" />
     <Content Include="Views\Shared\EditorTemplates\TextArea.aspx" />
-    <Content Include="Views\Shared\login.ascx" />
     <Content Include="Views\Shared\EditorTemplates\AjaxDropdown.aspx" />
     <Content Include="Views\Shared\EditorTemplates\Autocomplete.aspx" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.aspx" />

@@ -1,7 +1,7 @@
 ﻿@using iOps.Core.Model;
 @using System.Xml.Linq;
+@using System.Xml;
 @{
-
     var clientName = "";
 
     if (HttpContext.Current.User.Identity.IsAuthenticated == true)
@@ -12,10 +12,61 @@
         var IsFirstScreen = true;
         foreach (Screen screen in dbData)
         {
-            XDocument xmlData = XDocument.Load(new StringReader(screen.ScreenLayout));
-            var ajaxUrl = xmlData.Element("Screen-Layout").Element("AjaxUrl").Value;
-            var ajaxData = xmlData.Element("Screen-Layout").Element("AjaxData").Value;
-            var tagPrefix = xmlData.Element("Screen-Layout").Element("TagPrefix").Value;
+            var ajaxUrl = "";
+            var ajaxData = "";
+            var tagPrefix = "";
+
+            using (XmlReader reader = XmlReader.Create(new StringReader(screen.ScreenLayout)))
+            {
+                while (reader.Read())
+                {
+                    if (ajaxUrl != "" && ajaxData != "" && tagPrefix != "")
+                    {
+                        break;
+                    }
+                    if (reader.NodeType == XmlNodeType.Element)
+                    {
+                        switch (reader.Name)
+                        {
+                            case "AjaxUrl":
+                                while (reader.Read())
+                                {
+                                    if (reader.NodeType == XmlNodeType.Text)
+                                    {
+                                        ajaxUrl = reader.Value.Trim();// xmlData.Element("Screen-Layout").Element("AjaxUrl").Value;
+                                        break;
+                                    }
+                                }
+                                break;
+                            case "AjaxData":
+                                while (reader.Read())
+                                {
+                                    if (reader.NodeType == XmlNodeType.Text)
+                                    {
+                                        ajaxData = reader.Value.Trim(); //xmlData.Element("Screen-Layout").Element("AjaxData").Value;
+                                        break;
+                                    }
+                                }
+                                break;
+                            case "TagPrefix":
+                                while (reader.Read())
+                                {
+                                    if (reader.NodeType == XmlNodeType.Text)
+                                    {
+                                        tagPrefix = reader.Value.Trim(); //xmlData.Element("Screen-Layout").Element("TagPrefix").Value;
+                                        break;
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+
+            //XDocument xmlData = XDocument.Load(new StringReader(screen.ScreenLayout));
+            //var ajaxUrl = xmlData.Element("Screen-Layout").Element("AjaxUrl").Value;
+            //var ajaxData = xmlData.Element("Screen-Layout").Element("AjaxData").Value;
+            //var tagPrefix = xmlData.Element("Screen-Layout").Element("TagPrefix").Value;
             var iconClass = String.Format("screen-icon-{0} {1} {2}", screen.DefaultIconType, screen.DefaultDisplayOrder == 1 ? "FirstIcon" : "", IsFirstScreen ? "IconSelected" : "IconIdle");
             var opcBkgAttrib = String.Format("{{\"type\":\"group\",\"all_f\": {{\"cls\":\"IconIdle\"}},\"bad_q\":{{\"cls\":\"IconIdle\"}},\"group\": [" +
                                             "{{\"tag\":\"{0}Alarm._HasAlarms.Value\",\"config\":{{\"cls\":\"IconAlarm\"}}}}, " +
@@ -154,4 +205,4 @@
         });
     });
 
-            </script>
+</script>

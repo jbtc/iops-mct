@@ -40,35 +40,16 @@ namespace iOps.Website.Controllers
             }
 
             string _clientName = "MCT";
-
             User user = us.Get(_clientName ,input.Username, input.Password);
-
-            ////ACHTUNG: remove this line in a real app
-            //if (user == null && input.Username == "crane" && input.Password == "i0ps2@14") user = new User { Username = "crane", SecurityRoles = new[] { new SecurityRole { Name = "Admin" } } };
-
             if (user == null)
             {
                 ModelState.AddModelError("CustomError", "Invalid Username or Password.");
                 return RedirectToAction("SignIn", "Account");
-                    //return View();
             }
-            //else
-            //{
 
-                //formsAuth.SignIn(user.Login, input.Remember, user.Roles.Select(o => o.Name));
-                formsAuth.SignIn(user, input.Remember);
+            formsAuth.SignIn(user, input.Remember);
+            return RedirectToAction("ShowAirport", "Airport", new { area = "Airport", clientName = _clientName, numberOfScreens = user.UsersXrefScreens.Count() });
 
-                return RedirectToAction("ShowAirport", "Airport", new { area = "Airport", clientName = _clientName, numberOfScreens = user.UsersXrefScreens.Count() });
-            //}
-            //return RedirectToAction("Index", "Home");
-            //return RedirectToAction("Index", "_GatesJBT");
-            //return RedirectToAction("Index", "RDUGates");
-            //return View("~/Views/RDU/Gates/Index.cshtml");
-            //return View("~/Views/RDUGates/Index.cshtml");
-            //return View("~/Views/RDU/GPU/Index.cshtml");
-            //return View("~/Views/RDU/PCA/Index.cshtml");
-            //@Html.Partial("~/Views/Header/_Header.cshtml")
-            //return RedirectToAction("Index", "Screens");
         }
 
         public ActionResult SignOff()

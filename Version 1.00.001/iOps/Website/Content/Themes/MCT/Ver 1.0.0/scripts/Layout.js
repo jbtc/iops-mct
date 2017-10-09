@@ -1,6 +1,5 @@
 ﻿// Changes the Screens Nav icon class to show proper icon and color
 function ChangeIcons(iconNum) {
-    console.log("_ScreenIcons::ChangeIcons(...) -> iconNum=" + iconNum);
     $("#tblScreenNav tr").each(function () {
         var currentIcon = $(this).attr('class').replace("screen-ajax", "");
         $(this).find('td[class^="screen-icon-"]').each(function () {

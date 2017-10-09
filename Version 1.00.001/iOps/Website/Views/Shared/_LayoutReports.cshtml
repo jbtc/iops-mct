@@ -30,7 +30,6 @@
     @Styles.Render("~/Content/kendo/dataviz/css")
     @Scripts.Render("~/bundles/kendo/js")
 
-    <script src="@Url.Content("~/Scripts/AwesomeMvc.js")?v=81" type="text/javascript"></script>
     @Scripts.Render("~/bundles/Site/js")
     @Scripts.Render("~/Content/Themes/" + System.Web.Configuration.WebConfigurationManager.AppSettings["ClientAbbreviation"] + "/" + System.Web.Configuration.WebConfigurationManager.AppSettings["ClientThemeVersion"] + "/js")
 
@@ -55,24 +54,6 @@
 
         setjQueryValidateDateFormat('@(JQueryDate.ConvertDateFormat(Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern))');
 
-        var timer
-
-        function Init() {
-            // Set up the timer. Set it for 5 seconds
-            timer = window.setInterval("Logout", 5000)
-        }
-
-        function Logout() {
-            // Take whatever action is required at this point
-            //alaert "Logging out..."
-            window.location = "Logoff.asp"
-        }
-
-        function Delay() {
-            // Delay the logout
-            clearInterval(timer)
-            Init
-        }
     </script>
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>

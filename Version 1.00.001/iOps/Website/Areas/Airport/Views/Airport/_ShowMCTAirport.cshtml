@@ -2,7 +2,6 @@
 <script type="text/javascript" src="~/OPCHTML/js/lib/jquery.numberformatter-1.2.3.min.js"></script>
 <script>
     $(document).ready(function () {
-        //$('#gateLinkid').css('visibility', 'hidden');
         $("#AirportWindow").kendoWindow({
             title: "MCT - Airport Termial Overview",
             draggable: false,
@@ -30,6 +29,18 @@
             $('body').find('.k-window').css('left', '-=200');
         };
 
+        InitializeOPC();
+
+        $(".gate_fire").hide();
+
+        $('#menuItemUserAdmin').css('display', ('@TempData["AuthLevel"]' > 3 ? 'list-item' : 'none'));
+        $("#menuItemRTUAutoOnSP").css('display', ('@TempData["AuthLevel"]' > 3 ? 'list-item' : 'none'));
+
+        $('span#CurrentUser').html('@HttpContext.Current.User.Identity.Name');
+        Init();
+    });
+
+    function InitializeOPC() {
         var tags = [];
         var rawScreens = '@Html.Raw(Json.Encode(TempData["Screens"]))';
         var screens = JSON.parse(rawScreens);
@@ -45,7 +56,7 @@
                             { name: "Text", text: "Text", type: "string", visible: true },
                             //{ name: "AlarmType", text: "Alarm Type", type: "string", visible: true, width: '5px'},
                             { name: "Priority", text: "Priority", type: "string", visible: true, width: '5px', align: 'right' }
-                        ]
+        ]
 
         for (i = 0; i < screens.length; i++) {
             var gateNumber = screens[i].Gate;
@@ -104,24 +115,17 @@
             }
         ];
 
-        tags.push("Airport.MCT.Term1.RTUAutoOnLeadTime.Value");
+        tags.push("RTUAutoOnLeadTime.Value");
         for (i = 0; i < screens.length; i++) {
             var gateNumber = screens[i].Gate;
             var zoneNumber = screens[i].Zone;
             var pre = "Zone" + zoneNumber + ".Gate" + gateNumber + ".";
-            tags.push(pre + "PBB.AIRCRAFTDOCKEDCALCULATION.Value");                  // aircraft is docked
-            tags.push(pre + "PBB.LoggedOn.Value");                  // show green
-            tags.push(pre + "PBB.Parked.Value");                  // show green
-            tags.push(pre + "PBB.AircraftSubType.Value");            // Show Jumbo Graphics
-            tags.push(pre + "PBB.Remote Bridge Status.Value");      // show Gate Disabled
+            tags.push(pre + "PBB._Commissioned.Value");                  // aircraft is docked
         }
 
-        $(".gate_fire").hide();
         OPC.init(); //required for ajax calls in OPC
 
-        $('#menuItemUserAdmin').css('display', ('@TempData["AuthLevel"]' > 3 ? 'list-item' : 'none'));
-        $("#menuItemRTUAutoOnSP").css('display', ('@TempData["AuthLevel"]' > 3 ? 'list-item' : 'none'));
-    });
+    };
 
     function get_value(tag) {
         var tagTemp = tag + (tag.endsWith(".Value") ? "" : ".Value");
@@ -149,18 +153,6 @@
     //   Wide aircraft will display ONLY if both gates are showing "Wide" for AircraftSubType
     function check_gate_images(zone, gate) {
         var pre = OPC_config.tag_prefix + "Zone" + zone + ".Gate" + gate + ".PBB.";
-        var is_parked = get_bool(pre + "Parked.Value");             // check for parked and default plane type to NARROW
-        var airCraftType = get_value(pre + "AircraftSubType.Value");
-        if(airCraftType == null || is_parked == null || is_parked) {
-            airCraftType = "NARROW";
-        }
-
-        var alarmCount = $("#AirportAlarms tr:contains('Gate " + gate + "')").length;
-        var show_wide = (airCraftType.toUpperCase().indexOf("WIDE") >= 0) ? true : false;
-        var show_ac = get_bool(pre + "AIRCRAFTDOCKEDCALCULATION.Value");            // aircraft is docked
-        var show_g = get_bool(pre + "LoggedOn.Value");              // show green
-        var show_o = get_bool(pre + "AIRCRAFTDOCKEDCALCULATION.Value");             // show orange
-        var show_blk = get_bool(pre + "Remote Bridge Status.Value");             // show black-red
 
         $("#Gate_" + gate + "_Plane").removeClass(function (index, css) {
             return (css.match(/\bnot_docked/g) || []).join(' ');
@@ -168,44 +160,90 @@
         $("#Gate_" + gate + "_Status").removeClass(function (index, css) {
             return (css.match(/\bstat-[a-zA-Z]\S+/g) || []).join(' ');
         });
-        var imgPath = $('#building').css('content').match(/(.*url[(]*\")(.*)(\Images)/)[2];
-        $("#Gate_" + gate + "_Status").css({ 'content': 'url(' + imgPath + 'Images/Airport/mct-gate' + gate + (show_wide ? '-wide' : '') + '-idle.png)' , 'display' : 'inline' });
 
-        if (show_ac != null && show_g != null && show_o != null) {   // removed csw20160211:  && show_r != null && show_y != null
-            $("#Gate_" + gate + "_Plane").css( (show_ac ? { 'content' : 'url(' + imgPath + 'Images/Airport/mct-gate' + gate + (show_wide ? '-wide' : '') + '-plane.png)' , 'display' : 'inline' } : { 'content' : 'none' , 'display' : 'none' }));
-            //$("#Gate_" + gate + "_Plane").addClass("img gate_plane g" + gate + "_no_ac");
-            switch (true) {
-                case show_blk:
-                    $("#Gate_" + gate + "_Status").addClass("stat-disabled");
-                    break;
-                case alarmCount > 0:
-                    $("#Gate_" + gate + "_Status").addClass("stat-alarm");
-                    break;
-                case show_o:
-                    $("#Gate_" + gate + "_Status").addClass("stat-docked");
-                    break;
-                case show_g:
-                    $("#Gate_" + gate + "_Status").addClass("stat-logged");
-                    break;
-                default:
-                    break;
+        var is_commissioned = get_bool(pre + "_Commissioned.Value");             // check to see if the gate is Active
+
+        if (is_commissioned) {
+
+            var is_parked = get_bool(pre + "Parked.Value");             // check for parked and default plane type to NARROW
+            var airCraftType = get_value(pre + "AircraftSubType.Value");
+            if (airCraftType == null || is_parked == null || is_parked) {
+                airCraftType = "NARROW";
+            }
+
+            var alarmCount = $("#AirportAlarms tr:contains('Gate " + gate + "')").length;
+            var show_wide = (airCraftType.toUpperCase().indexOf("WIDE") >= 0) ? true : false;
+            var show_ac = get_bool(pre + "AIRCRAFTDOCKEDCALCULATION.Value");            // aircraft is docked
+            var show_g = get_bool(pre + "LoggedOn.Value");              // show green
+            var show_o = get_bool(pre + "AIRCRAFTDOCKEDCALCULATION.Value");             // show orange
+            var show_blk = get_bool(pre + "Remote Bridge Status.Value");             // show black-red
+
+            var imgPath = $('#building').css('content').match(/(.*url[(]*\")(.*)(\Images)/)[2];
+            $("#Gate_" + gate + "_Status").css({ 'content': 'url(' + imgPath + 'Images/Airport/mct-gate' + gate + (show_wide ? '-wide' : '') + '-idle.png)', 'display': 'inline' });
+
+            if (show_ac != null && show_g != null && show_o != null) {   // removed csw20160211:  && show_r != null && show_y != null
+                $("#Gate_" + gate + "_Plane").css((show_ac ? { 'content': 'url(' + imgPath + 'Images/Airport/mct-gate' + gate + (show_wide ? '-wide' : '') + '-plane.png)', 'display': 'inline' } : { 'content': 'none', 'display': 'none' }));
+                switch (true) {
+                    case show_blk:
+                        $("#Gate_" + gate + "_Status").addClass("stat-disabled");
+                        break;
+                    case alarmCount > 0:
+                        $("#Gate_" + gate + "_Status").addClass("stat-alarm");
+                        break;
+                    case show_o:
+                        $("#Gate_" + gate + "_Status").addClass("stat-docked");
+                        break;
+                    case show_g:
+                        $("#Gate_" + gate + "_Status").addClass("stat-logged");
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         else {
-            $("#Gate_" + gate + "_Plane").css({ "content": 'none', 'display': 'none' } );
-            $("#Gate_" + gate + "_Status").addClass("stat-bq");
+            var imgPath = $('#building').css('content').match(/(.*url[(]*\")(.*)(\Images)/)[2];
+            $("#Gate_" + gate + "_Status").css({ 'content': 'url(' + imgPath + 'Images/Airport/mct-gate' + gate + '-idle.png)', 'display': 'inline' });
+
+            if (is_commissioned == null) {
+                $("#Gate_" + gate + "_Plane").css({ "content": 'none', 'display': 'none' });
+                $("#Gate_" + gate + "_Status").addClass("stat-bq");
+            }
+            else {
+                $("#Gate_" + gate + "_Plane").css({ "content": 'none', 'display': 'none' });
+                $("#Gate_" + gate + "_Status").addClass("stat-nc");
+            }
         }
     }
 
     function opc_airport_callback(data) {
         var rawScreens = '@Html.Raw(Json.Encode(TempData["Screens"]))';
         var screens = JSON.parse(rawScreens);
+        var tags_added = false;
 
-        for (i = 0; i < screens.length; i++)
-        {
+        for (i = 0; i < screens.length; i++) {
             var gateNumber = screens[i].Gate;
             var zoneNumber = screens[i].Zone;
+
+            var pre = "Zone" + zoneNumber + ".Gate" + gateNumber + ".";
+            var is_commissioned = get_bool(OPC.tag_prefix + pre + "PBB._Commissioned.Value");
+            if (is_commissioned && !OPC_config.watch_tags.includes(pre + "PBB.AIRCRAFTDOCKEDCALCULATION.Value")) {
+                OPC.toggle_refresh(false);
+                OPC_config.watch_tags.push(pre + "PBB.AIRCRAFTDOCKEDCALCULATION.Value");                  // aircraft is docked
+                OPC_config.watch_tags.push(pre + "PBB.LoggedOn.Value");                  // show green
+                OPC_config.watch_tags.push(pre + "PBB.Parked.Value");                  // show green
+                OPC_config.watch_tags.push(pre + "PBB.AircraftSubType.Value");            // Show Jumbo Graphics
+                OPC_config.watch_tags.push(pre + "PBB.Remote Bridge Status.Value");      // 
+                console.log(OPC_config.watch_tags.length);
+                OPC.toggle_refresh(true);
+                tags_added = true;
+                continue;
+            }
             check_gate_images(zoneNumber, gateNumber);
+        }
+        if(tags_added)
+        {
+            OPC.init();
         }
     }
 
@@ -257,8 +295,6 @@
 
         PriorityCol = $('#AirportMasterAlarms_tbl th[aria-label*="Priority"]').index() + 1;
         if (PriorityCol > 0) {
-            //AlarmTypeCol = PriorityCol - 1;
-            //$('#AirportMasterAlarms_tbl th:nth-child(' + AlarmTypeCol + '),#AirportMasterAlarms_tbl td:nth-child(' + AlarmTypeCol + ')').hide()
             $('#AirportMasterAlarms_tbl th:nth-child(' + PriorityCol + '),#AirportMasterAlarms_tbl td:nth-child(' + PriorityCol + ')').hide()
             $('#AirportMasterAlarms_tbl tr').not('thead tr').each(function (idx, row) {
                 if ($(this).children('td').length > 1) {
@@ -278,8 +314,6 @@
 
         PriorityCol = $('#AirportAlarms_tbl th[aria-label*="Priority"]').index() + 1;
         if (PriorityCol > 0) {
-            //AlarmTypeCol = PriorityCol - 1;
-            //$('#AirportAlarms_tbl th:nth-child(' + AlarmTypeCol + '),#AirportAlarms_tbl td:nth-child(' + AlarmTypeCol + ')').hide()
             $('#AirportAlarms_tbl th:nth-child(' + PriorityCol + '),#AirportAlarms_tbl td:nth-child(' + PriorityCol + ')').hide()
             $('#AirportAlarms_tbl tr').not('thead tr').each(function (idx, row) {
                 if ($(this).children('td').length > 1) {
@@ -329,32 +363,21 @@
 </script>
 
 <div id="AirportWindow" class="Window-Container Airport-Window">
-    <svg class="defs-only" style="display:none;">
-        <filter id="svg-red" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
-            <feColorMatrix type="matrix" values="0 1 0 0.5 0   0 0 0 0 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
-        </filter>
-        <filter id="svg-black-red" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
-            <feColorMatrix type="matrix" values="0 0 -1 -1.6 2.5   0 0 -1 0 0   0 0 -1 0 0   0 0 0 1.7 0"></feColorMatrix>
-        </filter>
-        <filter id="svg-yellow" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
-            <feColorMatrix type="matrix" values="0 0 0 1.1 0   0 0 0 1.1 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
-        </filter>
-        <filter id="svg-green" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
-            <feColorMatrix type="matrix" values="0 0 0 0 0   0 0 2 0 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
-        </filter>
-        <filter id="svg-orange" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
-            <feColorMatrix type="matrix" values="0 0 0 1.1 0   0 0 0 0.6 0   0 0 0 0 0   0 0 0 1.5 0"></feColorMatrix>
-        </filter>
-        <filter id="svg-ghost" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
-            <feColorMatrix type="matrix" values="1 0 0 0 0   0 1 0 0 0   0 0 1 0 0   -0.9 -1 -0.9 1.5 0"></feColorMatrix>
-        </filter>
-        <filter id="svg-gray" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
-            <feColorMatrix type="matrix" values="0 3 1 0 0   0 3 1 0 0   0 3 1 0 0   0 0 0 1 0"></feColorMatrix>
-        </filter>
-    </svg>
     <div id="gates_container">
+        <!-- Add Building Image Overlays -->
         <img id="building" class="img" />
         <img id="gates_nc" class="img" />
+
+        <!-- Add Gates Legend Image Ovelays -->
+        <img id="legend-backbround" class="img" />
+        <img id="legend-NCF" class="img stat-nc" />
+        <img id="legend-BDF" class="img stat-bq" />
+        <img id="legend-BIM" class="img" />
+        <img id="legend-LONF" class="img stat-logged" />
+        <img id="legend-AL" class="img stat-docked" />
+        <img id="legend-BD" class="img stat-disabled" />
+        <img id="legend-BF" class="img stat-alarm" />
+        <img id="legend-BSA" class="img" />
         
         @{
             List<object> screens = (List<object>)TempData["Screens"];

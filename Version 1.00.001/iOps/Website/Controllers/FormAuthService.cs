@@ -52,6 +52,7 @@ namespace iOps.Website.Controllers
             FormsAuthentication.SetAuthCookie(user.Username, createPersistentCookie, "/");
 
             HttpContext.Current.User = new GenericPrincipal(new GenericIdentity(user.Username), user.SecurityRoles.Select(r => r.Name).ToArray());
+
             var test = HttpContext.Current.User.IsInRole("Admin");
             //HttpContext.Current.Response.Redirect(FormsAuthentication.GetRedirectUrl(user.Username, createPersistentCookie));
             
